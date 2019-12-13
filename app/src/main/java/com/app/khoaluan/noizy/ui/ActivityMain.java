@@ -27,6 +27,14 @@ import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    private static final int REQUEST_CODE = 1;
+    private static String[] PERMISSIONS = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.RECORD_AUDIO
+    };
+
     private ActivityMainBinding binding;
     private int currentFragmentId;
     private ActionBarDrawerToggle toggle;
@@ -97,5 +105,21 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         int fragmentId = item.getItemId();
         switchFragments(fragmentId);
         return true;
+    }
+
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int storage_per = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int audio_per = ActivityCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO);
+
+
+        if (storage_per != PackageManager.PERMISSION_GRANTED && audio_per != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS,
+                    REQUEST_CODE
+            );
+        }
     }
 }
