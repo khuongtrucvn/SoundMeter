@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="HardcodedText" >
+
+    <group
+        android:id="@+id/group_mode"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_meter"
+            android:icon="@drawable/icon_speedometer"
+            android:title="@string/title_soundmeter" />
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/icon_history"
+            android:title="@string/title_history"/>
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/icon_camera"
+            android:title="@string/title_share" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/icon_settings"
+            android:title="@string/title_setting"/>
+    </group>
+</menu>

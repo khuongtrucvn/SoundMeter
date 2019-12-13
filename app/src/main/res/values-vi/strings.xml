@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_version">phiên bản 1.0</string>
+    <string name="open">Mở </string>
+    <string name="close">Đóng</string>
+
+    <!-- Title -->
+    <string name="title_soundmeter">Đo độ ồn</string>
+    <string name="title_history">Lịch sử</string>
+    <string name="title_soundstorage">Kho âm thanh</string>
+    <string name="title_share">Chụp &amp; Chia sẻ</string>
+    <string name="title_setting">Cài đặt</string>
+    <string name="title_confirm">Xác nhận</string>
+
+    <!-- Sound Unit -->
+    <string name="sound_unit">dB</string>
+    <string name="sound_minlabel">NHỎ NHẤT</string>
+    <string name="sound_avglabel">T.BÌNH</string>
+    <string name="sound_maxlabel">LỚN NHẤT</string>
+
+    <!-- Noise Chart -->
+    <string name="noise_20_des">Tiếng lá xào xạc</string>
+    <string name="noise_30_des">Tiếng thì thầm</string>
+    <string name="noise_40_des">Thư viện</string>
+    <string name="noise_50_des">Mưa vừa phải</string>
+    <string name="noise_60_des">Cuộc trò chuyện bình thường</string>
+    <string name="noise_70_des">Giao thông, máy hút bụi</string>
+    <string name="noise_80_des">Đồng hồ báo thức</string>
+    <string name="noise_90_des">Máy cắt cỏ, máy móc</string>
+    <string name="noise_100_des">Xe trượt tuyết</string>
+    <string name="noise_110_des">Kèn xe, buổi hoà nhạc</string>
+    <string name="noise_120_des">Máy bay (khi cất cánh)</string>
+    <string name="noise_130_des">Xe cứu thương, búa khoan</string>
+    <string name="noise_140_des">Pháo hoa, tiếng súng bắn</string>
+
+    <!-- Layout -->
+    <string name="activity_soundmeter">Đo độ ồn</string>
+    <string name="activity_exvalue">0</string>
+    <string name="activity_exdur">mm:ss</string>
+    <string name="activity_statuslabel">Trạng thái</string>
+    <string name="activity_exstatus">Normal Conversation</string>
+    <string name="activity_curlabel">Hiện tại(dB)</string>
+    <string name="activity_durlabel">Thời gian </string>
+    <string name="activity_chartlabel">Thang độ ồn</string>
+    <string name="activity_calibratelabel">Hiệu chỉnh</string>
+    <string name="activity_pickerlabel">Cài đặt giá trị để cảnh báo</string>
+    <string name="activity_extime">hh:mm:ss</string>
+    <string name="activity_exdate">dd-MM-YYYY</string>
+
+    <!-- Message -->
+    <string name="activity_recStartErr">Không thể khởi động thu âm</string>
+    <string name="activity_recBusyErr">Trình thu âm đang bận hoặc chưa được cấp quyền</string>
+    <string name="activity_recFileErr">Không thể tạo tệp</string>
+    <string name="activity_delete_all_confirm">Bạn có muốn xoá hết lịch sử ?</string>
+    <string name="activity_delete_confirm">Bạn có muốn xoá lịch sử đã chọn ?</string>
+    <string name="activity_save_confirm">Bạn có muốn lưu kết quả đo hiện tại ?</string>
+    <string name="activity_calibrate">Hiệu quả của mỗi ống thu thanh sẽ khác nhau tuỳ vào thiết bị, vì vậy hãy điều chỉnh sai số trước khi sử dụng.</string>
+    <string name="activity_confirm">Đồng ý</string>
+    <string name="activity_cancel">Huỷ</string>
+
+    <!-- Notification -->
+    <string name="noti_refresh">Đã làm mới</string>
+    <string name="noti_pause">Tạm dừng</string>
+    <string name="noti_resume">Tiếp tục</string>
+    <string name="noti_history_saved">Lịch sử đã được lưu</string>
+    <string name="noti_history_unsaved">Lỗi: Lịch sử chưa được lưu.</string>
+    <string name="noti_history_null">Không có lịch sử nào.</string>
+    <string name="noti_all_history_delete">Tất cả lịch sử đã được xoá.</string>
+    <string name="noti_history_delete">Lịch sử đã được xoá.</string>
+    <string name="noti_history_delete_fail">Lỗi: Lịch sử chưa được xoá.</string>
+    <string name="noti_calibrate_save">Giá trị đã được lưu</string>
+    <string name="noti_warning_value_save">Giá trị đã được lưu</string>
+
+    <!-- Settings -->
+    <string name="settings_warninglabel">Cảnh báo ô nhiễm độ ồn</string>
+    <string name="settings_warningex">Hệ thống sẽ cảnh báo khi độ ồn hiện tại lớn hơn độ ồn được định sẵn</string>
+
+    <string name="settings_warningvaluelabel">Giá trị cảnh báo</string>
+    <string name="settings_warningvalueex">Cài đặt giá trị cảnh báo ô nhiễm độ ồn</string>
+
+    <string name="settings_vibratelabel">Chế độ rung</string>
+    <string name="settings_vibrateex">Nếu được kích hoạt, thiết bị sẽ rung khi độ ồn hiện tại lớn hơn độ ồn được định sẵn</string>
+
+    <string name="settings_soundlabel">Chế độ chuông</string>
+    <string name="settings_soundex">Nếu được kích hoạt, thiết bị sẽ bật chuông thông báo khi độ ồn hiện tại lớn hơn độ ồn được định sẵn</string>
+
+
+</resources>

@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name" translatable="false">Noizy</string>
+    <string name="app_version">version 1.0</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!-- Miscellanies -->
+    <string name="colon" translatable="false">:</string>
+    <string name="left_parenthesis" translatable="false">(</string>
+    <string name="right_parenthesis" translatable="false">)</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="minus" translatable="false">-</string>
+
+    <!-- Title -->
+    <string name="title_soundmeter">Sound Meter</string>
+    <string name="title_history">History</string>
+    <string name="title_soundstorage">Sound Storage</string>
+    <string name="title_share">Snap &amp; Share</string>
+    <string name="title_setting">Settings</string>
+    <string name="title_confirm">Confirm</string>
+
+    <!-- Sound Unit -->
+    <string name="sound_unit">dB</string>
+    <string name="sound_minlabel">MIN</string>
+    <string name="sound_avglabel">AVG</string>
+    <string name="sound_maxlabel">MAX</string>
+
+    <!-- Noise Chart -->
+    <string name="noise_20" translatable="false">20dB</string>
+    <string name="noise_20_des">Leaves rustling</string>
+    <string name="noise_30" translatable="false">30dB</string>
+    <string name="noise_30_des">Whisper</string>
+    <string name="noise_40" translatable="false">40dB</string>
+    <string name="noise_40_des">Quiet library</string>
+    <string name="noise_50" translatable="false">50dB</string>
+    <string name="noise_50_des">Moderate rainfall</string>
+    <string name="noise_60" translatable="false">60dB</string>
+    <string name="noise_60_des">Normal conversation</string>
+    <string name="noise_70" translatable="false">70dB</string>
+    <string name="noise_70_des">Traffic, Vacuums</string>
+    <string name="noise_80" translatable="false">80dB</string>
+    <string name="noise_80_des">Alarm clocks</string>
+    <string name="noise_90" translatable="false">90dB</string>
+    <string name="noise_90_des">Lawnmowers, Power tools</string>
+    <string name="noise_100" translatable="false">100dB</string>
+    <string name="noise_100_des">Snowmobiles</string>
+    <string name="noise_110" translatable="false">110dB</string>
+    <string name="noise_110_des">Car horns, Concerts</string>
+    <string name="noise_120" translatable="false">120dB</string>
+    <string name="noise_120_des">Jet planes (during take off)</string>
+    <string name="noise_130" translatable="false">130dB</string>
+    <string name="noise_130_des">Ambulances, Jackhammers</string>
+    <string name="noise_140" translatable="false">140dB</string>
+    <string name="noise_140_des">Fireworks, Gun shots</string>
+
+    <!-- Layout -->
+    <string name="activity_soundmeter">Sound Meter</string>
+    <string name="activity_exvalue">0</string>
+    <string name="activity_exdur">mm:ss</string>
+    <string name="activity_statuslabel">Status</string>
+    <string name="activity_exstatus">Normal Conversation</string>
+    <string name="activity_curlabel">Current (Db)</string>
+    <string name="activity_durlabel">Duration </string>
+    <string name="activity_chartlabel">Noise Chart</string>
+    <string name="activity_calibratelabel">Calibrate</string>
+    <string name="activity_pickerlabel">Set dB value for warning</string>
+    <string name="activity_extime">hh:mm:ss</string>
+    <string name="activity_exdate">dd-MM-YYYY</string>
+
+    <!-- Message -->
+    <string name="activity_recStartErr">Unable to start recording</string>
+    <string name="activity_recBusyErr">Recorder is busy or permission to record is prohibited</string>
+    <string name="activity_recFileErr">Can not create file</string>
+    <string name="activity_delete_all_confirm">Do you want to delete all history ?</string>
+    <string name="activity_delete_confirm">Do you want to delete the selected history ?</string>
+    <string name="activity_save_confirm">Do you want to save this measure result ?</string>
+    <string name="activity_calibrate">Performance of the microphone will be different for each device, so calibration is need before use.</string>
+    <string name="activity_confirm">OK</string>
+    <string name="activity_cancel">Cancel</string>
+
+    <!-- Notification -->
+    <string name="noti_refresh">Refreshed</string>
+    <string name="noti_pause">Paused</string>
+    <string name="noti_resume">Resumed</string>
+    <string name="noti_history_saved">History has been saved</string>
+    <string name="noti_history_unsaved">Error: History has not been saved</string>
+    <string name="noti_history_null">There is no history available.</string>
+    <string name="noti_all_history_delete">All histories have been deleted</string>
+    <string name="noti_history_delete">History has been deleted</string>
+    <string name="noti_history_delete_fail">Error: History has not been deleted</string>
+    <string name="noti_calibrate_save">Value has been save</string>
+    <string name="noti_warning_value_save">Value has been save</string>
+
+    <!-- Settings -->
+    <string name="settings_warninglabel">dB Warning</string>
+    <string name="settings_warningex">It will be warned when the current dB value is larger than preset dB value</string>
+
+    <string name="settings_warningvaluelabel">Warning dB value</string>
+    <string name="settings_warningvalueex">Set dB value for warning</string>
+
+    <string name="settings_vibratelabel">Vibrate</string>
+    <string name="settings_vibrateex">If enable, the device will vibrate when the current dB value is larger than preset dB value</string>
+
+    <string name="settings_soundlabel">Sound</string>
+    <string name="settings_soundex">If enable, the device will issue a warning sound when the current dB value is larger than preset dB value</string>
+
+
+</resources>
