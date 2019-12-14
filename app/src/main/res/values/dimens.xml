@@ -2,21 +2,41 @@
 <resources>
     //Margin
     <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_30dp">30dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_7dp">7dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
 
     //Padding
     <dimen name="padding_45dp">45dp</dimen>
     <dimen name="padding_20dp">20dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
 
     //Size
     <dimen name="size_height_header">140dp</dimen>
     <dimen name="size_height_toolbar_frame">80dp</dimen>
     <dimen name="size_height_toolbar_circular_frame">40dp</dimen>
+    <dimen name="size_speedometer">280dp</dimen>
+    <dimen name="size_button_restart">48dp</dimen>
+    <dimen name="size_button_info">26dp</dimen>
+    <dimen name="size_button_pause_play">72dp</dimen>
+    <dimen name="size_button_calibrate">54dp</dimen>
+    <dimen name="size_button_save">54dp</dimen>
+    <dimen name="size_frame_value">100dp</dimen>
+    <dimen name="size_text_sign_value">14dp</dimen>
+    <dimen name="size_text_calibrate_value">36dp</dimen>
 
     //Font Size
+    <dimen name="font_36sp">36sp</dimen>
+    <dimen name="font_32sp">32sp</dimen>
+    <dimen name="font_28sp">28sp</dimen>
     <dimen name="font_26sp">26sp</dimen>
     <dimen name="font_22sp">22sp</dimen>
+    <dimen name="font_20sp">20sp</dimen>
     <dimen name="font_18sp">18sp</dimen>
+    <dimen name="font_16sp">16sp</dimen>
 
     //Radius
     <dimen name="radius_15dp">15dp</dimen>

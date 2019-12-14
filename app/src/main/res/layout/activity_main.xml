@@ -21,7 +21,7 @@
                 android:id="@+id/toolbar"
                 layout="@layout/nav_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <com.google.android.material.circularreveal.CircularRevealFrameLayout
                 android:id="@+id/content_frame"

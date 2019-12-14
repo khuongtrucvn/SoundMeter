@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/padding_20dp"
+        android:paddingBottom="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_20dp"
+        android:paddingEnd="@dimen/padding_20dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_gravity="center"
+            android:text="@string/activity_calibratelabel"
+            android:textSize="@dimen/font_20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_gravity="center"
+            android:text="@string/activity_calibrate"
+            android:textSize="@dimen/font_16sp"
+            android:textColor="@color/black"/>
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/left_parenthesis"
+                    android:textSize="@dimen/font_28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_current_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_exvalue"
+                    android:textSize="@dimen/font_28sp"
+                    android:textColor="@color/black"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_5dp"
+                    android:minWidth="@dimen/size_text_sign_value"
+                    android:text="@string/plus"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/font_28sp"
+                    android:textColor="@color/black"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_tolerance"
+                    android:layout_width="@dimen/size_text_calibrate_value"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_exvalue"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/font_28sp"
+                    android:textColor="@color/black"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/right_parenthesis"
+                    android:textSize="@dimen/font_28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_5dp"
+                    android:text="@string/sound_unit"
+                    android:textSize="@dimen/font_28sp"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+            <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="start"
+                android:layout_marginStart="@dimen/margin_10dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_increase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plus"
+                    android:textSize="@dimen/font_32sp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/colorAccent"
+                    app:cornerRadius="@dimen/radius_15dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_decrease"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:text="@string/minus"
+                    android:textSize="@dimen/font_32sp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/colorAccent"
+                    app:cornerRadius="@dimen/radius_15dp"/>
+            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="@dimen/margin_30dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_10dp"
+                android:text="@string/activity_cancel"
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/colorAccent"
+                app:backgroundTint="@color/white"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_10dp"
+                android:text="@string/activity_confirm"
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/colorAccent"/>
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+</layout>
