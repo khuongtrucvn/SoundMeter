@@ -25,6 +25,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 
@@ -101,6 +102,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 case R.id.nav_history: {
                     binding.toolbar.textTitle.setText(R.string.title_history);
                     UtilsFragment.replace(this, frameId, new FragmentHistory());
+                    changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
                 case R.id.nav_share: {
@@ -212,5 +214,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             }
         });
         measureThread.start();
+    }
+
+    public void changeBackgroundColor(int color){
+        binding.layoutActivity.setBackgroundColor(ContextCompat.getColor(this, color));
     }
 }

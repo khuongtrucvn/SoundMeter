@@ -124,4 +124,17 @@ public class NoiseLevel {
         }
         return description;
     }
+
+    public int getWarningColor(float value) {
+        if(value > 120)
+            return R.color.extreme_danger;
+        else if(value > 90)
+            return R.color.high_danger;
+        else if(value > 80)
+            return R.color.considerable_danger;
+        else if(value > 70)
+            return R.color.moderate_danger;
+        else
+            return R.color.colorPrimary;
+    }
 }

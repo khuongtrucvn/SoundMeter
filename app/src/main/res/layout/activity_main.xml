@@ -10,12 +10,12 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:id="@+id/layout_activity"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
-            android:paddingTop="@dimen/padding_45dp"
-            android:paddingBottom="@dimen/padding_45dp">
+            android:paddingTop="@dimen/padding_20dp">
 
             <include
                 android:id="@+id/toolbar"

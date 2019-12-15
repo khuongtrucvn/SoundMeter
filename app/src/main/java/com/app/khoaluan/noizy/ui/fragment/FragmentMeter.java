@@ -28,10 +28,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,14 +48,20 @@ public class FragmentMeter extends Fragment {
     private DialogCalibrateBinding calibrateBinding;
     private AdapterNoiseChart adapterNoiseChart;
 
+    private boolean isInitThreadRun = true;
+    private boolean isCalibrateThreadRun = false;
+
     /* Duration */
     private long duration;
 
-    /*Recorder*/
+    /* Recorder */
     private NoiseLevel noiseLevel = new NoiseLevel();
 
-    /*Recorder*/
+    /* Calibrate */
     private int calibrateValue = Global.calibrateValue;
+
+    /* Format */
+    private DecimalFormat df1;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -67,6 +75,7 @@ public class FragmentMeter extends Fragment {
     public void onDetach() {
         super.onDetach();
         this.activity = null;
+        isInitThreadRun = false;
     }
 
     @Nullable
@@ -89,18 +98,15 @@ public class FragmentMeter extends Fragment {
     }
 
     private void initializeComponents() {
+        setMeasureResultFormat();
+
         binding.textDuration.start();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (isInitThreadRun) {
                     try {
-                        Locale currentLocale = Locale.getDefault();
-                        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(currentLocale);
-                        otherSymbols.setDecimalSeparator('.');
-                        final DecimalFormat df1 = new DecimalFormat("##0.0", otherSymbols);
-
                         int level = noiseLevel.getNoiseLevel(Global.lastDb);
                         int description = noiseLevel.getNoiseLevelDescription(level);
                         noiseLevel.setSoundLevel(level, description);
@@ -119,6 +125,8 @@ public class FragmentMeter extends Fragment {
                                     binding.textMaxValue.setText(df1.format(Global.maxDb));
                                     binding.textStatus.setText(noiseLevel.getDescription());
 
+                                    warnRealTime(Global.lastDb);
+
                                     binding.speedometer.refresh();
                                 }
                             });
@@ -132,6 +140,14 @@ public class FragmentMeter extends Fragment {
                 }
             }
         }).start();
+    }
+
+    //Phương thức cài đặt format
+    private void setMeasureResultFormat(){
+        Locale currentLocale = Locale.getDefault();
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(currentLocale);
+        otherSymbols.setDecimalSeparator('.');
+        df1 = new DecimalFormat("##0.0", otherSymbols);
     }
 
     private void setEventHandler(){
@@ -276,8 +292,10 @@ public class FragmentMeter extends Fragment {
             @Override
             public void onClick(View v) {
                 Global.calibrateValue = calibrateValue;
-                activity.restartRecorder();
+                restartRecord();
+                Toast.makeText(getActivity(), R.string.noti_calibrate_save, Toast.LENGTH_SHORT).show();
                 b.dismiss();
+                isCalibrateThreadRun = false;
             }
         });
 
@@ -285,6 +303,7 @@ public class FragmentMeter extends Fragment {
             @Override
             public void onClick(View v) {
                 b.dismiss();
+                isCalibrateThreadRun = false;
             }
         });
 
@@ -295,16 +314,12 @@ public class FragmentMeter extends Fragment {
     private void initializeCalibrateDialog(){
         loadCalibrateValueHandler();
 
+        isCalibrateThreadRun = true;
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (isCalibrateThreadRun) {
                     try {
-                        Locale currentLocale = Locale.getDefault();
-                        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(currentLocale);
-                        otherSymbols.setDecimalSeparator('.');
-                        final DecimalFormat df1 = new DecimalFormat("##0.0", otherSymbols);
-
                         if(activity != null){
                             //Cập nhật dữ liệu lên giao diện
                             activity.runOnUiThread(new Runnable() {
@@ -341,5 +356,13 @@ public class FragmentMeter extends Fragment {
                     calibrateBinding.textSign.setText(R.string.plus);
             }
         });
+    }
+
+    //Phương thức cảnh báo thời gian thực, sử dụng synchronized vì trong thời gian thread chạy nếu đổi fragment thì activity = null => crash
+    private synchronized void warnRealTime(float value){
+        if(activity != null){
+            int backgroundColor = noiseLevel.getWarningColor(value);                //Điều chỉnh màu nền cảnh báo người dùng
+            activity.changeBackgroundColor(backgroundColor);
+        }
     }
 }

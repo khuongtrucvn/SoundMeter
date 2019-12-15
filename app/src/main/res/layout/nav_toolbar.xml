@@ -5,41 +5,38 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        android:paddingBottom="@dimen/padding_20dp"
         style="@style/ToolbarStyle">
 
-        <com.google.android.material.circularreveal.CircularRevealFrameLayout
+        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_height_toolbar_frame">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_30dp"
+            android:layout_marginEnd="@dimen/margin_30dp"
+            android:background="@drawable/white_roundcorner">
 
-            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_height_toolbar_circular_frame"
-                android:orientation="horizontal"
-                android:layout_marginStart="@dimen/margin_40dp"
-                android:layout_marginEnd="@dimen/margin_40dp"
-                android:background="@drawable/white_roundcorner">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:textSize="@dimen/font_18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:textSize="@dimen/font_18sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"/>
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_hamburger"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_dehaze"
-                    android:background="@color/transparent"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/margin_10dp"
-                    android:scaleType="fitXY"/>
-            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
-        </com.google.android.material.circularreveal.CircularRevealFrameLayout>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_hamburger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_dehaze"
+                android:background="@color/transparent"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:scaleType="fitXY"/>
+        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 </layout>
