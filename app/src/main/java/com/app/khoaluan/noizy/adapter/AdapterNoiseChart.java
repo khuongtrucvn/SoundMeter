@@ -1,7 +1,6 @@
 package com.app.khoaluan.noizy.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -23,7 +22,8 @@ public class AdapterNoiseChart extends RecyclerView.Adapter<AdapterNoiseChart.No
 
     class NoiseChartViewHolder extends RecyclerView.ViewHolder {
         private ItemDialogNoisechartBinding binding;
-        public NoiseChartViewHolder(ItemDialogNoisechartBinding binding) {
+
+        NoiseChartViewHolder(ItemDialogNoisechartBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

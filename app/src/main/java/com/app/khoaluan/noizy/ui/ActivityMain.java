@@ -251,6 +251,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         warningVal = myPrefs.getWarningValue();
         isVibrate = myPrefs.getIsVibrate();
         isSound = myPrefs.getIsSound();
+        Global.calibrateValue = myPrefs.getCalibrateValue();
     }
 
     private void initdbWarning(){

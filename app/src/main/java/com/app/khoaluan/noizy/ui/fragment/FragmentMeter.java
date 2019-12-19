@@ -2,6 +2,7 @@ package com.app.khoaluan.noizy.ui.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -18,13 +19,18 @@ import com.app.khoaluan.noizy.databinding.DialogCalibrateBinding;
 import com.app.khoaluan.noizy.databinding.DialogNoisechartBinding;
 import com.app.khoaluan.noizy.databinding.FragmentMeterBinding;
 import com.app.khoaluan.noizy.model.Global;
+import com.app.khoaluan.noizy.model.MeasureResult;
+import com.app.khoaluan.noizy.model.MyPrefs;
 import com.app.khoaluan.noizy.model.NoiseLevel;
 import com.app.khoaluan.noizy.ui.ActivityMain;
+import com.app.khoaluan.noizy.utils.UtilsXmlFile;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -50,6 +56,15 @@ public class FragmentMeter extends Fragment {
 
     private boolean isInitThreadRun = true;
     private boolean isCalibrateThreadRun = false;
+
+    List<MeasureResult> resultList;
+    MeasureResult ms;
+
+    /* XML file */
+    private UtilsXmlFile xml = new UtilsXmlFile();
+
+    /* Shared Preferences */
+    private MyPrefs myPrefs;
 
     /* Recorder */
     private NoiseLevel noiseLevel = new NoiseLevel();
@@ -95,6 +110,9 @@ public class FragmentMeter extends Fragment {
     }
 
     private void initializeComponents() {
+        myPrefs = new MyPrefs(activity);
+        calibrateValue = myPrefs.getCalibrateValue();
+
         setMeasureResultFormat();
 
         if(!activity.isRecording){                  // Đang tạm dừng
@@ -185,7 +203,9 @@ public class FragmentMeter extends Fragment {
         //Sự kiện nhấn nút Lưu kết quả đo độ ồn
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                ms = getMeasureResult();
 
+                confirmSaveHistory();
             }
         });
     }
@@ -295,6 +315,7 @@ public class FragmentMeter extends Fragment {
             @Override
             public void onClick(View v) {
                 Global.calibrateValue = calibrateValue;
+                myPrefs.setCalibrateValue(calibrateValue);
                 restartRecord();
                 Toast.makeText(getActivity(), R.string.noti_calibrate_save, Toast.LENGTH_SHORT).show();
                 calibrateDialog.dismiss();
@@ -367,5 +388,48 @@ public class FragmentMeter extends Fragment {
             int backgroundColor = noiseLevel.getWarningColor(value);                //Điều chỉnh màu nền cảnh báo người dùng
             activity.changeBackgroundColor(backgroundColor);
         }
+    }
+
+    private MeasureResult getMeasureResult(){
+        MeasureResult result = new MeasureResult();
+
+        result.setCurValue(Float.parseFloat(df1.format(Global.lastDb)));
+        result.setMinValue(Float.parseFloat(binding.textMinValue.getText().toString()));
+        result.setAvgValue(Float.parseFloat(binding.textAverageValue.getText().toString()));
+        result.setMaxValue(Float.parseFloat(binding.textMaxValue.getText().toString()));
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        result.setDate(currentDate);
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        result.setTime(currentTime);
+        result.setDuration(binding.textDuration.getText().toString());
+
+        return result;
+    }
+
+    private void confirmSaveHistory(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.title_confirm);
+        builder.setMessage(R.string.activity_save_confirm);
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.activity_confirm, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //save history to file
+                resultList = new ArrayList<>();
+                resultList.add(ms);
+                xml.writeXmlFile(activity, resultList);
+
+                //restart
+                restartRecord();
+            }
+        });
+        builder.setNegativeButton(R.string.activity_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

@@ -1,32 +1,40 @@
 package com.app.khoaluan.noizy.model;
 
 public class MeasureResult {
+    private float CurValue;
     private float MinValue;
     private float AvgValue;
     private float MaxValue;
     private String Date;
     private String Time;
     private String Duration;
-    private String Status;
 
     public MeasureResult(){
+        CurValue = 0;
         MinValue = 0;
         AvgValue = 0;
         MaxValue = 0;
         Date = "dd-MM-YYYY";
         Time = "00:00:00";
         Duration = "00:00";
-        Status = "None";
     }
 
-    public MeasureResult(float minValue, float avgValue, float maxValue, String date, String time, String duration, String status) {
+    public MeasureResult(float curValue, float minValue, float avgValue, float maxValue, String date, String time, String duration) {
+        CurValue = curValue;
         MinValue = minValue;
         AvgValue = avgValue;
         MaxValue = maxValue;
         Date = date;
         Time = time;
         Duration = duration;
-        Status = status;
+    }
+
+    public float getCurValue() {
+        return CurValue;
+    }
+
+    public void setCurValue(float curValue) {
+        CurValue = curValue;
     }
 
     public float getMinValue() {
@@ -75,13 +83,5 @@ public class MeasureResult {
 
     public void setDuration(String duration) {
         Duration = duration;
-    }
-
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String status) {
-        Status = status;
     }
 }
