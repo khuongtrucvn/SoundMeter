@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/padding_20dp"
+        android:paddingBottom="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_20dp"
+        android:paddingEnd="@dimen/padding_20dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_gravity="center"
+            android:text="@string/activity_pickerlabel"
+            android:textSize="@dimen/font_20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <NumberPicker
+            android:id="@+id/picker_warning_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="@dimen/margin_30dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_10dp"
+                app:backgroundTint="@color/white"
+                android:text="@string/activity_cancel"
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/colorAccent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_10dp"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/activity_confirm"
+                android:textSize="@dimen/font_16sp"
+                android:textColor="@color/white" />
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+</layout>

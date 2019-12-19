@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     //Margin
+    <dimen name="margin_50dp">50dp</dimen>
     <dimen name="margin_40dp">40dp</dimen>
     <dimen name="margin_30dp">30dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>

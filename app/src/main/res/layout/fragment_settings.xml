@@ -1,10 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:ignore="HardcodedText">
 
-    </LinearLayout>
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="ScrollViewSize">
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/layout_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_layout_settings">
+
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/margin_50dp"
+                    android:padding="@dimen/padding_20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_warninglabel"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_18sp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_warningex"
+                        android:textColor="@color/lightgray"
+                        android:textSize="@dimen/font_16sp"/>
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/chk_warn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_20dp"
+                    android:paddingEnd="@dimen/padding_5dp"
+                    android:buttonTint="@color/white"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+
+                <View
+                    style="@style/Divider"
+                    android:layout_alignParentBottom="true"/>
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/layout_warning_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_layout_settings">
+
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/margin_50dp"
+                    android:padding="@dimen/padding_20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_warningvaluelabel"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_18sp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_warningvalueex"
+                        android:textColor="@color/lightgray"
+                        android:textSize="@dimen/font_16sp"/>
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/padding_20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_warn_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_exvalue"
+                        android:textSize="@dimen/font_18sp"
+                        android:textColor="@color/white" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sound_unit"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textSize="@dimen/font_18sp"
+                        android:textColor="@color/white" />
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                <View
+                    style="@style/Divider"
+                    android:layout_alignParentBottom="true"/>
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/layout_vibrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_layout_settings">
+
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/margin_50dp"
+                    android:padding="@dimen/padding_20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_vibratelabel"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_18sp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_vibrateex"
+                        android:textColor="@color/lightgray"
+                        android:textSize="@dimen/font_16sp"/>
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/swt_vibrate"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/padding_20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    style="@style/Divider"
+                    android:layout_alignParentBottom="true"/>
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/layout_sound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_layout_settings">
+
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/margin_50dp"
+                    android:padding="@dimen/padding_20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_soundlabel"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_18sp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_soundex"
+                        android:textColor="@color/lightgray"
+                        android:textSize="@dimen/font_16sp"/>
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/swt_sound"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/padding_20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    style="@style/Divider"
+                    android:layout_alignParentBottom="true"/>
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

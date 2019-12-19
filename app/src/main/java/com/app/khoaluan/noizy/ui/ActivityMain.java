@@ -1,6 +1,14 @@
 package com.app.khoaluan.noizy.ui;
 
+import android.content.Context;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -9,6 +17,7 @@ import com.app.khoaluan.noizy.R;
 import com.app.khoaluan.noizy.databinding.ActivityMainBinding;
 import com.app.khoaluan.noizy.model.Global;
 import com.app.khoaluan.noizy.model.MyMediaRecorder;
+import com.app.khoaluan.noizy.model.MyPrefs;
 import com.app.khoaluan.noizy.ui.fragment.FragmentHistory;
 import com.app.khoaluan.noizy.ui.fragment.FragmentMeter;
 import com.app.khoaluan.noizy.ui.fragment.FragmentSettings;
@@ -29,6 +38,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 
+import static com.app.khoaluan.noizy.utils.AppConfig.DELAYING_WARNING_TIME;
 import static com.app.khoaluan.noizy.utils.AppConfig.WAITING_TIME;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -40,10 +50,19 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     private MyMediaRecorder mRecorder ;
     private boolean bListener = true;
     private boolean isThreadRun = true;
-    private Thread measureThread;
+    public boolean isRecording = true;
+    private Thread measureThread, warnThread;
     float volume = 10000;
     private double totalDb = 0; // tổng cộng dB
     private long numberOfDb = 0; // số lần đo độ ồn
+
+    /* Shared Preferences */
+    private MyPrefs myPrefs;
+    private boolean isWarn, isVibrate, isSound;
+    private int warningVal;
+
+    /* Duration */
+    public long duration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +145,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         @LayoutRes int layoutId = R.layout.activity_main;
         setContentView(layoutId);
         binding = DataBindingUtil.setContentView(this, layoutId);
+
         binding.navView.getMenu().getItem(0).setChecked(true);
         switchFragments(R.id.nav_meter);
         setSupportActionBar(binding.toolbar.toolbar);
@@ -135,7 +155,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         binding.drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        loadSharedPreferences();
         initRecorder();
+        initdbWarning();
         setEventHandler();
     }
 
@@ -157,10 +179,12 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     public void resumeRecorder(){
         mRecorder.resumeRecording();
+        isRecording = true;
     }
 
     public void pauseRecorder(){
         mRecorder.pauseRecording();
+        isRecording = false;
     }
 
     private void setEventHandler(){
@@ -218,5 +242,63 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     public void changeBackgroundColor(int color){
         binding.layoutActivity.setBackgroundColor(ContextCompat.getColor(this, color));
+    }
+
+    //Phương thức tải dữ liệu từ Shared Preferences
+    public void loadSharedPreferences(){
+        myPrefs = new MyPrefs(this);
+        isWarn = myPrefs.getIsWarn();
+        warningVal = myPrefs.getWarningValue();
+        isVibrate = myPrefs.getIsVibrate();
+        isSound = myPrefs.getIsSound();
+    }
+
+    private void initdbWarning(){
+        warnThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (isThreadRun) {
+                    try {
+                        if(isRecording)
+                            warn(Global.lastDb);
+
+                        Thread.sleep(DELAYING_WARNING_TIME);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        warnThread.start();
+    }
+
+    private void warn(float curVal){
+        if(isWarn){
+            if(curVal > warningVal){
+                if(isVibrate){
+                    Vibrator v = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
+                    if(v != null){
+                        // Rung 0.5s
+                        if (Build.VERSION.SDK_INT >= 26) {
+                            v.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            v.vibrate(400);
+                        }
+                    }
+                }
+                if(isSound){
+                    try {
+                        Uri path = Uri.parse("android.resource://" + this.getPackageName()+"/raw/warning_tone");
+                        RingtoneManager.setActualDefaultRingtoneUri(this, RingtoneManager.TYPE_NOTIFICATION,path);
+                        Ringtone r = RingtoneManager.getRingtone(this, path);
+                        r.play();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 }

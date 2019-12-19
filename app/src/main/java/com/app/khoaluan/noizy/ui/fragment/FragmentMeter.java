@@ -51,9 +51,6 @@ public class FragmentMeter extends Fragment {
     private boolean isInitThreadRun = true;
     private boolean isCalibrateThreadRun = false;
 
-    /* Duration */
-    private long duration;
-
     /* Recorder */
     private NoiseLevel noiseLevel = new NoiseLevel();
 
@@ -100,7 +97,13 @@ public class FragmentMeter extends Fragment {
     private void initializeComponents() {
         setMeasureResultFormat();
 
-        binding.textDuration.start();
+        if(!activity.isRecording){                  // Đang tạm dừng
+            binding.btnPausePlay.setChecked(true);
+            binding.textDuration.setBase(SystemClock.elapsedRealtime() + activity.duration);
+        }
+        else
+            binding.textDuration.start();
+
 
         new Thread(new Runnable() {
             @Override
@@ -206,7 +209,7 @@ public class FragmentMeter extends Fragment {
             activity.pauseRecorder();
 
             //Lưu lại thời gian đếm và dừng đồng hồ đếm
-            duration = binding.textDuration.getBase() - SystemClock.elapsedRealtime();
+            activity.duration = binding.textDuration.getBase() - SystemClock.elapsedRealtime();
             binding.textDuration.stop();
 
             Toast.makeText(getActivity(), R.string.noti_pause,Toast.LENGTH_SHORT).show();
@@ -215,7 +218,7 @@ public class FragmentMeter extends Fragment {
             activity.resumeRecorder();
 
             //Gán thời gian đếm và chạy đồng hồ đếm
-            binding.textDuration.setBase(SystemClock.elapsedRealtime() + duration);
+            binding.textDuration.setBase(SystemClock.elapsedRealtime() + activity.duration);
             binding.textDuration.start();
 
             Toast.makeText(getActivity(), R.string.noti_resume,Toast.LENGTH_SHORT).show();
@@ -265,7 +268,7 @@ public class FragmentMeter extends Fragment {
         AlertDialog.Builder dialogBuilder =	new AlertDialog.Builder(activity);
         calibrateBinding = DialogCalibrateBinding.inflate(LayoutInflater.from(getContext()));
         dialogBuilder.setView(calibrateBinding.getRoot());
-        final AlertDialog b = dialogBuilder.create();
+        final AlertDialog calibrateDialog = dialogBuilder.create();
         initializeCalibrateDialog();
 
         calibrateBinding.btnIncrease.setOnClickListener(new View.OnClickListener() {
@@ -294,7 +297,7 @@ public class FragmentMeter extends Fragment {
                 Global.calibrateValue = calibrateValue;
                 restartRecord();
                 Toast.makeText(getActivity(), R.string.noti_calibrate_save, Toast.LENGTH_SHORT).show();
-                b.dismiss();
+                calibrateDialog.dismiss();
                 isCalibrateThreadRun = false;
             }
         });
@@ -302,12 +305,12 @@ public class FragmentMeter extends Fragment {
         calibrateBinding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                b.dismiss();
+                calibrateDialog.dismiss();
                 isCalibrateThreadRun = false;
             }
         });
 
-        b.show();
+        calibrateDialog.show();
     }
 
     //Phương thức khởi tạo alert dialog hiệu chỉnh
