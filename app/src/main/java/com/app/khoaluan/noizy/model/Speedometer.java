@@ -18,19 +18,23 @@ import java.util.Locale;
 import static com.app.khoaluan.noizy.utils.AppConfig.ANIMATION_INTERVAL;
 
 public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
+    private Context context;
     private float scaleWidth, scaleHeight;
     private int newWidth, newHeight;
     private Matrix mMatrix = new Matrix();
     private Bitmap indicatorBitmap;
-    private Paint paint = new Paint();
+    private Paint dbValuePaint = new Paint(), influencePaint = new Paint();
     DecimalFormat df1;
+    private NoiseLevel level = new NoiseLevel();
 
     public Speedometer(Context context) {
         super(context);
+        this.context = context;
     }
 
     public Speedometer(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     private void init() {
@@ -44,11 +48,17 @@ public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
         mMatrix.postScale(scaleWidth, scaleHeight);   //Set the scale of mMatrix
         indicatorBitmap = Bitmap.createBitmap(myBitmap, 0, 0, bitmapWidth, bitmapHeight, mMatrix,true);  //Get the same and background width and height of the pointer map bitmap
 
-        paint = new Paint();
-        paint.setTextSize(108);
-        paint.setAntiAlias(true);  //Anti-aliasing
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setColor(Color.WHITE);
+        dbValuePaint = new Paint();
+        dbValuePaint.setTextSize(112);
+        dbValuePaint.setAntiAlias(true);  //Anti-aliasing
+        dbValuePaint.setTextAlign(Paint.Align.CENTER);
+        dbValuePaint.setColor(Color.WHITE);
+
+        influencePaint = new Paint();
+        influencePaint.setTextSize(54);
+        influencePaint.setAntiAlias(true);  //Anti-aliasing
+        influencePaint.setTextAlign(Paint.Align.CENTER);
+        influencePaint.setColor(Color.WHITE);
 
         Locale currentLocale = Locale.getDefault();
         DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(currentLocale);
@@ -72,12 +82,15 @@ public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
             init();
         }
         mMatrix.setRotate(getAngle(Global.lastDb), newWidth / 2, newHeight * 215 / 460);   //The relative position of the sheet
-        canvas.drawBitmap(indicatorBitmap, mMatrix, paint);
-        canvas.drawText(df1.format(Global.lastDb)+" dB", newWidth/2,newHeight*44/46, paint); //Picture relative position
+        canvas.drawBitmap(indicatorBitmap, mMatrix, dbValuePaint);
+
+        //Mức độ ảnh hưởng
+        canvas.drawText(context.getString(level.getInfluenceLevel(Global.lastDb)), newWidth/2,newHeight*18/23, influencePaint); //Picture relative position
+        //Độ ồn hiện tại
+        canvas.drawText(df1.format(Global.lastDb)+" dB", newWidth/2,newHeight*22/23, dbValuePaint); //Picture relative position
     }
 
     private float getAngle(float db){
         return(db-85)*5/3;  //Say more are tears, online to find pictures. The They will not change the map, the code calculation
     }
-
 }

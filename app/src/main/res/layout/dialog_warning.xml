@@ -19,7 +19,7 @@
             android:text="@string/activity_pickerlabel"
             android:textSize="@dimen/font_20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textColor="@color/colorAccent"/>
 
         <NumberPicker
             android:id="@+id/picker_warning_value"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_10dp"
                 android:backgroundTint="@color/colorAccent"
-                android:text="@string/activity_confirm"
+                android:text="@string/activity_save"
                 android:textSize="@dimen/font_16sp"
                 android:textColor="@color/white" />
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>

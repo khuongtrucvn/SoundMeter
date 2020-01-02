@@ -408,10 +408,10 @@ public class FragmentMeter extends Fragment {
 
     private void confirmSaveHistory(){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.title_confirm);
+        builder.setTitle(R.string.title_history_save);
         builder.setMessage(R.string.activity_save_confirm);
         builder.setCancelable(false);
-        builder.setPositiveButton(R.string.activity_confirm, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.activity_save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //save history to file

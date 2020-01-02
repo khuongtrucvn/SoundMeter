@@ -137,4 +137,17 @@ public class NoiseLevel {
         else
             return R.color.colorPrimary;
     }
+
+    public int getInfluenceLevel(float value){
+        if(value > 120)
+            return R.string.il_extreme_danger;
+        else if(value > 90)
+            return R.string.il_high_danger;
+        else if(value > 80)
+            return R.string.il_considerable_danger;
+        else if(value > 70)
+            return R.string.il_moderate_danger;
+        else
+            return R.string.il_normal;
+    }
 }

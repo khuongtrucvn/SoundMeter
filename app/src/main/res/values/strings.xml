@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Noizy</string>
+    <string name="app_name" translatable="false">SoundMeter</string>
     <string name="app_version">version 1.0</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
@@ -11,6 +11,13 @@
     <string name="plus" translatable="false">+</string>
     <string name="minus" translatable="false">-</string>
 
+    <!-- Influence Level -->
+    <string name="il_normal" >Normal</string>
+    <string name="il_moderate_danger">Not safe</string>
+    <string name="il_considerable_danger">Warning</string>
+    <string name="il_high_danger">Danger</string>
+    <string name="il_extreme_danger">Extreme Danger</string>
+
     <!-- Title -->
     <string name="title_soundmeter">Sound Meter</string>
     <string name="title_history">History</string>
@@ -18,6 +25,9 @@
     <string name="title_share">Snap &amp; Share</string>
     <string name="title_setting">Settings</string>
     <string name="title_confirm">Confirm</string>
+    <string name="title_history_save">Save result</string>
+    <string name="title_history_delete_all">Delete all history</string>
+    <string name="title_history_delete">Delete selected history</string>
 
     <!-- Sound Unit -->
     <string name="sound_unit">dB</string>
@@ -75,8 +85,9 @@
     <string name="activity_delete_confirm">Do you want to delete the selected history ?</string>
     <string name="activity_save_confirm">Do you want to save this measure result ?</string>
     <string name="activity_calibrate">Performance of the microphone will be different for each device, so calibration is need before use.</string>
-    <string name="activity_confirm">OK</string>
+    <string name="activity_save">Save</string>
     <string name="activity_cancel">Cancel</string>
+    <string name="activity_delete">Delete</string>
 
     <!-- Notification -->
     <string name="noti_refresh">Refreshed</string>

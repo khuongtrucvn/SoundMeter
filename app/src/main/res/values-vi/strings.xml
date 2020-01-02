@@ -55,7 +55,6 @@
     <string name="activity_delete_confirm">Bạn có muốn xoá lịch sử đã chọn ?</string>
     <string name="activity_save_confirm">Bạn có muốn lưu kết quả đo hiện tại ?</string>
     <string name="activity_calibrate">Hiệu quả của mỗi ống thu thanh sẽ khác nhau tuỳ vào thiết bị, vì vậy hãy điều chỉnh sai số trước khi sử dụng.</string>
-    <string name="activity_confirm">Đồng ý</string>
     <string name="activity_cancel">Huỷ</string>
 
     <!-- Notification -->
@@ -83,6 +82,16 @@
 
     <string name="settings_soundlabel">Chế độ chuông</string>
     <string name="settings_soundex">Nếu được kích hoạt, thiết bị sẽ bật chuông thông báo khi độ ồn hiện tại lớn hơn độ ồn được định sẵn</string>
+    <string name="il_normal">Bình thường</string>
+    <string name="il_moderate_danger">Không an toàn</string>
+    <string name="il_high_danger">Nguy hiểm</string>
+    <string name="il_considerable_danger">Cảnh báo</string>
+    <string name="il_extreme_danger">Rất nguy hiểm</string>
+    <string name="activity_delete">Xoá</string>
+    <string name="activity_save">Lưu</string>
+    <string name="title_history_delete">Xoá lịch sử đã chọn</string>
+    <string name="title_history_delete_all">Xoá tất cả lịch sử</string>
+    <string name="title_history_save">Lưu kết quả đo</string>
 
 
 </resources>

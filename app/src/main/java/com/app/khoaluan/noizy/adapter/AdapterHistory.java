@@ -90,10 +90,10 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.HistoryV
         final UtilsXmlFile xml = new UtilsXmlFile();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(R.string.title_confirm);
+        builder.setTitle(R.string.title_history_delete);
         builder.setMessage(R.string.activity_delete_confirm);
         builder.setCancelable(false);
-        builder.setPositiveButton(R.string.activity_confirm, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.activity_delete_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 List<MeasureResult> ms = xml.getNodeDeleteList(context,position);

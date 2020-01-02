@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_10dp"
-                android:text="@string/activity_confirm"
+                android:text="@string/activity_save"
                 android:textSize="@dimen/font_16sp"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/colorAccent"/>

@@ -109,10 +109,10 @@ public class FragmentHistory extends Fragment {
     //Xác nhận xoá hết tất cả lịch sử
     private void confirmDeleteAll(){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.title_confirm);
+        builder.setTitle(R.string.title_history_delete_all);
         builder.setMessage(R.string.activity_delete_all_confirm);
         builder.setCancelable(false);
-        builder.setPositiveButton(R.string.activity_confirm, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.activity_delete_all_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Xoá file và thông báo

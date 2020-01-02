@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class UtilsFile {
-    private static final String LOCAL = "Noizy";
+    private static final String LOCAL = "SoundMeter";
 
     private static final String LOCAL_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator;
 

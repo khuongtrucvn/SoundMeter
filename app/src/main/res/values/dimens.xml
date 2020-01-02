@@ -22,7 +22,7 @@
     <dimen name="size_height_toolbar_frame">80dp</dimen>
     <dimen name="size_height_toolbar_circular_frame">40dp</dimen>
     <dimen name="size_speedometer">280dp</dimen>
-    <dimen name="size_button_restart">48dp</dimen>
+    <dimen name="size_button_restart">40dp</dimen>
     <dimen name="size_button_info">26dp</dimen>
     <dimen name="size_button_pause_play">72dp</dimen>
     <dimen name="size_button_calibrate">54dp</dimen>
