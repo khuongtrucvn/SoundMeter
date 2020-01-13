@@ -21,9 +21,12 @@
     <!-- Title -->
     <string name="title_soundmeter">Sound Meter</string>
     <string name="title_history">History</string>
-    <string name="title_soundstorage">Sound Storage</string>
+    <string name="title_hearing_test">Hearing Test</string>
+    <string name="title_noise_level_suggest">Noise Suggestion</string>
+    <string name="title_noise_cancelling_music">Noise-cancelling Music</string>
     <string name="title_share">Snap &amp; Share</string>
     <string name="title_setting">Settings</string>
+
     <string name="title_confirm">Confirm</string>
     <string name="title_history_save">Save result</string>
     <string name="title_history_delete_all">Delete all history</string>

@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.app.khoaluan.noizy.R;
 import com.app.khoaluan.noizy.adapter.AdapterHistory;
-import com.app.khoaluan.noizy.adapter.AdapterNoiseChart;
 import com.app.khoaluan.noizy.databinding.FragmentHistoryBinding;
 import com.app.khoaluan.noizy.model.MeasureResult;
 import com.app.khoaluan.noizy.ui.ActivityMain;
@@ -112,7 +111,7 @@ public class FragmentHistory extends Fragment {
         builder.setTitle(R.string.title_history_delete_all);
         builder.setMessage(R.string.activity_delete_all_confirm);
         builder.setCancelable(false);
-        builder.setPositiveButton(R.string.activity_delete_all_confirm, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.activity_delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Xoá file và thông báo

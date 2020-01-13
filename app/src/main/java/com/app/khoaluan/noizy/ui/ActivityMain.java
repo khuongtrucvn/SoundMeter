@@ -18,8 +18,11 @@ import com.app.khoaluan.noizy.databinding.ActivityMainBinding;
 import com.app.khoaluan.noizy.model.Global;
 import com.app.khoaluan.noizy.model.MyMediaRecorder;
 import com.app.khoaluan.noizy.model.MyPrefs;
+import com.app.khoaluan.noizy.ui.fragment.FragmentHearingTest;
 import com.app.khoaluan.noizy.ui.fragment.FragmentHistory;
 import com.app.khoaluan.noizy.ui.fragment.FragmentMeter;
+import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseCancellingMusic;
+import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseLevelSuggest;
 import com.app.khoaluan.noizy.ui.fragment.FragmentSettings;
 import com.app.khoaluan.noizy.ui.fragment.FragmentShare;
 import com.app.khoaluan.noizy.utils.UtilsActivity;
@@ -124,9 +127,24 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                     changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
+                case R.id.nav_hearing_test: {
+                    binding.toolbar.textTitle.setText(R.string.title_hearing_test);
+                    UtilsFragment.replace(this, frameId, new FragmentHearingTest());
+                    break;
+                }
+                case R.id.nav_noise_level_suggest: {
+                    binding.toolbar.textTitle.setText(R.string.title_noise_level_suggest);
+                    UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggest());
+                    break;
+                }
                 case R.id.nav_share: {
                     binding.toolbar.textTitle.setText(R.string.title_share);
                     UtilsFragment.replace(this, frameId, new FragmentShare());
+                    break;
+                }
+                case R.id.nav_noise_cancelling_music: {
+                    binding.toolbar.textTitle.setText(R.string.title_noise_cancelling_music);
+                    UtilsFragment.replace(this, frameId, new FragmentNoiseCancellingMusic());
                     break;
                 }
                 case R.id.nav_settings: {

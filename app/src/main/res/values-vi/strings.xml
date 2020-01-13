@@ -7,7 +7,6 @@
     <!-- Title -->
     <string name="title_soundmeter">Đo độ ồn</string>
     <string name="title_history">Lịch sử</string>
-    <string name="title_soundstorage">Kho âm thanh</string>
     <string name="title_share">Chụp &amp; Chia sẻ</string>
     <string name="title_setting">Cài đặt</string>
     <string name="title_confirm">Xác nhận</string>
@@ -92,6 +91,9 @@
     <string name="title_history_delete">Xoá lịch sử đã chọn</string>
     <string name="title_history_delete_all">Xoá tất cả lịch sử</string>
     <string name="title_history_save">Lưu kết quả đo</string>
+    <string name="title_hearing_test">Đo thính lực</string>
+    <string name="title_noise_cancelling_music">Nhạc chống ồn</string>
+    <string name="title_noise_level_suggest">Chuẩn độ ồn</string>
 
 
 </resources>
