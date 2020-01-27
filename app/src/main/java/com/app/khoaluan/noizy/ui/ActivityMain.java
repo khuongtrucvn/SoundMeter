@@ -18,6 +18,7 @@ import com.app.khoaluan.noizy.databinding.ActivityMainBinding;
 import com.app.khoaluan.noizy.model.Global;
 import com.app.khoaluan.noizy.model.MyMediaRecorder;
 import com.app.khoaluan.noizy.model.MyPrefs;
+import com.app.khoaluan.noizy.ui.fragment.FragmentCamera;
 import com.app.khoaluan.noizy.ui.fragment.FragmentHearingTest;
 import com.app.khoaluan.noizy.ui.fragment.FragmentHistory;
 import com.app.khoaluan.noizy.ui.fragment.FragmentMeter;
@@ -111,7 +112,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void switchFragments(int fragmentId) {
+    public void switchFragments(int fragmentId) {
         @IdRes int frameId = R.id.content_frame;
 
         if (fragmentId != currentFragmentId) {
@@ -130,26 +131,37 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 case R.id.nav_hearing_test: {
                     binding.toolbar.textTitle.setText(R.string.title_hearing_test);
                     UtilsFragment.replace(this, frameId, new FragmentHearingTest());
+                    changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
                 case R.id.nav_noise_level_suggest: {
                     binding.toolbar.textTitle.setText(R.string.title_noise_level_suggest);
                     UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggest());
+                    changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
                 case R.id.nav_share: {
                     binding.toolbar.textTitle.setText(R.string.title_share);
                     UtilsFragment.replace(this, frameId, new FragmentShare());
+                    changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
                 case R.id.nav_noise_cancelling_music: {
                     binding.toolbar.textTitle.setText(R.string.title_noise_cancelling_music);
                     UtilsFragment.replace(this, frameId, new FragmentNoiseCancellingMusic());
+                    changeBackgroundColor(R.color.colorPrimary);
+                    break;
+                }
+                case R.id.btn_snap: {
+                    binding.toolbar.textTitle.setText(R.string.title_share);
+                    UtilsFragment.replace(this, frameId, new FragmentCamera());
+                    changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
                 case R.id.nav_settings: {
                     binding.toolbar.textTitle.setText(R.string.title_setting);
                     UtilsFragment.replace(this, frameId, new FragmentSettings());
+                    changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
             }

@@ -61,11 +61,11 @@
     <string name="noti_pause">Tạm dừng</string>
     <string name="noti_resume">Tiếp tục</string>
     <string name="noti_history_saved">Lịch sử đã được lưu</string>
-    <string name="noti_history_unsaved">Lỗi: Lịch sử chưa được lưu.</string>
-    <string name="noti_history_null">Không có lịch sử nào.</string>
-    <string name="noti_all_history_delete">Tất cả lịch sử đã được xoá.</string>
-    <string name="noti_history_delete">Lịch sử đã được xoá.</string>
-    <string name="noti_history_delete_fail">Lỗi: Lịch sử chưa được xoá.</string>
+    <string name="noti_history_unsaved">Lỗi: Lịch sử chưa được lưu</string>
+    <string name="noti_history_null">Không có lịch sử nào</string>
+    <string name="noti_all_history_delete">Tất cả lịch sử đã được xoá</string>
+    <string name="noti_history_delete">Lịch sử đã được xoá</string>
+    <string name="noti_history_delete_fail">Lỗi: Lịch sử chưa được xoá</string>
     <string name="noti_calibrate_save">Giá trị đã được lưu</string>
     <string name="noti_warning_value_save">Giá trị đã được lưu</string>
 
@@ -94,6 +94,17 @@
     <string name="title_hearing_test">Đo thính lực</string>
     <string name="title_noise_cancelling_music">Nhạc chống ồn</string>
     <string name="title_noise_level_suggest">Chuẩn độ ồn</string>
+    <string name="activity_cameraStartErr">Không thể mở do không được cấp quyền</string>
+    <string name="title_back">Trở lại</string>
+    <string name="title_share_button">Chia sẻ</string>
+    <string name="activity_delete_image_confirm">Bạn có muốn xoá bức ảnh này ?</string>
+    <string name="title_image_delete">Xoá ảnh</string>
+    <string name="noti_image_delete">Ảnh đã được xoá</string>
+    <string name="activity_avg_value">Độ ồn trung bình</string>
+    <string name="title_snap">Chụp ảnh</string>
+    <string name="noti_snap_permission">Vui lòng cấp quyền sử dụng Vị trí nếu không chức năng sẽ không chạy được</string>
+    <string name="activity_unidentified_location">Địa điểm không xác định</string>
+    <string name="noti_snap_remind">Và nhớ mở dịch vụ Vị trí và kết nối mạng để ứng dụng có thể xác định vị trí hiện tại của bạn</string>
 
 
 </resources>

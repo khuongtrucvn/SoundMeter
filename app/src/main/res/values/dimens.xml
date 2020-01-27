@@ -31,6 +31,9 @@
     <dimen name="size_text_sign_value">14dp</dimen>
     <dimen name="size_text_calibrate_value">36dp</dimen>
     <dimen name="size_icon_history">24dp</dimen>
+    <dimen name="size_stroke_width_button_snap">8dp</dimen>
+    <dimen name="size_button_snap">64dp</dimen>
+    <dimen name="size_button_back">48dp</dimen>
 
     //Font Size
     <dimen name="font_36sp">36sp</dimen>

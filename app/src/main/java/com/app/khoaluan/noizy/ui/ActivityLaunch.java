@@ -13,8 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import static com.app.khoaluan.noizy.utils.AppConfig.REQUEST_CODE;
+
 public class ActivityLaunch extends AppCompatActivity {
-    private static final int REQUEST_CODE = 1;
     private static String[] PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -50,7 +51,6 @@ public class ActivityLaunch extends AppCompatActivity {
     }
 
     public void verifyPermissions() {
-        // Check if we have permissions
         int write_per = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int read_per = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         int audio_per = ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
@@ -69,17 +69,19 @@ public class ActivityLaunch extends AppCompatActivity {
         }
     }
 
-    public boolean checkPermissionsGranted(@NonNull String[] permissions, @NonNull int[] grantResults){
+    private boolean checkPermissionsGranted(@NonNull String[] permissions, @NonNull int[] grantResults){
         if(grantResults.length > 0){
             for (int i = 0; i < permissions.length; i++) {
                 int grantResult = grantResults[i];
 
-                if (grantResult != PackageManager.PERMISSION_GRANTED)
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
                     return false;
+                }
             }
         }
-        else
+        else{
             return false;
+        }
 
         return true;
     }

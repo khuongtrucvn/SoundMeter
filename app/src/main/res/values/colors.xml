@@ -5,6 +5,8 @@
     <color name="colorPrimaryLight">#8c4af0</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
+    <color name="gradient_white_80">#80FFFFFF</color>
+    <color name="gradient_black_50">#50000000</color>
     <color name="black">#000000</color>
     <color name="button1">#BB86FC</color>
     <color name="button2">#FF66FF</color>
