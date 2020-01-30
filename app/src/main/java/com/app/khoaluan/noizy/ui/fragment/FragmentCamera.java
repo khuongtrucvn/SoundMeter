@@ -28,6 +28,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -66,6 +68,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -310,6 +313,8 @@ public class FragmentCamera extends Fragment implements LocationListener {
         image.compress(Bitmap.CompressFormat.JPEG, 100, output);
         output.flush();
         output.close();
+
+        getGalleryUpdate(imageFile);
     }
 
     private void previewImage(String filePath){
@@ -487,4 +492,11 @@ public class FragmentCamera extends Fragment implements LocationListener {
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) { }
+
+    private void getGalleryUpdate(File image){
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri imageUri = FileProvider.getUriForFile(activity,"android.dbmeter.net.provider",image);
+        mediaScanIntent.setData(imageUri);
+        activity.sendBroadcast(mediaScanIntent);
+    }
 }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/nav_hearing_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:id="@+id/layout_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/toolbar"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/margin_20dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/size_button_info"
+                android:layout_height="@dimen/size_button_info"
+                android:src="@drawable/icon_info"
+                app:tint="@color/white"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_helplabel"
+                android:textSize="@dimen/font_20sp"
+                android:layout_marginStart="@dimen/margin_7dp"
+                android:textColor="@color/white" />
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/layout_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layout_help"/>
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:id="@+id/layout_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/margin_24dp">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_first_page"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/size_button_testing_step"
+                android:layout_height="@dimen/size_button_testing_step"
+                android:src="@drawable/icon_first_arrow"
+                android:scaleType="fitXY"
+                android:tint="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_prev_page"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/size_button_testing_step"
+                android:layout_height="@dimen/size_button_testing_step"
+                android:src="@drawable/icon_previous_arrow"
+                android:scaleType="fitXY"
+                android:tint="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_next_page"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/size_button_testing_step"
+                android:layout_height="@dimen/size_button_testing_step"
+                android:src="@drawable/icon_next_arrow"
+                android:scaleType="fitXY"
+                android:tint="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_last_page"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/size_button_testing_step"
+                android:layout_height="@dimen/size_button_testing_step"
+                android:src="@drawable/icon_last_arrow"
+                android:scaleType="fitXY"
+                android:tint="@color/white"/>
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_above="@id/layout_navigation"
+            android:backgroundTint="@color/orange"
+            android:text="@string/title_finish" />
+    </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+</layout>

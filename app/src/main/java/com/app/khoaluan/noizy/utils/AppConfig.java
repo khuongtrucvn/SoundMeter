@@ -8,5 +8,5 @@ public class AppConfig {
     public static final long ANIMATION_INTERVAL = 20;
     public static final int MAX_CALIBRATE_VALUE = 30;
     public static final int MIN_CALIBRATE_VALUE = -30;
-    public static final int REQUEST_IMAGE_CAPTURE  = 1;
+    private final static int MAX_VOLUME = 100;
 }

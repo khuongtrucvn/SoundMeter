@@ -14,15 +14,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_10dp"
             android:layout_gravity="center"
-            android:text="@string/activity_chartlabel"
+            android:text="@string/activity_helplabel"
             android:textSize="@dimen/font_20sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_noise_chart"
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/noti_hearing_test_help"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18sp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_close"

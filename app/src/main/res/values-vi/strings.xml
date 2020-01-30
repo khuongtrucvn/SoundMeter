@@ -15,6 +15,7 @@
     <string name="sound_unit">dB</string>
     <string name="sound_minlabel">NHỎ NHẤT</string>
     <string name="sound_avglabel">T.BÌNH</string>
+    <string name="sound_avglabel_1">TRUNG BÌNH</string>
     <string name="sound_maxlabel">LỚN NHẤT</string>
 
     <!-- Noise Chart -->
@@ -37,7 +38,7 @@
     <string name="activity_exvalue">0</string>
     <string name="activity_exdur">mm:ss</string>
     <string name="activity_statuslabel">Trạng thái</string>
-    <string name="activity_exstatus">Normal Conversation</string>
+    <string name="activity_exstatus">Cuộc trò chuyện bình thường</string>
     <string name="activity_curlabel">Hiện tại(dB)</string>
     <string name="activity_durlabel">Thời gian </string>
     <string name="activity_chartlabel">Thang độ ồn</string>
@@ -102,9 +103,41 @@
     <string name="noti_image_delete">Ảnh đã được xoá</string>
     <string name="activity_avg_value">Độ ồn trung bình</string>
     <string name="title_snap">Chụp ảnh</string>
-    <string name="noti_snap_permission">Vui lòng cấp quyền sử dụng Vị trí nếu không chức năng sẽ không chạy được</string>
     <string name="activity_unidentified_location">Địa điểm không xác định</string>
-    <string name="noti_snap_remind">Và nhớ mở dịch vụ Vị trí và kết nối mạng để ứng dụng có thể xác định vị trí hiện tại của bạn</string>
-
+    <string name="activity_resultlabel">Kết quả (dB)</string>
+    <string name="noti_snap">\t\t Vui lòng cấp quyền sử dụng Vị trí nếu không chức năng sẽ không chạy được \n\n\t\t Và nhớ mở dịch vụ Vị trí và kết nối mạng để ứng dụng có thể xác định vị trí hiện tại của bạn</string>
+    <string name="title_start_hearing_test">Bắt đầu kiểm tra</string>
+    <string name="noti_hearing_test">\t\t Bài kiểm tra yêu cầu phải sử dụng tai nghe \n\n\t\t Hãy kết nối và đeo tai nghe vào trước khi bắt đầu kiểm tra</string>
+    <string name="activity_hearingTestStartErr">Hãy kết nối tai nghe trước khi kiểm tra thính lực</string>
+    <string name="noti_hearing_test_calibration">\t\t Hiệu chỉnh là bước cần thiết để điều chỉnh âm lượng thiết bị của bạn phù hợp cho bài kiểm tra \n\n\t\t\ Đặt hai bàn tay vào nhau, hướng trước mũi bạn, chà nhanh và mạnh, cố gắng tạo ra âm thanh giống như tập tin hiệu chỉnh bên dưới \n\n\t\t Khi bạn phát tập tin hiệu chỉnh, hãy điều chỉnh âm lượng thiết bị để phù hợp với âm thanh bạn vừa tạo ra từ tay bạn \n\n\t\t Tiếp tục thực hiện cho đến khi cả hai âm thanh có độ lớn giống nhau, khi đó ta đã sẵn sàng để bắt đầu bài kiểm tra</string>
+    <string name="title_continue">Tiếp tục</string>
+    <string name="activity_exit_hearingTest">Bạn muốn thoát khỏi bài kiểm tra thính lực ?</string>
+    <string name="title_exit">Thoát</string>
+    <string name="title_exit_test">Thoát bài kiểm tra</string>
+    <string name="activity_test_headphone_remind">Vui lòng kết nối tai nghe vào thiết bị để tiếp tục kiểm tra</string>
+    <string name="title_headphone_disconnect">Không tìm thấy tai nghe</string>
+    <string name="activity_helplabel">Trợ giúp</string>
+    <string name="title_testing">Kiểm tra</string>
+    <string name="title_result">Kết quả</string>
+    <string name="activity_back_calibration_hearingTest">Bạn có muốn trở về bước Hiệu chỉnh ?</string>
+    <string name="activity_back_testing_hearingTest">Bạn có muốn trở về bước Kiểm tra ?</string>
+    <string name="title_back_calibration">Trở lại bước Hiệu chỉnh</string>
+    <string name="title_back_testing">Trở lại bước Kiểm tra</string>
+    <string name="activity_can_hear">Nghe</string>
+    <string name="activity_cannot_hear">Không nghe</string>
+    <string name="noti_hearing_test_help">\t\t Ấn nút &quot;Nghe được&quot; nếu bạn nghe âm thanh, khi đó âm thanh sẽ được phát lại với độ lớn thấp hơn \n\n\t\t Ấn nút &quot;Không nghe được&quot; nếu bạn không nghe được âm thanh, khi đó âm thanh sẽ được phát lại với cường độ cao hơn \n\n\t\t Dừng khi bạn có thể nghe được âm thanh ở cường độ hiện tại nhưng không thể ở cường độ thấp hơn \n\n\t\t Lặp lại quá trình cho đến lúc hoàn thành bài kiểm tra , có tổng cộng 7 âm thanh với tần số khác nhau từ 125Hz đến 8000Hz cho mỗi bên tai \n\n\t\t Ấn nút &quot;Hoàn thành&quot; để kết thúc bài kiểm tra và nhận kết quả </string>
+    <string name="hearing_test_left">Tai trái</string>
+    <string name="hearing_test_right">Tai phải</string>
+    <string name="title_finish">Hoàn thành</string>
+    <string name="activity_proceed_result_hearingTest">Bạn có muốn kết thúc bài kiểm tra và nhận kết quả ?</string>
+    <string name="title_finish_test">Hoàn thành bài kiểm tra</string>
+    <string name="activity_test_volume_denied">Không thể điều chỉnh âm thanh thiết bị trong lúc kiểm tra</string>
+    <string name="title_test_again">Kiểm tra lại</string>
+    <string name="activity_test_again_hearingTest">Bạn có muốn đo thính lực lần nữa ?</string>
+    <string name="hearing_test_result_normal">Thính lực bình thường</string>
+    <string name="hearing_test_result_mild">Mất thính lực nhẹ</string>
+    <string name="hearing_test_result_moderate">Mất thính lực vừa phải</string>
+    <string name="hearing_test_result_profound">Mất thính lực nghiêm trọng</string>
+    <string name="hearing_test_result_severe">Mất thính lực khá nghiêm trọng</string>
 
 </resources>

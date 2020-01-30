@@ -6,29 +6,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.circularreveal.CircularRevealLinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/margin_24dp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="@string/noti_snap_permission"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_20sp"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="@string/noti_snap_remind"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_20sp"
-                android:layout_marginTop="@dimen/margin_10dp"/>
-        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_24dp"
+            android:text="@string/noti_snap"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_20sp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_snap"
@@ -36,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/title_snap"
-            android:backgroundTint="@color/colorAccent"/>
+            android:backgroundTint="@color/orange"/>
 
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 </layout>

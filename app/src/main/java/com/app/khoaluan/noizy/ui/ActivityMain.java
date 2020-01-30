@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -200,7 +199,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
         // Chỉnh lại thông số sau khi restart
         totalDb = 0;
-        numberOfDb = 1;
+        numberOfDb = 0;
 
         Global.minDb = 140;
         Global.avgDb = 0;
@@ -243,7 +242,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void startListenAudio() {
+    private synchronized void startListenAudio() {
         measureThread = new Thread(new Runnable() {
             @Override
             public void run() {

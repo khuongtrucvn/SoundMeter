@@ -12,7 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_16sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -21,13 +21,13 @@
             android:layout_marginEnd="@dimen/margin_5dp"
             android:text="@string/colon"
             android:textSize="@dimen/font_16sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_sound_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_16sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 </layout>

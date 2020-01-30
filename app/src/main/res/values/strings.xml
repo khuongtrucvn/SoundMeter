@@ -28,6 +28,7 @@
     <string name="title_setting">Settings</string>
 
     <string name="title_confirm">Confirm</string>
+    <string name="title_exit">Exit</string>
     <string name="title_history_save">Save result</string>
     <string name="title_history_delete_all">Delete all history</string>
     <string name="title_history_delete">Delete selected history</string>
@@ -35,11 +36,25 @@
     <string name="title_back">Back</string>
     <string name="title_snap">Take a picture</string>
     <string name="title_share_button">Share</string>
+    <string name="title_start_hearing_test">Start hearing test</string>
+    <string name="title_continue">Continue</string>
+    <string name="title_finish">Finish</string>
+    <string name="title_exit_test">Exit test</string>
+    <string name="title_back_calibration">Back to Calibration step</string>
+    <string name="title_finish_test">Finish test</string>
+    <string name="title_back_testing">Back to Testing step</string>
+    <string name="title_headphone_disconnect">Headphone or headset disconnected</string>
+    <string name="title_testing">Testing</string>
+    <string name="title_result">Result</string>
+    <string name="title_test_again">Test again</string>
 
     <!-- Sound Unit -->
     <string name="sound_unit">dB</string>
+    <string name="sound_testing_unit" translatable="false">dBHL</string>
+    <string name="sound_frequency_unit" translatable="false">Hz</string>
     <string name="sound_minlabel">MIN</string>
-    <string name="sound_avglabel">AVG</string>
+    <string name="sound_avglabel">AVERAGE</string>
+    <string name="sound_avglabel_1">AVERAGE</string>
     <string name="sound_maxlabel">MAX</string>
 
     <!-- Noise Chart -->
@@ -76,13 +91,17 @@
     <string name="activity_exdur">mm:ss</string>
     <string name="activity_statuslabel">Status</string>
     <string name="activity_exstatus">Normal Conversation</string>
-    <string name="activity_curlabel">Current (Db)</string>
+    <string name="activity_curlabel">Current (dB)</string>
     <string name="activity_durlabel">Duration </string>
+    <string name="activity_resultlabel">Result (dB) </string>
     <string name="activity_chartlabel">Noise Chart</string>
     <string name="activity_calibratelabel">Calibrate</string>
     <string name="activity_pickerlabel">Set dB value for warning</string>
     <string name="activity_extime">hh:mm:ss</string>
     <string name="activity_exdate">dd-MM-YYYY</string>
+    <string name="activity_helplabel">Help</string>
+    <string name="activity_can_hear">I can hear</string>
+    <string name="activity_cannot_hear">I cannot hear</string>
 
     <!-- Message -->
     <string name="activity_recStartErr">Unable to start recording</string>
@@ -99,6 +118,14 @@
     <string name="activity_cameraStartErr">Unable to open due to permission"'"s denial</string>
     <string name="activity_avg_value">Average SPL</string>
     <string name="activity_unidentified_location">Unidentified location</string>
+    <string name="activity_hearingTestStartErr">Please connect headphones or headset before starting the test</string>
+    <string name="activity_exit_hearingTest">Do you want to exit the hearing test ?</string>
+    <string name="activity_back_calibration_hearingTest">Do you want to get back to calibration step ?</string>
+    <string name="activity_back_testing_hearingTest">Do you want to get back to testing step ?</string>
+    <string name="activity_test_again_hearingTest">Do you want to test again ?</string>
+    <string name="activity_proceed_result_hearingTest">Do you want to finish and get result ?</string>
+    <string name="activity_test_headphone_remind">Please connect your headphones or headset to continue the test</string>
+    <string name="activity_test_volume_denied">Cannot adjust volume during the test</string>
 
     <!-- Notification -->
     <string name="noti_refresh">Refreshed</string>
@@ -113,8 +140,10 @@
     <string name="noti_history_delete_fail">Error: History has not been deleted</string>
     <string name="noti_calibrate_save">Value has been save</string>
     <string name="noti_warning_value_save">Value has been save</string>
-    <string name="noti_snap_permission">Please allow the app to use Location otherwise function will not run</string>
-    <string name="noti_snap_remind">Also remember to have both Location and internet connected in order to get your location</string>
+    <string name="noti_snap">\t\t Please allow the app to use Location otherwise function will not run \n\n\t\t Also remember to have both Location and internet connected in order to get your location</string>
+    <string name="noti_hearing_test">\t\t Headphones or headset is required for this test \n\n\t\t Please connect your headphones or headset and wear it properly before starting the test </string>
+    <string name="noti_hearing_test_calibration">\t\t Calibration is a necessary step to adjust your device"'"volume appropriate for your test \n\n\t\t\ Rub your hands together, in front of your nose, quickly and firmly, and try producing the same sound as our calibration file \n\n\t\t As you play our calibration file, adjust your device"'"s volume to match the sound level you just heard from you hands \n\n\t\t Proceed back and forth until both levels match, then we are ready to begin the test </string>
+    <string name="noti_hearing_test_help">\t\t Press button &quot;I can hear&quot; if you hear the sound, the sound then will be played again with lower sound level \n\n\t\t Press button &quot;I cannot hear&quot; if you don"'"t hear the sound, the sound then will be played again with higher sound level \n\n\t\t Stop until you are at the sound level you can hear but cannot at the lower sound level \n\n\t\t Repeating the progress until you finish the test, there are 7 sound with different frequency from 125Hz to 8000Hz for each ear \n\n\t\t Press button &quot;Finish&quot; to finish the test and get result</string>
 
     <!-- Settings -->
     <string name="settings_warninglabel">dB Warning</string>
@@ -129,5 +158,12 @@
     <string name="settings_soundlabel">Sound</string>
     <string name="settings_soundex">If enable, the device will issue a warning sound when the current dB value is larger than preset dB value</string>
 
-
+    <!-- Hearing Test -->
+    <string name="hearing_test_left">Left ears</string>
+    <string name="hearing_test_right">Right ears</string>
+    <string name="hearing_test_result_normal">Normal hearing</string>
+    <string name="hearing_test_result_mild">Mild hearing loss</string>
+    <string name="hearing_test_result_moderate">Moderate hearing loss</string>
+    <string name="hearing_test_result_severe">Severe hearing loss</string>
+    <string name="hearing_test_result_profound">Profound hearing loss</string>
 </resources>
