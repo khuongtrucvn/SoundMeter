@@ -25,7 +25,8 @@
             android:id="@+id/picker_warning_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:descendantFocusability="blocksDescendants" />
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:layout_width="match_parent"

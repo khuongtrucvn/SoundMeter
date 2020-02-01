@@ -22,7 +22,7 @@
     <string name="title_soundmeter">Sound Meter</string>
     <string name="title_history">History</string>
     <string name="title_hearing_test">Hearing Test</string>
-    <string name="title_noise_level_suggest">Noise Suggestion</string>
+    <string name="title_noise_level_suggest">Noise standards</string>
     <string name="title_noise_cancelling_music">Noise-cancelling Music</string>
     <string name="title_share">Snap &amp; Share</string>
     <string name="title_setting">Settings</string>
@@ -46,7 +46,12 @@
     <string name="title_headphone_disconnect">Headphone or headset disconnected</string>
     <string name="title_testing">Testing</string>
     <string name="title_result">Result</string>
+    <string name="title_buildings">Buildings</string>
     <string name="title_test_again">Test again</string>
+    <string name="title_show_value">Show value</string>
+    <string name="title_measure">Start measure</string>
+    <string name="title_measure_again">Measure again</string>
+    <string name="title_check_other_place">Check other places</string>
 
     <!-- Sound Unit -->
     <string name="sound_unit">dB</string>
@@ -56,6 +61,8 @@
     <string name="sound_avglabel">AVERAGE</string>
     <string name="sound_avglabel_1">AVERAGE</string>
     <string name="sound_maxlabel">MAX</string>
+    <string name="sound_standardlabel">STANDARD (dB)</string>
+    <string name="sound_actuallabel">ACTUAL (dB)</string>
 
     <!-- Noise Chart -->
     <string name="noise_20" translatable="false">20dB</string>
@@ -103,6 +110,7 @@
     <string name="activity_can_hear">I can hear</string>
     <string name="activity_cannot_hear">I cannot hear</string>
 
+
     <!-- Message -->
     <string name="activity_recStartErr">Unable to start recording</string>
     <string name="activity_recBusyErr">Recorder is busy or permission to record is prohibited</string>
@@ -126,6 +134,7 @@
     <string name="activity_proceed_result_hearingTest">Do you want to finish and get result ?</string>
     <string name="activity_test_headphone_remind">Please connect your headphones or headset to continue the test</string>
     <string name="activity_test_volume_denied">Cannot adjust volume during the test</string>
+    <string name="activity_exit_noiseSuggest">Do you want to exit Noise standards ?</string>
 
     <!-- Notification -->
     <string name="noti_refresh">Refreshed</string>
@@ -144,6 +153,14 @@
     <string name="noti_hearing_test">\t\t Headphones or headset is required for this test \n\n\t\t Please connect your headphones or headset and wear it properly before starting the test </string>
     <string name="noti_hearing_test_calibration">\t\t Calibration is a necessary step to adjust your device"'"volume appropriate for your test \n\n\t\t\ Rub your hands together, in front of your nose, quickly and firmly, and try producing the same sound as our calibration file \n\n\t\t As you play our calibration file, adjust your device"'"s volume to match the sound level you just heard from you hands \n\n\t\t Proceed back and forth until both levels match, then we are ready to begin the test </string>
     <string name="noti_hearing_test_help">\t\t Press button &quot;I can hear&quot; if you hear the sound, the sound then will be played again with lower sound level \n\n\t\t Press button &quot;I cannot hear&quot; if you don"'"t hear the sound, the sound then will be played again with higher sound level \n\n\t\t Stop until you are at the sound level you can hear but cannot at the lower sound level \n\n\t\t Repeating the progress until you finish the test, there are 7 sound with different frequency from 125Hz to 8000Hz for each ear \n\n\t\t Press button &quot;Finish&quot; to finish the test and get result</string>
+    <string name="noti_noise_suggestion">\t\t Noise standards provides you maximum values of noise allowed in different places \n\n\t\t Moreover, you can even measure current location"'"s noise and see if it meet the standard</string>
+    <string name="noti_noise_suggestion_help">\t\t Choose a building and its section which you want to know its noise"'"s standard value \n\n\t\t Then you can choose whether to see the value or have the app measure the noise and return result \n\n\t\t Press button &quot;Show value&quot; to check the standard value \n\n\t\t Press button &quot;Start measure&quot; to check if the current location"'"s noise meets the standard \n\n\t\t Make sure you choose the correct building and its section before start measure noise</string>
+    <string name="noti_noise_suggestion_choose_building">Choose a building you would like to check standard value </string>
+    <string name="noti_noise_suggestion_choose_section_1">Choose an area in</string>
+    <string name="noti_noise_suggestion_choose_section_2">you would like to check standard value</string>
+    <string name="noti_noise_suggestion_testing">This action may take a few seconds \n Please wait until it finishes</string>
+    <string name="noti_noise_suggestion_conclusion_true">The noise which is measured meets the standard</string>
+    <string name="noti_noise_suggestion_conclusion_false">The noise which is measured does not meet the standard</string>
 
     <!-- Settings -->
     <string name="settings_warninglabel">dB Warning</string>
@@ -166,4 +183,48 @@
     <string name="hearing_test_result_moderate">Moderate hearing loss</string>
     <string name="hearing_test_result_severe">Severe hearing loss</string>
     <string name="hearing_test_result_profound">Profound hearing loss</string>
+
+    <!-- Building & section-->
+    <string name="standard_entertainment">Places of entertainment</string>
+    <string name="standard_museum">Museum, exhibition</string>
+    <string name="standard_library">Library</string>
+    <string name="standard_children_school">Kindergarten, primary school</string>
+    <string name="standard_adult_school">High school, college, university</string>
+    <string name="standard_hospital">Clinic, hospital, maternity home</string>
+    <string name="standard_nursing_home">Nursing home</string>
+    <string name="standard_heallth_department">Department of health, medical center</string>
+    <string name="standard_science_park">Science park</string>
+    <string name="standard_court">Court</string>
+    <string name="standard_sport">Sports facility</string>
+    <string name="standard_business">Business facility, service facility</string>
+    <string name="standard_station">Train station</string>
+
+    <string name="section_concert">Concert hall, opera theater</string>
+    <string name="section_auditorium">Auditorium (for drama, musicals)</string>
+    <string name="section_cinema">Cinema, circus</string>
+    <string name="section_outdoor_theater">Outdoor theater</string>
+    <string name="section_showroom">Showroom</string>
+    <string name="section_office">Office</string>
+    <string name="section_reading_area">Reading area</string>
+    <string name="section_bedroom">Bedroom</string>
+    <string name="section_classroom">Classroom</string>
+    <string name="section_playground">Outdoor playground</string>
+    <string name="section_outdoor_area">Outdoor area</string>
+    <string name="section_conference_room">Conference room</string>
+    <string name="section_hall">Hall, auditorium</string>
+    <string name="section_laboratory">Laboratory</string>
+    <string name="section_lounge">Teacher"'"s lounge</string>
+    <string name="section_patient_room">Patient"'"s room</string>
+    <string name="section_doctor_room">Doctor"'"s room</string>
+    <string name="section_operating_room">Operating room, delivery room</string>
+    <string name="section_reception_room">Reception room</string>
+    <string name="section_court_room">Court room</string>
+    <string name="section_training_room">Training room</string>
+    <string name="section_stadium_cover">Stadium, pool (covered)</string>
+    <string name="section_stadium">Stadium, pool (uncovered)</string>
+    <string name="section_mart">Shopping mall, mart</string>
+    <string name="section_restaurant">Restaurant</string>
+    <string name="section_public_shop">Public services shop, store</string>
+    <string name="section_central_market">Central market</string>
+    <string name="section_guest_room">Guest room in train, ship</string>
 </resources>

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.app.khoaluan.noizy.R;
 import com.app.khoaluan.noizy.databinding.ItemFragmentHearingTestTestingStepBinding;
 import com.app.khoaluan.noizy.model.HearingTestData;
-import com.app.khoaluan.noizy.samples.SampleHearingTestResult;
+import com.app.khoaluan.noizy.database.HearingTestResultDatabase;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class AdapterHearingTest extends RecyclerView.Adapter<AdapterHearingTest.
 
     public AdapterHearingTest(Context context) {
         this.context = context;
-        mResults = SampleHearingTestResult.get();
+        mResults = HearingTestResultDatabase.get();
     }
 
     public interface OnItemClickedListener {
@@ -89,7 +89,7 @@ public class AdapterHearingTest extends RecyclerView.Adapter<AdapterHearingTest.
         holder.binding.btnHear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(result.getSoundLevel()-10 >= 0){
-                    mResults = SampleHearingTestResult.updateSoundLevel(position, result.getSoundLevel()-10, result.getVolumeLevel()-1, result.getResultSoundLevel()-10);
+                    mResults = HearingTestResultDatabase.updateSoundLevel(position, result.getSoundLevel()-10, result.getVolumeLevel()-1, result.getResultSoundLevel()-10);
                     refreshAdapter();
                 }
 
@@ -107,11 +107,11 @@ public class AdapterHearingTest extends RecyclerView.Adapter<AdapterHearingTest.
         holder.binding.btnCantHear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(result.getSoundLevel()+10 <=80){
-                    mResults = SampleHearingTestResult.updateSoundLevel(position, result.getSoundLevel()+10, result.getVolumeLevel()+1, result.getResultSoundLevel()+10);
+                    mResults = HearingTestResultDatabase.updateSoundLevel(position, result.getSoundLevel()+10, result.getVolumeLevel()+1, result.getResultSoundLevel()+10);
                     refreshAdapter();
                 }
                 else{
-                    mResults = SampleHearingTestResult.updateSoundLevel(position, result.getSoundLevel(), result.getVolumeLevel(), 90);
+                    mResults = HearingTestResultDatabase.updateSoundLevel(position, result.getSoundLevel(), result.getVolumeLevel(), 90);
                 }
 
                 mediaPlayer = MediaPlayer.create(context, result.getSoundFile());
@@ -136,7 +136,7 @@ public class AdapterHearingTest extends RecyclerView.Adapter<AdapterHearingTest.
     }
 
     private void refreshAdapter(){
-        mResults = SampleHearingTestResult.get();
+        mResults = HearingTestResultDatabase.get();
         notifyDataSetChanged();
     }
 

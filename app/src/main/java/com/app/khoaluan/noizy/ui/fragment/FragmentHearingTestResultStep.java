@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.app.khoaluan.noizy.R;
 import com.app.khoaluan.noizy.databinding.FragmentHearingTestResultStepBinding;
 import com.app.khoaluan.noizy.model.HearingTestData;
-import com.app.khoaluan.noizy.samples.SampleHearingTestResult;
+import com.app.khoaluan.noizy.database.HearingTestResultDatabase;
 import com.app.khoaluan.noizy.ui.ActivityHearingTest;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class FragmentHearingTestResultStep extends Fragment {
     public void onDetach() {
         super.onDetach();
         this.activity = null;
-        SampleHearingTestResult.delete();
+        HearingTestResultDatabase.delete();
     }
 
     @Nullable
@@ -70,7 +70,7 @@ public class FragmentHearingTestResultStep extends Fragment {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                binding.toolbar.btnBack.setVisibility(View.GONE);
+                binding.toolbar.btnBack.setVisibility(View.INVISIBLE);
                 binding.textLeftEarResult.setText(getHearingTestStandard(leftEarResult));
                 binding.textRightEarResult.setText(getHearingTestStandard(rightEarResult));
             }
@@ -134,7 +134,7 @@ public class FragmentHearingTestResultStep extends Fragment {
     }
 
     private void getResult(){
-        ArrayList<HearingTestData> results = SampleHearingTestResult.get();
+        ArrayList<HearingTestData> results = HearingTestResultDatabase.get();
 
         for (HearingTestData data: results) {
             if(data.getSide() == 0){

@@ -11,7 +11,7 @@ import com.app.khoaluan.noizy.R;
 import com.app.khoaluan.noizy.adapter.AdapterHearingTest;
 import com.app.khoaluan.noizy.databinding.DialogHearingTestHelpBinding;
 import com.app.khoaluan.noizy.databinding.FragmentHearingTestTestingStepBinding;
-import com.app.khoaluan.noizy.samples.SampleHearingTestResult;
+import com.app.khoaluan.noizy.database.HearingTestResultDatabase;
 import com.app.khoaluan.noizy.ui.ActivityHearingTest;
 
 import androidx.annotation.NonNull;
@@ -33,7 +33,7 @@ public class FragmentHearingTestTestingStep extends Fragment{
         if (context instanceof AppCompatActivity) {
             this.activity = (ActivityHearingTest) context;
         }
-        SampleHearingTestResult.delete();
+        HearingTestResultDatabase.delete();
     }
 
     @Override
@@ -167,18 +167,18 @@ public class FragmentHearingTestTestingStep extends Fragment{
 
     private void showHelp(){
         AlertDialog.Builder dialogBuilder =	new AlertDialog.Builder(activity);
-        DialogHearingTestHelpBinding calibrateBinding = DialogHearingTestHelpBinding.inflate(LayoutInflater.from(getContext()));
-        dialogBuilder.setView(calibrateBinding.getRoot());
-        final AlertDialog calibrateDialog = dialogBuilder.create();
+        DialogHearingTestHelpBinding helpBinding = DialogHearingTestHelpBinding.inflate(LayoutInflater.from(getContext()));
+        dialogBuilder.setView(helpBinding.getRoot());
+        final AlertDialog helpDialog = dialogBuilder.create();
 
-        calibrateBinding.btnClose.setOnClickListener(new View.OnClickListener() {
+        helpBinding.btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calibrateDialog.dismiss();
+                helpDialog.dismiss();
             }
         });
 
-        calibrateDialog.show();
+        helpDialog.show();
     }
 
     private void proceedToResultStep(){

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.app.khoaluan.noizy.R;
 import com.app.khoaluan.noizy.databinding.FragmentHearingTestCalibrationStepBinding;
-import com.app.khoaluan.noizy.samples.SampleHearingTestResult;
+import com.app.khoaluan.noizy.database.HearingTestResultDatabase;
 import com.app.khoaluan.noizy.ui.ActivityHearingTest;
 
 import androidx.annotation.NonNull;
@@ -42,7 +42,7 @@ public class FragmentHearingTestCalibrationStep extends Fragment {
             mediaPlayer.stop();
             mediaPlayer.release();
         }
-        SampleHearingTestResult.delete();
+        HearingTestResultDatabase.delete();
     }
 
     @Nullable

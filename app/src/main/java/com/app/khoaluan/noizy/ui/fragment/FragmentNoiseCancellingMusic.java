@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.khoaluan.noizy.R;
-import com.app.khoaluan.noizy.databinding.FragmentNoiseCancellingMusicBinding;
+import com.app.khoaluan.noizy.databinding.FragmentNoiseLevelSuggestResultStepBinding;
 import com.app.khoaluan.noizy.ui.ActivityMain;
 
 import androidx.annotation.NonNull;
@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 public class FragmentNoiseCancellingMusic extends Fragment {
     private ActivityMain activity = (ActivityMain)getActivity();
-    private FragmentNoiseCancellingMusicBinding binding;
+    private FragmentNoiseLevelSuggestResultStepBinding binding;
 
     @Override
     public void onAttach(@NonNull Context context) {

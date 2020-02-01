@@ -22,7 +22,7 @@ import com.app.khoaluan.noizy.ui.fragment.FragmentHearingTest;
 import com.app.khoaluan.noizy.ui.fragment.FragmentHistory;
 import com.app.khoaluan.noizy.ui.fragment.FragmentMeter;
 import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseCancellingMusic;
-import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseLevelSuggest;
+import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseLevelSuggestion;
 import com.app.khoaluan.noizy.ui.fragment.FragmentSettings;
 import com.app.khoaluan.noizy.ui.fragment.FragmentShare;
 import com.app.khoaluan.noizy.utils.UtilsActivity;
@@ -135,7 +135,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 }
                 case R.id.nav_noise_level_suggest: {
                     binding.toolbar.textTitle.setText(R.string.title_noise_level_suggest);
-                    UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggest());
+                    UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestion());
                     changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
