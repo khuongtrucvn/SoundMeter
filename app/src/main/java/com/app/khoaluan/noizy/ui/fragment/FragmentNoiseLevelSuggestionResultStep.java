@@ -100,6 +100,7 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
             activity.restartRecorder();
             binding.layoutProgress.setVisibility(View.VISIBLE);
             binding.layoutResult.setVisibility(View.INVISIBLE);
+            binding.toolbar.textTitle.setVisibility(View.INVISIBLE);
 
             new Thread(new Runnable() {
                 public void run() {
@@ -118,6 +119,7 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            binding.toolbar.textTitle.setVisibility(View.VISIBLE);
                             binding.layoutProgress.setVisibility(View.INVISIBLE);
                             binding.layoutResult.setVisibility(View.VISIBLE);
 

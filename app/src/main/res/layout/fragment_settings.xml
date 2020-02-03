@@ -6,20 +6,20 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        tools:ignore="HardcodedText">
+        android:background="@color/colorPrimary">
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:ignore="ScrollViewSize">
+            android:orientation="vertical">
 
             <com.google.android.material.circularreveal.CircularRevealRelativeLayout
                 android:id="@+id/layout_warning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_layout_settings">
+                android:background="@drawable/button_layout_settings"
+                android:clickable="true"
+                android:focusable="true">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"
@@ -62,7 +62,9 @@
                 android:id="@+id/layout_warning_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_layout_settings">
+                android:background="@drawable/button_layout_settings"
+                android:clickable="true"
+                android:focusable="true">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"
@@ -120,7 +122,9 @@
                 android:id="@+id/layout_vibrate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_layout_settings">
+                android:background="@drawable/button_layout_settings"
+                android:clickable="true"
+                android:focusable="true">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"
@@ -161,7 +165,9 @@
                 android:id="@+id/layout_sound"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_layout_settings">
+                android:background="@drawable/button_layout_settings"
+                android:clickable="true"
+                android:focusable="true">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"

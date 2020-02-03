@@ -27,10 +27,10 @@
             android:id="@+id/nav_share"
             android:icon="@drawable/icon_camera"
             android:title="@string/title_share" />
-        <item
+        <!-- <item
             android:id="@+id/nav_noise_cancelling_music"
             android:icon="@drawable/icon_music"
-            android:title="@string/title_noise_cancelling_music"/>
+            android:title="@string/title_noise_cancelling_music"/> -->
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/icon_settings"

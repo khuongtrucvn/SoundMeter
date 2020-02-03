@@ -27,6 +27,8 @@ public class FragmentHearingTestTestingStep extends Fragment{
     private FragmentHearingTestTestingStepBinding binding;
     private AdapterHearingTest adapterListInstructions;
 
+    private static boolean firstTime = true;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -65,6 +67,11 @@ public class FragmentHearingTestTestingStep extends Fragment{
     private void initializeComponents() {
         activity.setSupportActionBar(binding.toolbar.toolbar);
         binding.toolbar.textTitle.setText(getString(R.string.title_testing));
+
+        if(firstTime){
+            showHelp();
+            firstTime = false;
+        }
 
         adapterListInstructions = new AdapterHearingTest(activity);
         binding.layoutTest.setAdapter(adapterListInstructions);

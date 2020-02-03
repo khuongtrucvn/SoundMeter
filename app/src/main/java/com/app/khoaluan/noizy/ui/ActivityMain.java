@@ -1,6 +1,7 @@
 package com.app.khoaluan.noizy.ui;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -21,16 +23,12 @@ import com.app.khoaluan.noizy.ui.fragment.FragmentCamera;
 import com.app.khoaluan.noizy.ui.fragment.FragmentHearingTest;
 import com.app.khoaluan.noizy.ui.fragment.FragmentHistory;
 import com.app.khoaluan.noizy.ui.fragment.FragmentMeter;
-import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseCancellingMusic;
 import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseLevelSuggestion;
 import com.app.khoaluan.noizy.ui.fragment.FragmentSettings;
 import com.app.khoaluan.noizy.ui.fragment.FragmentShare;
 import com.app.khoaluan.noizy.utils.UtilsActivity;
-import com.app.khoaluan.noizy.utils.UtilsFile;
 import com.app.khoaluan.noizy.utils.UtilsFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import java.io.File;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -76,12 +74,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     @Override
     public void onResume() {
         super.onResume();
-        File file = UtilsFile.createFile("temp.amr");
 
-        if (file != null)
-            startMeasure(file);
-        else
-            Toast.makeText(this, getString(R.string.activity_recFileErr), Toast.LENGTH_LONG).show();
+        startMeasure();
 
         bListener = true;
     }
@@ -90,7 +84,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     public void onPause() {
         super.onPause();
         bListener = false;
-        mRecorder.delete();
+        mRecorder.stopRecording();
         measureThread = null;
     }
 
@@ -100,7 +94,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             isThreadRun = false;
             measureThread = null;
         }
-        mRecorder.delete();
+        mRecorder.stopRecording();
         super.onDestroy();
     }
 
@@ -145,12 +139,12 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                     changeBackgroundColor(R.color.colorPrimary);
                     break;
                 }
-                case R.id.nav_noise_cancelling_music: {
+                /*case R.id.nav_noise_cancelling_music: {
                     binding.toolbar.textTitle.setText(R.string.title_noise_cancelling_music);
                     UtilsFragment.replace(this, frameId, new FragmentNoiseCancellingMusic());
                     changeBackgroundColor(R.color.colorPrimary);
                     break;
-                }
+                }*/
                 case R.id.btn_snap: {
                     binding.toolbar.textTitle.setText(R.string.title_share);
                     UtilsFragment.replace(this, frameId, new FragmentCamera());
@@ -226,9 +220,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         binding.navView.setNavigationItemSelectedListener(this);
     }
 
-    public void startMeasure(File fFile){
+    public void startMeasure(){
         try{
-            mRecorder.setMyRecAudioFile(fFile);
             if (mRecorder.startRecorder()) {
                 startListenAudio();
             }
@@ -255,6 +248,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                                 Global.setDbCount((20 * (float)(Math.log10(volume))));  //Đổi từ áp suất thành độ lớn
                                 totalDb += Global.lastDb;
                                 Global.avgDb = (float)(totalDb/numberOfDb);
+                                Log.e("Measureeeeee", "Total: " + totalDb + ", times: " + numberOfDb + ", average: " + Global.avgDb +", min: " + Global.minDb);
                             }
                         }
                         Thread.sleep(WAITING_TIME);
@@ -318,15 +312,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                     }
                 }
                 if(isSound){
-                    try {
-                        Uri path = Uri.parse("android.resource://" + this.getPackageName()+"/raw/warning_tone");
-                        RingtoneManager.setActualDefaultRingtoneUri(this, RingtoneManager.TYPE_NOTIFICATION,path);
-                        Ringtone r = RingtoneManager.getRingtone(this, path);
-                        r.play();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    MediaPlayer ringtone = MediaPlayer.create(this, R.raw.warning_tone);
+                    ringtone.start();
                 }
             }
         }

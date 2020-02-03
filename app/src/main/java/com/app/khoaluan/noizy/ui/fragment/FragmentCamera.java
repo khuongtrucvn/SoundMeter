@@ -22,12 +22,15 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -99,12 +102,14 @@ public class FragmentCamera extends Fragment implements LocationListener {
     private Bitmap bitmapImage;
 
     private String resultAddress = "";
+    private Geocoder geocoder;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof AppCompatActivity) {
             this.activity = (ActivityMain) context;
+            geocoder = new Geocoder(getContext(), Locale.getDefault());
         }
     }
 
@@ -217,8 +222,6 @@ public class FragmentCamera extends Fragment implements LocationListener {
                 @Override
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,@NonNull CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-
-                    Toast.makeText(activity, "Saved:" + imageFile, Toast.LENGTH_LONG).show();
 
                     try {
                         createCameraPreview();
@@ -464,13 +467,17 @@ public class FragmentCamera extends Fragment implements LocationListener {
 
         LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+            }
+            else if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            }
         }
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        Geocoder geocoder = new Geocoder(activity, Locale.getDefault());
         try {
             List<Address> list = geocoder.getFromLocation(
                     location.getLatitude(), location.getLongitude(), 1);
@@ -499,4 +506,5 @@ public class FragmentCamera extends Fragment implements LocationListener {
         mediaScanIntent.setData(imageUri);
         activity.sendBroadcast(mediaScanIntent);
     }
+
 }

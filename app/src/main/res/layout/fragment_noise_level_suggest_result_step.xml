@@ -29,76 +29,35 @@
                 android:textColor="@color/white"
                 android:textAlignment="center"/>
 
-            <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                android:id="@+id/layout_standard_noise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/text_location">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/sound_standardlabel"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_24sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_standard_value"
-                    android:layout_width="wrap_content"
-                    android:minWidth="@dimen/size_frame_value"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/activity_exvalue"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_36sp"
-                    android:textStyle="bold"/>
-            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-            <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                android:id="@+id/layout_actual_noise"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@id/layout_standard_noise"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_30dp">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_actual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sound_actuallabel"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_24sp"/>
+                android:layout_below="@+id/text_location"
+                android:layout_above="@id/btn_measure_again">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
 
                     <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                        android:layout_width="0dp"
+                        android:id="@+id/layout_standard_noise"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="@string/sound_minlabel"
+                            android:text="@string/sound_standardlabel"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_20sp" />
+                            android:textSize="@dimen/font_24sp" />
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/text_min_value"
+                            android:id="@+id/text_standard_value"
                             android:layout_width="wrap_content"
                             android:minWidth="@dimen/size_frame_value"
                             android:layout_height="wrap_content"
@@ -107,78 +66,129 @@
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_36sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
                     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
                     <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                        android:layout_width="0dp"
+                        android:id="@+id/layout_actual_noise"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin_30dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/text_actual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sound_actuallabel"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_24sp"/>
+
+                        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_10dp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="@string/sound_minlabel"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/font_20sp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/text_min_value"
+                                    android:layout_width="wrap_content"
+                                    android:minWidth="@dimen/size_frame_value"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="@string/activity_exvalue"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/font_36sp"
+                                    android:textStyle="bold" />
+                            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                            <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_centerHorizontal="true"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="@string/sound_avglabel"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/font_20sp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/text_average_value"
+                                    android:layout_width="wrap_content"
+                                    android:minWidth="@dimen/size_frame_value"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="@string/activity_exvalue"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/font_36sp"
+                                    android:textStyle="bold"/>
+                            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                            <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="@string/sound_maxlabel"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/font_20sp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/text_max_value"
+                                    android:minWidth="@dimen/size_frame_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="@string/activity_exvalue"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/font_36sp"
+                                    android:textStyle="bold"/>
+                            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+                        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+                    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_conclusion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_20dp"
                         android:layout_centerHorizontal="true"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/sound_avglabel"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_20sp" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/text_average_value"
-                            android:layout_width="wrap_content"
-                            android:minWidth="@dimen/size_frame_value"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/activity_exvalue"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_36sp"
-                            android:textStyle="bold"/>
-                    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-                    <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/sound_maxlabel"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_20sp" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/text_max_value"
-                            android:minWidth="@dimen/size_frame_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/activity_exvalue"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_36sp"
-                            android:textStyle="bold"/>
-                    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+                        android:textSize="@dimen/font_24sp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
                 </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_conclusion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layout_actual_noise"
-                android:layout_margin="@dimen/margin_20dp"
-                android:layout_centerHorizontal="true"
-                android:textSize="@dimen/font_24sp"
-                android:textColor="@color/white"
-                android:textAlignment="center"/>
+            </androidx.core.widget.NestedScrollView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_measure_again"

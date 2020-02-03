@@ -66,8 +66,6 @@ public class FragmentSettings extends Fragment {
     }
 
     private void initializeComponents(){
-        activity.changeBackgroundColor(R.color.colorPrimary);
-
         loadSharedPreferences();
 
         new Handler().post(new Runnable() {

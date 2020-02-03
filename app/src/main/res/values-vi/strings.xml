@@ -199,4 +199,5 @@
     <string name="noti_noise_suggestion_testing">Quá trình đo có thể mất vài giây \n Vui lòng chờ đến khi hoàn thành</string>
     <string name="noti_noise_suggestion_conclusion_false">Độ ồn đo được vượt quá chuẩn độ ồn cho phép</string>
     <string name="noti_noise_suggestion_conclusion_true">Độ ồn đo được đạt chuẩn độ ồn cho phép</string>
+    <string name="noti_camera_location">Hãy kết nối với mạng hoặc bật dịch vụ Vị trí trên thiết bị để lấy vị trí hiện tại</string>
 </resources>

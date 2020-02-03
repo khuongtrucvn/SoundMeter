@@ -37,6 +37,7 @@
     <dimen name="size_button_snap">64dp</dimen>
     <dimen name="size_button_back">48dp</dimen>
     <dimen name="size_button_testing_step">54dp</dimen>
+    <dimen name="size_height_building_picker">100dp</dimen>
 
     //Font Size
     <dimen name="font_36sp">36sp</dimen>

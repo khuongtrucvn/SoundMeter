@@ -6,9 +6,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class MyMediaRecorder {
-    public File myRecAudioFile = null;
     private MediaRecorder mMediaRecorder;
-    public boolean isRecording = false ;
+    private boolean isRecording = false ;
 
     public float getMaxAmplitude() {
         if (mMediaRecorder != null) {
@@ -24,29 +23,18 @@ public class MyMediaRecorder {
             return 5;
     }
 
-    public File getMyRecAudioFile() {
-        return myRecAudioFile;
-    }
-
-    public void setMyRecAudioFile(File myRecAudioFile) {
-        this.myRecAudioFile = myRecAudioFile;
-    }
-
     /**
      * Recording
      * @return Whether to start recording successfully
      */
     public boolean startRecorder(){
-        if (myRecAudioFile == null) {
-            return false;
-        }
         try {
             mMediaRecorder = new MediaRecorder();
 
             mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            mMediaRecorder.setOutputFile(myRecAudioFile.getAbsolutePath());
+            mMediaRecorder.setOutputFile("/dev/null");
 
             mMediaRecorder.prepare();
             mMediaRecorder.start();
@@ -70,7 +58,7 @@ public class MyMediaRecorder {
         return false;
     }
 
-    private void stopRecording(){
+    public void stopRecording(){
         if (mMediaRecorder != null){
             if(isRecording){
                 try{
@@ -107,7 +95,7 @@ public class MyMediaRecorder {
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                     mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                     mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                    mMediaRecorder.setOutputFile(myRecAudioFile.getAbsolutePath());
+                    mMediaRecorder.setOutputFile("/dev/null");
 
                     mMediaRecorder.prepare();
                     mMediaRecorder.start();
@@ -127,11 +115,12 @@ public class MyMediaRecorder {
         }
     }
 
-    public void restartRecording(){
+    synchronized public void restartRecording(){
         if (mMediaRecorder != null){
             if(isRecording){
                 try{
                     mMediaRecorder.stop();
+                    mMediaRecorder.reset();
                     mMediaRecorder.release();
                 }
                 catch(Exception e){
@@ -146,7 +135,7 @@ public class MyMediaRecorder {
                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                 mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                 mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                mMediaRecorder.setOutputFile(myRecAudioFile.getAbsolutePath());
+                mMediaRecorder.setOutputFile("/dev/null");
 
                 mMediaRecorder.prepare();
                 mMediaRecorder.start();
@@ -164,14 +153,6 @@ public class MyMediaRecorder {
                 e.printStackTrace();
                 isRecording = false ;
             }
-        }
-    }
-
-    public void delete(){
-        stopRecording();
-        if (myRecAudioFile != null) {
-            myRecAudioFile.delete();
-            myRecAudioFile = null;
         }
     }
 }

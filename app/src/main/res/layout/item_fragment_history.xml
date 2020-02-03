@@ -5,7 +5,8 @@
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_16dp">
 
         <com.google.android.material.circularreveal.CircularRevealRelativeLayout
             android:layout_width="match_parent"

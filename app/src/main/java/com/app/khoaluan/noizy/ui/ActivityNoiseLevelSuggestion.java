@@ -1,22 +1,17 @@
 package com.app.khoaluan.noizy.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.app.khoaluan.noizy.R;
 import com.app.khoaluan.noizy.databinding.ActivityNoiseLevelSuggestionBinding;
 import com.app.khoaluan.noizy.model.Global;
 import com.app.khoaluan.noizy.model.MyMediaRecorder;
-import com.app.khoaluan.noizy.ui.fragment.FragmentMeter;
 import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseLevelSuggestionBuildingChoosingStep;
 import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseLevelSuggestionResultStep;
 import com.app.khoaluan.noizy.ui.fragment.FragmentNoiseLevelSuggestionSectionChoosingStep;
 import com.app.khoaluan.noizy.utils.UtilsActivity;
-import com.app.khoaluan.noizy.utils.UtilsFile;
 import com.app.khoaluan.noizy.utils.UtilsFragment;
-
-import java.io.File;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -51,12 +46,8 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        File file = UtilsFile.createFile("temp.amr");
 
-        if (file != null)
-            startMeasure(file);
-        else
-            Toast.makeText(this, getString(R.string.activity_recFileErr), Toast.LENGTH_LONG).show();
+        startMeasure();
 
         bListener = true;
     }
@@ -65,7 +56,7 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         bListener = false;
-        mRecorder.delete();
+        mRecorder.stopRecording();
         measureThread = null;
     }
 
@@ -75,7 +66,7 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
             isThreadRun = false;
             measureThread = null;
         }
-        mRecorder.delete();
+        mRecorder.stopRecording();
         super.onDestroy();
     }
 
@@ -137,9 +128,8 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         isRecording = false;
     }
 
-    public void startMeasure(File fFile){
+    public void startMeasure(){
         try{
-            mRecorder.setMyRecAudioFile(fFile);
             if (mRecorder.startRecorder()) {
                 startListenAudio();
             }

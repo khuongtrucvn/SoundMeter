@@ -28,6 +28,8 @@ public class FragmentNoiseLevelSuggestionBuildingChoosingStep extends Fragment {
 
     private ArrayList<BuildingStandard> mBuildings = new ArrayList<>();
 
+    private static boolean firstTime = true;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -67,6 +69,11 @@ public class FragmentNoiseLevelSuggestionBuildingChoosingStep extends Fragment {
 
         mBuildings = BuildingStandardDatabase.get(activity);
         initializeBuildingPicker();
+
+        if(firstTime){
+            showHelp();
+            firstTime = false;
+        }
     }
 
     private void setEventHandler() {
