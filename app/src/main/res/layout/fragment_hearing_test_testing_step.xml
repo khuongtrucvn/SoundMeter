@@ -99,7 +99,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_above="@id/layout_navigation"
                     android:backgroundTint="@color/orange"
-                    android:text="@string/title_finish" />
+                    android:text="@string/title_finish"
+                    app:cornerRadius="@dimen/radius_15dp"/>
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 </layout>

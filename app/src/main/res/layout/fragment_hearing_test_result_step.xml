@@ -88,7 +88,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_50dp"
                     app:backgroundTint="@color/orange"
-                    android:text="@string/title_test_again"/>
+                    android:text="@string/title_test_again"
+                    app:cornerRadius="@dimen/radius_15dp"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_exit_test"
@@ -96,7 +97,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20dp"
                     app:backgroundTint="@color/orange"
-                    android:text="@string/title_exit_test"/>
+                    android:text="@string/title_exit_test"
+                    app:cornerRadius="@dimen/radius_15dp"/>
             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
         </androidx.core.widget.NestedScrollView>
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>

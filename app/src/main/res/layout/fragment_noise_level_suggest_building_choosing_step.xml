@@ -79,7 +79,8 @@
                     android:backgroundTint="@color/orange"
                     android:text="@string/title_continue"
                     android:layout_marginBottom="@dimen/margin_30dp"
-                    android:layout_marginTop="@dimen/margin_50dp"/>
+                    android:layout_marginTop="@dimen/margin_50dp"
+                    app:cornerRadius="@dimen/radius_15dp"/>
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 </layout>

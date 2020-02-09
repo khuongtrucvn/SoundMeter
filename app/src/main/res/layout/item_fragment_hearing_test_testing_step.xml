@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.circularreveal.CircularRevealRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -76,7 +77,8 @@
                 android:layout_weight="1"
                 android:layout_margin="@dimen/margin_20dp"
                 android:text="@string/activity_can_hear"
-                android:backgroundTint="@color/orange"/>
+                android:backgroundTint="@color/orange"
+                app:cornerRadius="@dimen/radius_15dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_cant_hear"
@@ -85,7 +87,8 @@
                 android:layout_weight="1"
                 android:layout_margin="@dimen/margin_20dp"
                 android:text="@string/activity_cannot_hear"
-                android:backgroundTint="@color/orange"/>
+                android:backgroundTint="@color/orange"
+                app:cornerRadius="@dimen/radius_15dp"/>
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 </layout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -43,7 +43,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_30dp"
                     android:text="@string/title_continue"
-                    android:backgroundTint="@color/orange"/>
+                    android:backgroundTint="@color/orange"
+                    app:cornerRadius="@dimen/radius_15dp"/>
             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
         </androidx.core.widget.NestedScrollView>
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>

@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.khoaluan.noizy.R;
+import com.app.khoaluan.noizy.database.BuildingSectionStandardDatabase;
+import com.app.khoaluan.noizy.database.BuildingStandardDatabase;
 import com.app.khoaluan.noizy.databinding.FragmentNoiseLevelSuggestResultStepBinding;
 import com.app.khoaluan.noizy.model.BuildingSectionStandard;
 import com.app.khoaluan.noizy.model.BuildingStandard;
-import com.app.khoaluan.noizy.database.BuildingSectionStandardDatabase;
-import com.app.khoaluan.noizy.database.BuildingStandardDatabase;
 import com.app.khoaluan.noizy.model.Global;
 import com.app.khoaluan.noizy.ui.ActivityNoiseLevelSuggestion;
 
@@ -74,9 +74,6 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
     }
 
     private void initializeComponents(){
-        activity.setSupportActionBar(binding.toolbar.toolbar);
-        binding.toolbar.textTitle.setText(activity.getString(R.string.title_result));
-
         isChoiceStartMeasure = activity.getIsChoiceStartMeasure();
         chosenBuilding = BuildingStandardDatabase.searchBuilding(activity.getBuildingIdChosen());
         chosenSection = BuildingSectionStandardDatabase.searchSection(activity.getBuildingIdChosen(), activity.getSectionIdChosen());
@@ -85,7 +82,6 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
 
         setMeasureResultFormat();
 
-        binding.toolbar.btnBack.setVisibility(View.INVISIBLE);
         binding.textLocation.setText(location);
         binding.textStandardValue.setText(String.valueOf(chosenSection.getSectionNoiseLevel()));
 
@@ -100,7 +96,6 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
             activity.restartRecorder();
             binding.layoutProgress.setVisibility(View.VISIBLE);
             binding.layoutResult.setVisibility(View.INVISIBLE);
-            binding.toolbar.textTitle.setVisibility(View.INVISIBLE);
 
             new Thread(new Runnable() {
                 public void run() {
@@ -119,7 +114,6 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            binding.toolbar.textTitle.setVisibility(View.VISIBLE);
                             binding.layoutProgress.setVisibility(View.INVISIBLE);
                             binding.layoutResult.setVisibility(View.VISIBLE);
 
@@ -128,9 +122,11 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
                             binding.textAverageValue.setText(df1.format(avgValue));
 
                             if(avgValue <= chosenSection.getSectionNoiseLevel()){
+                                binding.textConclusion.setTextColor(ContextCompat.getColor(activity,R.color.green));
                                 binding.textConclusion.setText(R.string.noti_noise_suggestion_conclusion_true);
                             }
                             else{
+                                binding.textConclusion.setTextColor(ContextCompat.getColor(activity,R.color.red));
                                 binding.textConclusion.setText(R.string.noti_noise_suggestion_conclusion_false);
                             }
                         }

@@ -73,7 +73,8 @@
             android:layout_centerHorizontal="true"
             android:backgroundTint="@color/orange"
             android:text="@string/title_show_value"
-            android:layout_marginTop="@dimen/margin_50dp"/>
+            android:layout_marginTop="@dimen/margin_50dp"
+            app:cornerRadius="@dimen/radius_15dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_measure"
@@ -84,6 +85,7 @@
             android:backgroundTint="@color/orange"
             android:text="@string/title_measure"
             android:layout_marginBottom="@dimen/margin_30dp"
-            android:layout_marginTop="@dimen/margin_16dp"/>
+            android:layout_marginTop="@dimen/margin_16dp"
+            app:cornerRadius="@dimen/radius_15dp"/>
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 </layout>

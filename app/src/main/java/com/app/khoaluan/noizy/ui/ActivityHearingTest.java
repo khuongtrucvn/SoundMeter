@@ -1,5 +1,7 @@
 package com.app.khoaluan.noizy.ui;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
@@ -133,6 +135,12 @@ public class ActivityHearingTest extends AppCompatActivity {
                 return true;
             }
         }
+
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(bluetoothAdapter != null && BluetoothProfile.STATE_CONNECTED == bluetoothAdapter.getProfileConnectionState(BluetoothProfile.HEADSET)){
+            return true;
+        }
+
         return false;
     }
 

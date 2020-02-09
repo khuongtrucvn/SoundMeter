@@ -313,7 +313,7 @@ public class FragmentCamera extends Fragment implements LocationListener {
     private void save(Bitmap image) throws IOException {
         FileOutputStream output = new FileOutputStream(imageFile);
 
-        image.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        image.compress(Bitmap.CompressFormat.JPEG, 90, output);
         output.flush();
         output.close();
 

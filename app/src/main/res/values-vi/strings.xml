@@ -125,7 +125,7 @@
     <string name="title_back_testing">Trở lại bước Kiểm tra</string>
     <string name="activity_can_hear">Nghe</string>
     <string name="activity_cannot_hear">Không nghe</string>
-    <string name="noti_hearing_test_help">\t\t Ấn nút &quot;Nghe được&quot; nếu bạn nghe âm thanh, khi đó âm thanh sẽ được phát lại với độ lớn thấp hơn \n\n\t\t Ấn nút &quot;Không nghe được&quot; nếu bạn không nghe được âm thanh, khi đó âm thanh sẽ được phát lại với cường độ cao hơn \n\n\t\t Dừng khi bạn có thể nghe được âm thanh ở cường độ hiện tại nhưng không thể ở cường độ thấp hơn \n\n\t\t Lặp lại quá trình cho đến lúc hoàn thành bài kiểm tra , có tổng cộng 7 âm thanh với tần số khác nhau từ 125Hz đến 8000Hz cho mỗi bên tai \n\n\t\t Ấn nút &quot;Hoàn thành&quot; để kết thúc bài kiểm tra và nhận kết quả </string>
+    <string name="noti_hearing_test_help">\t\t Ấn nút có biểu tượng &quot;Phát âm thanh &quot; để nghe âm thanh\n\n\t\t Ấn nút &quot;Nghe được&quot; nếu bạn nghe âm thanh, khi đó âm thanh sẽ được phát lại với độ lớn thấp hơn \n\n\t\t Ấn nút &quot;Không nghe được&quot; nếu bạn không nghe được âm thanh, khi đó âm thanh sẽ được phát lại với cường độ cao hơn \n\n\t\t Dừng khi bạn có thể nghe được âm thanh ở cường độ hiện tại nhưng không thể ở cường độ thấp hơn \n\n\t\t Lặp lại quá trình cho đến lúc hoàn thành bài kiểm tra , có tổng cộng 7 âm thanh với tần số khác nhau từ 125Hz đến 8000Hz cho mỗi bên tai \n\n\t\t Ấn nút &quot;Hoàn thành&quot; để kết thúc bài kiểm tra và nhận kết quả </string>
     <string name="hearing_test_left">Tai trái</string>
     <string name="hearing_test_right">Tai phải</string>
     <string name="title_finish">Hoàn thành</string>

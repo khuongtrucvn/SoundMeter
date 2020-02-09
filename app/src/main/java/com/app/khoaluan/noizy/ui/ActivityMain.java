@@ -2,9 +2,6 @@ package com.app.khoaluan.noizy.ui;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
