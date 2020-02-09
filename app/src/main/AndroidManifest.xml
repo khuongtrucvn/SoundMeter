@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.khoaluan.noizy">
+    package="android.dbmeter.net">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -36,7 +36,7 @@
         </provider>
 
         <activity
-            android:name=".ui.ActivityLaunch"
+            android:name="android.dbmeter.net.ui.ActivityLaunch"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ActivityMain"
+            android:name="android.dbmeter.net.ui.ActivityMain"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,20 +52,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ActivityImagePreview">
+            android:name="android.dbmeter.net.ui.ActivityImagePreview">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ActivityHearingTest"
+            android:name="android.dbmeter.net.ui.ActivityHearingTest"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ActivityNoiseLevelSuggestion"
+            android:name="android.dbmeter.net.ui.ActivityNoiseLevelSuggestion"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

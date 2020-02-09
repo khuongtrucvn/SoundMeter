@@ -30,7 +30,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                            <com.app.khoaluan.noizy.model.Speedometer
+                            <android.dbmeter.net.model.Speedometer
                                 android:id="@+id/speedometer"
                                 android:layout_centerInParent="true"
                                 android:layout_width="@dimen/size_speedometer"
