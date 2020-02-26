@@ -50,9 +50,11 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     private boolean isThreadRun = true;
     public boolean isRecording = true;
     private Thread measureThread, warnThread;
-    float volume = 10000;
+    int volume;
     private double totalDb = 0; // tổng cộng dB
     private long numberOfDb = 0; // số lần đo độ ồn
+
+    long threadId = 0;
 
     /* Shared Preferences */
     private MyPrefs myPrefs;
@@ -72,8 +74,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     public void onResume() {
         super.onResume();
 
-        startMeasure();
-
+        if(isRecording){
+            startMeasure();
+        }
         bListener = true;
     }
 
@@ -238,14 +241,17 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             public void run() {
                 while (isThreadRun) {
                     try {
+                        threadId++;
                         if(bListener) {
-                            numberOfDb++;
                             volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
-                            if(volume > 0 && volume < 1000000) {
-                                Global.setDbCount((20 * (float)(Math.log10(volume))));  //Đổi từ áp suất thành độ lớn
+                            Log.e("Thread", "Thread : " + threadId + ", volume: " + volume);
+                            if(volume > 0) {
+                                float dbCurrent = 20 * (float)(Math.log10(volume));
+                                Global.setDbCount(dbCurrent);  //Đổi từ áp suất thành độ lớn
+                                numberOfDb++;
                                 totalDb += Global.lastDb;
                                 Global.avgDb = (float)(totalDb/numberOfDb);
-                                Log.e("Measureeeeee", "Total: " + totalDb + ", times: " + numberOfDb + ", average: " + Global.avgDb +", min: " + Global.minDb);
+                                Log.e("Measureeeeee", "Thread : " + threadId + ", total: " + totalDb + ", times: " + numberOfDb + ", average: " + Global.avgDb +", min: " + Global.minDb + ", current: " + Global.lastDb);
                             }
                         }
                         Thread.sleep(WAITING_TIME);

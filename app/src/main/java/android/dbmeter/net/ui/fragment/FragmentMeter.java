@@ -134,11 +134,7 @@ public class FragmentMeter extends Fragment {
                             activity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if(Global.minDb < 0)
-                                        binding.textMinValue.setText(df1.format(0.0));
-                                    else
-                                        binding.textMinValue.setText(df1.format(Global.minDb));
-
+                                    binding.textMinValue.setText(df1.format(Global.minDb));
                                     binding.textAverageValue.setText(df1.format(Global.avgDb));
                                     binding.textMaxValue.setText(df1.format(Global.maxDb));
                                     binding.textStatus.setText(noiseLevel.getDescription());
@@ -232,7 +228,7 @@ public class FragmentMeter extends Fragment {
             Toast.makeText(getActivity(), R.string.noti_pause,Toast.LENGTH_SHORT).show();
         }
         else {
-            activity.resumeRecorder();
+            activity.startMeasure();
 
             //Gán thời gian đếm và chạy đồng hồ đếm
             binding.textDuration.setBase(SystemClock.elapsedRealtime() + activity.duration);

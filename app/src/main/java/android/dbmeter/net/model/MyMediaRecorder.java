@@ -8,18 +8,19 @@ public class MyMediaRecorder {
     private MediaRecorder mMediaRecorder;
     private boolean isRecording = false ;
 
-    public float getMaxAmplitude() {
+    public synchronized int getMaxAmplitude() {
         if (mMediaRecorder != null) {
             try {
                 return mMediaRecorder.getMaxAmplitude();
             }
             catch (IllegalArgumentException e) {
                 e.printStackTrace();
-                return 0;
+                return -1;
             }
         }
-        else
-            return 5;
+        else {
+            return -1;
+        }
     }
 
     /**
