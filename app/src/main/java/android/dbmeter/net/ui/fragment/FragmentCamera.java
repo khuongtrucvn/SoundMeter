@@ -266,19 +266,25 @@ public class FragmentCamera extends Fragment implements LocationListener {
     }
 
     private Bitmap addInformation(byte[] data){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inMutable = true;
-        Bitmap myBitmap = rotate(BitmapFactory.decodeByteArray(data, 0, data.length, options),90);
+        Bitmap myBitmap = rotate(decodeAndResizeImage(data),90);
         Canvas canvas = new Canvas(myBitmap);
 
+        Locale currentLocale = Locale.getDefault();
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(currentLocale);
+        otherSymbols.setDecimalSeparator('.');
+        DecimalFormat df1 = new DecimalFormat("##0.0", otherSymbols);
+
+        String value = getString(R.string.activity_avg_value) + getString(R.string.colon) + " " + df1.format(Global.avgDb)+ getString(R.string.sound_unit);
         Paint valuePaint = new Paint();
-        valuePaint.setTextSize(150);
+        int valueFontSize = determineMaxTextSize(value,(float)myBitmap.getWidth()/2);
+        valuePaint.setTextSize(valueFontSize);
         valuePaint.setAntiAlias(true);
         valuePaint.setTextAlign(Paint.Align.CENTER);
         valuePaint.setColor(Color.WHITE);
 
         Paint addressPaint = new Paint();
-        addressPaint.setTextSize(90);
+        int addressFontSize = determineMaxTextSize(resultAddress,(float)myBitmap.getWidth()*4/5);
+        addressPaint.setTextSize(addressFontSize);
         addressPaint.setAntiAlias(true);
         addressPaint.setTextAlign(Paint.Align.CENTER);
         addressPaint.setColor(Color.WHITE);
@@ -287,14 +293,48 @@ public class FragmentCamera extends Fragment implements LocationListener {
         framePaint.setAntiAlias(true);
         framePaint.setColor(ContextCompat.getColor(activity,R.color.gradient_black_50));
 
-        Locale currentLocale = Locale.getDefault();
-        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(currentLocale);
-        otherSymbols.setDecimalSeparator('.');
-        DecimalFormat df1 = new DecimalFormat("##0.0", otherSymbols);
+        canvas.drawRect(0,(float)myBitmap.getHeight()*21/50,(float)myBitmap.getWidth(),(float)myBitmap.getHeight()*3/5,framePaint);
+        canvas.drawText(value, (float)myBitmap.getWidth()/2,(float)myBitmap.getHeight()/2, valuePaint);
+        canvas.drawText(resultAddress, (float)myBitmap.getWidth()/2,(float)myBitmap.getHeight()*11/20, addressPaint);
 
-        canvas.drawRect(0,myBitmap.getHeight()*21/50,myBitmap.getWidth(),myBitmap.getHeight()*3/5,framePaint);
-        canvas.drawText(getString(R.string.activity_avg_value) + getString(R.string.colon) + " " + df1.format(Global.avgDb)+ getString(R.string.sound_unit), myBitmap.getWidth()/2,myBitmap.getHeight()/2, valuePaint);
-        canvas.drawText(resultAddress, myBitmap.getWidth()/2,myBitmap.getHeight()*11/20, addressPaint);
+        return myBitmap;
+    }
+
+    /**
+     * Retrieve the maximum text size to fit in a given width.
+     * @param str (String): Text to check for size.
+     * @param maxWidth (float): Maximum allowed width.
+     * @return (int): The desired text size.
+     */
+    private int determineMaxTextSize(String str, float maxWidth)
+    {
+        int size = 0;
+        Paint paint = new Paint();
+
+        do {
+            paint.setTextSize(++ size);
+        } while(paint.measureText(str) < maxWidth);
+
+        return size;
+    }
+
+    private Bitmap decodeAndResizeImage(byte[] data){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inMutable = true;
+
+        boolean done = false;
+        int downsampleBy = 1;
+
+        Bitmap myBitmap = null;
+        while (!done) {
+            options.inSampleSize = downsampleBy++;
+            try {
+                myBitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+                done = true;
+            } catch (OutOfMemoryError e) {
+                e.printStackTrace();
+            }
+        }
 
         return myBitmap;
     }

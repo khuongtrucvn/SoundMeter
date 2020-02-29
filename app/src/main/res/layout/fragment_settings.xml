@@ -14,12 +14,13 @@
             android:orientation="vertical">
 
             <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:background="?android:attr/selectableItemBackground"
                 android:id="@+id/layout_warning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_layout_settings"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:addStatesFromChildren="true">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"
@@ -62,9 +63,10 @@
                 android:id="@+id/layout_warning_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_layout_settings"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:addStatesFromChildren="true">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"
@@ -122,9 +124,10 @@
                 android:id="@+id/layout_vibrate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_layout_settings"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:addStatesFromChildren="true">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"
@@ -165,9 +168,10 @@
                 android:id="@+id/layout_sound"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_layout_settings"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:addStatesFromChildren="true">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"

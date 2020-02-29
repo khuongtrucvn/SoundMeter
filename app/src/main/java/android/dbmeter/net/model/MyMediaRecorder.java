@@ -8,7 +8,7 @@ public class MyMediaRecorder {
     private MediaRecorder mMediaRecorder;
     private boolean isRecording = false ;
 
-    public synchronized int getMaxAmplitude() {
+    public int getMaxAmplitude() {
         if (mMediaRecorder != null) {
             try {
                 return mMediaRecorder.getMaxAmplitude();

@@ -235,7 +235,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private synchronized void startListenAudio() {
+    private void startListenAudio() {
         measureThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -243,16 +243,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                     try {
                         threadId++;
                         if(bListener) {
-                            volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
-                            Log.e("Thread", "Thread : " + threadId + ", volume: " + volume);
-                            if(volume > 0) {
-                                float dbCurrent = 20 * (float)(Math.log10(volume));
-                                Global.setDbCount(dbCurrent);  //Đổi từ áp suất thành độ lớn
-                                numberOfDb++;
-                                totalDb += Global.lastDb;
-                                Global.avgDb = (float)(totalDb/numberOfDb);
-                                Log.e("Measureeeeee", "Thread : " + threadId + ", total: " + totalDb + ", times: " + numberOfDb + ", average: " + Global.avgDb +", min: " + Global.minDb + ", current: " + Global.lastDb);
-                            }
+                            getSoundPowerLevel();
                         }
                         Thread.sleep(WAITING_TIME);
                     }
@@ -264,6 +255,19 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             }
         });
         measureThread.start();
+    }
+
+    private synchronized void getSoundPowerLevel(){
+        volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
+        //Log.e("Thread", "Thread : " + threadId + ", volume: " + volume);
+        if(volume > 0) {
+            float dbCurrent = 20 * (float)(Math.log10(volume));
+            Global.setDbCount(dbCurrent);  //Đổi từ áp suất thành độ lớn
+            numberOfDb++;
+            totalDb += Global.lastDb;
+            Global.avgDb = (float)(totalDb/numberOfDb);
+            //Log.e("Measureeeeee", "Thread : " + threadId + ", volume: " + volume + ", times: " + numberOfDb + ", average: " + Global.avgDb +", min: " + Global.minDb);
+        }
     }
 
     public void changeBackgroundColor(int color){
