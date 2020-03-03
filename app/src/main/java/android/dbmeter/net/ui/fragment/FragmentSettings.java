@@ -1,9 +1,13 @@
 package android.dbmeter.net.ui.fragment;
 
+import android.dbmeter.net.database.LocaleDescriptionDatabase;
+import android.dbmeter.net.databinding.DialogLanguageBinding;
 import android.dbmeter.net.ui.ActivityMain;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.LocaleList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,10 @@ import android.dbmeter.net.R;
 import android.dbmeter.net.databinding.DialogWarningBinding;
 import android.dbmeter.net.databinding.FragmentSettingsBinding;
 import android.dbmeter.net.model.MyPrefs;
+import android.dbmeter.net.model.LocaleDescription;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,11 +34,14 @@ public class FragmentSettings extends Fragment {
     private ActivityMain activity = (ActivityMain)getActivity();
     private FragmentSettingsBinding binding;
     private DialogWarningBinding warningBinding;
+    private DialogLanguageBinding languageBinding;
+    private ArrayList<LocaleDescription> mLocale = new ArrayList<>();
 
     /* Shared Preferences */
     private MyPrefs myPrefs;
     private boolean isWarn, isVibrate, isSound;
     private int warningVal;
+    private String language;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -66,6 +77,8 @@ public class FragmentSettings extends Fragment {
     }
 
     private void initializeComponents(){
+        mLocale = LocaleDescriptionDatabase.get(activity);
+
         loadSharedPreferences();
 
         new Handler().post(new Runnable() {
@@ -76,6 +89,13 @@ public class FragmentSettings extends Fragment {
                 binding.textWarnValue.setText(Integer.toString(warningVal));
                 binding.swtVibrate.setChecked(isVibrate);
                 binding.swtSound.setChecked(isSound);
+
+                //Nếu ứng dụng lần đầu sử dụng (không có lưu Ngôn ngữ trong Shared Pref) và không hỗ trợ ngôn ngữ của thiết bị đang sử dụng thì ứng dụng sẽ sử dụng ngôn ngữ mặc định là tiếng anh
+                if(language.equals("") && LocaleDescriptionDatabase.getLocaleNameFromCode(getDeviceLocale()).equals("")){
+                    language = getString(R.string.locale_en);
+                }
+                String localeLanguage = LocaleDescriptionDatabase.getLocaleNameFromCode(language);
+                binding.textLanguage.setText(localeLanguage);
             }
         });
     }
@@ -87,9 +107,16 @@ public class FragmentSettings extends Fragment {
         warningVal = myPrefs.getWarningValue();
         isVibrate = myPrefs.getIsVibrate();
         isSound = myPrefs.getIsSound();
+        language = myPrefs.getLocale();
     }
 
     private void setEventHandler(){
+        binding.layoutLanguage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showLanguageDialog();
+            }
+        });
+
         //Do warning là view nên cần setChecked
         binding.layoutWarning.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -238,5 +265,65 @@ public class FragmentSettings extends Fragment {
             }
         }
         return 0;
+    }
+
+    private void showLanguageDialog(){
+        AlertDialog.Builder dialogBuilder =	new AlertDialog.Builder(activity);
+        languageBinding = DialogLanguageBinding.inflate(LayoutInflater.from(getContext()));
+        dialogBuilder.setView(languageBinding.getRoot());
+        final AlertDialog languageDialog = dialogBuilder.create();
+        initializeLanguageDialog();
+
+        languageBinding.btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String localeName = languageBinding.pickerLanguage.getDisplayedValues()[languageBinding.pickerLanguage.getValue()];
+                String localeCode = LocaleDescriptionDatabase.getLocaleCodeFromName(localeName);
+                myPrefs.setLocale(localeCode);
+                Toast.makeText(getActivity(), getString(R.string.noti_warning_value_save), Toast.LENGTH_SHORT).show();
+                languageDialog.dismiss();
+                activity.restartApplication();
+            }
+        });
+
+        languageBinding.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                languageDialog.dismiss();
+            }
+        });
+
+        languageDialog.show();
+    }
+
+    private void initializeLanguageDialog(){
+        String[] valRange = LocaleDescriptionDatabase.getLocaleNameArrayList().toArray(new String[mLocale.size()]);
+        languageBinding.pickerLanguage.setDisplayedValues(valRange);
+        languageBinding.pickerLanguage.setMinValue(0);
+        languageBinding.pickerLanguage.setMaxValue(valRange.length-1);
+        languageBinding.pickerLanguage.setValue(findPosLanguage(valRange, language));
+        languageBinding.pickerLanguage.setWrapSelectorWheel(false);
+    }
+
+    //Phương thức tìm vị trí của ngôn ngữ trên number picker từ localeCode
+    private int findPosLanguage(String[] range, String localeCode) {
+        for(int i = 0; i< range.length; i++){
+            if(range[i].equals(LocaleDescriptionDatabase.getLocaleNameFromCode(localeCode))){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private String getDeviceLocale(){
+        String currentLocale;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            currentLocale = LocaleList.getDefault().get(0).getLanguage();
+        } else{
+            currentLocale =  Locale.getDefault().getLanguage();
+        }
+
+        return currentLocale;
     }
 }

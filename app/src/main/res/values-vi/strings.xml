@@ -200,4 +200,7 @@
     <string name="noti_noise_suggestion_conclusion_false">Độ ồn đo được vượt quá chuẩn độ ồn cho phép</string>
     <string name="noti_noise_suggestion_conclusion_true">Độ ồn đo được đạt chuẩn độ ồn cho phép</string>
     <string name="noti_camera_location">Hãy kết nối với mạng hoặc bật dịch vụ Vị trí trên thiết bị để lấy vị trí hiện tại</string>
+    <string name="activity_language">Ngôn ngữ</string>
+    <string name="lang_en">Tiếng Anh</string>
+    <string name="lang_vi">Tiếng Việt</string>
 </resources>

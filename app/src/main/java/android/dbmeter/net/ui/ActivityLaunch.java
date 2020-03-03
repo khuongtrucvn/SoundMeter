@@ -1,9 +1,9 @@
 package android.dbmeter.net.ui;
 
 import android.Manifest;
-import android.dbmeter.net.utils.AppConfig;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.dbmeter.net.utils.AppConfig;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 public class ActivityLaunch extends AppCompatActivity {
+
     private static String[] PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,

@@ -2,6 +2,10 @@ package android.dbmeter.net.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.LocaleList;
+
+import java.util.Locale;
 
 public class MyPrefs {
     private SharedPreferences myPrefs;
@@ -27,7 +31,7 @@ public class MyPrefs {
     }
 
     public int getWarningValue(){
-        return myPrefs.getInt("WarningValue", 80);
+        return myPrefs.getInt("WarningValue", 85);
     }
 
     public void setIsVibrate(boolean value){
@@ -59,4 +63,13 @@ public class MyPrefs {
     public int getCalibrateValue(){
         return myPrefs.getInt("CalibrateValue", 0);
     }
+
+    public void setLocale(String locale){
+        SharedPreferences.Editor editor = myPrefs.edit();
+        editor.putString("Locale",locale);
+        editor.apply();
+    }
+
+    public String getLocale(){
+        return myPrefs.getString("Locale","");}
 }

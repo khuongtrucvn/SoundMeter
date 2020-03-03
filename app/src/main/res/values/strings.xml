@@ -104,6 +104,7 @@
     <string name="activity_chartlabel">Noise Chart</string>
     <string name="activity_calibratelabel">Calibrate</string>
     <string name="activity_pickerlabel">Set dB value for warning</string>
+    <string name="activity_language">Language</string>
     <string name="activity_extime">hh:mm:ss</string>
     <string name="activity_exdate">dd-MM-YYYY</string>
     <string name="activity_helplabel">Help</string>
@@ -228,4 +229,11 @@
     <string name="section_public_shop">Public services shop, store</string>
     <string name="section_central_market">Central market</string>
     <string name="section_guest_room">Guest room in train, ship</string>
+
+    <!-- Locale & Language-->
+    <string name="locale_en" translatable="false">en</string>
+    <string name="locale_vi" translatable="false">vi</string>
+
+    <string name="lang_en">English</string>
+    <string name="lang_vi">Vietnamese</string>
 </resources>

@@ -1,14 +1,19 @@
 package android.dbmeter.net.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.dbmeter.net.ui.fragment.FragmentHearingTest;
 import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestion;
 import android.dbmeter.net.ui.fragment.FragmentShare;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +31,8 @@ import android.dbmeter.net.ui.fragment.FragmentSettings;
 import android.dbmeter.net.utils.UtilsActivity;
 import android.dbmeter.net.utils.UtilsFragment;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Locale;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -164,6 +171,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     }
 
     private void initializeComponents() {
+        loadSharedPreferences();
+        setAppLocale();
         UtilsActivity.enterFullScreen(ActivityMain.this);
         @LayoutRes int layoutId = R.layout.activity_main;
         setContentView(layoutId);
@@ -178,7 +187,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         binding.drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        loadSharedPreferences();
         initRecorder();
         initdbWarning();
         setEventHandler();
@@ -324,5 +332,21 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 }
             }
         }
+    }
+
+    private void setAppLocale(){
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+
+        if(!myPrefs.getLocale().equals("")){
+            config.setLocale(new Locale(myPrefs.getLocale().toLowerCase()));
+            resources.updateConfiguration(config, dm);
+        }
+    }
+
+    public void restartApplication(){
+        startActivity(new Intent(this, ActivityMain.class));
+        finishAffinity();
     }
 }

@@ -14,6 +14,42 @@
             android:orientation="vertical">
 
             <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/layout_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:addStatesFromChildren="true">
+
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/margin_50dp"
+                    android:padding="@dimen/padding_20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_language"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_18sp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/lightgray"
+                        android:textSize="@dimen/font_16sp"/>
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                <View
+                    style="@style/Divider"
+                    android:layout_alignParentBottom="true"/>
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
                 android:background="?android:attr/selectableItemBackground"
                 android:id="@+id/layout_warning"
                 android:layout_width="match_parent"
