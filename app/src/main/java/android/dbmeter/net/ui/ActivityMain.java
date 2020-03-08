@@ -4,32 +4,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.dbmeter.net.ui.fragment.FragmentHearingTest;
-import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestion;
-import android.dbmeter.net.ui.fragment.FragmentShare;
-import android.media.MediaPlayer;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.LocaleList;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 import android.dbmeter.net.R;
 import android.dbmeter.net.databinding.ActivityMainBinding;
 import android.dbmeter.net.model.Global;
 import android.dbmeter.net.model.MyMediaRecorder;
 import android.dbmeter.net.model.MyPrefs;
 import android.dbmeter.net.ui.fragment.FragmentCamera;
+import android.dbmeter.net.ui.fragment.FragmentHearingTest;
 import android.dbmeter.net.ui.fragment.FragmentHistory;
 import android.dbmeter.net.ui.fragment.FragmentMeter;
+import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestion;
 import android.dbmeter.net.ui.fragment.FragmentSettings;
 import android.dbmeter.net.utils.UtilsActivity;
 import android.dbmeter.net.utils.UtilsFragment;
+import android.media.MediaPlayer;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.util.DisplayMetrics;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Locale;
@@ -60,8 +57,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     int volume;
     private double totalDb = 0; // tổng cộng dB
     private long numberOfDb = 0; // số lần đo độ ồn
-
-    long threadId = 0;
 
     /* Shared Preferences */
     private MyPrefs myPrefs;
@@ -141,18 +136,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                     break;
                 }
                 case R.id.nav_share: {
-                    binding.toolbar.textTitle.setText(R.string.title_share);
-                    UtilsFragment.replace(this, frameId, new FragmentShare());
-                    changeBackgroundColor(R.color.colorPrimary);
-                    break;
-                }
-                /*case R.id.nav_noise_cancelling_music: {
-                    binding.toolbar.textTitle.setText(R.string.title_noise_cancelling_music);
-                    UtilsFragment.replace(this, frameId, new FragmentNoiseCancellingMusic());
-                    changeBackgroundColor(R.color.colorPrimary);
-                    break;
-                }*/
-                case R.id.btn_snap: {
                     binding.toolbar.textTitle.setText(R.string.title_share);
                     UtilsFragment.replace(this, frameId, new FragmentCamera());
                     changeBackgroundColor(R.color.colorPrimary);
@@ -249,7 +232,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             public void run() {
                 while (isThreadRun) {
                     try {
-                        threadId++;
                         if(bListener) {
                             getSoundPowerLevel();
                         }
@@ -267,14 +249,12 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     private synchronized void getSoundPowerLevel(){
         volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
-        //Log.e("Thread", "Thread : " + threadId + ", volume: " + volume);
         if(volume > 0) {
             float dbCurrent = 20 * (float)(Math.log10(volume));
             Global.setDbCount(dbCurrent);  //Đổi từ áp suất thành độ lớn
             numberOfDb++;
             totalDb += Global.lastDb;
             Global.avgDb = (float)(totalDb/numberOfDb);
-            //Log.e("Measureeeeee", "Thread : " + threadId + ", volume: " + volume + ", times: " + numberOfDb + ", average: " + Global.avgDb +", min: " + Global.minDb);
         }
     }
 

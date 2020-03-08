@@ -1,17 +1,16 @@
 package android.dbmeter.net.ui;
 
-import android.dbmeter.net.model.MyMediaRecorder;
-import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestionResultStep;
-import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestionSectionChoosingStep;
-import android.os.Bundle;
-import android.widget.Toast;
-
+import android.content.pm.ActivityInfo;
 import android.dbmeter.net.R;
-import android.dbmeter.net.databinding.ActivityNoiseLevelSuggestionBinding;
+import android.dbmeter.net.databinding.ActivityCameraBinding;
 import android.dbmeter.net.model.Global;
-import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestionBuildingChoosingStep;
+import android.dbmeter.net.model.MyMediaRecorder;
+import android.dbmeter.net.ui.fragment.FragmentCameraImageCapture;
+import android.dbmeter.net.ui.fragment.FragmentCameraImagePreview;
 import android.dbmeter.net.utils.UtilsActivity;
 import android.dbmeter.net.utils.UtilsFragment;
+import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -20,12 +19,9 @@ import androidx.databinding.DataBindingUtil;
 
 import static android.dbmeter.net.utils.AppConfig.WAITING_TIME;
 
-public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
-    private ActivityNoiseLevelSuggestionBinding binding;
+public class ActivityCamera extends AppCompatActivity {
+    private ActivityCameraBinding binding;
     private int currentFragmentId;
-    private static int buildingIdChosen = -1;
-    private static int sectionIdChosen = -1;
-    private static boolean isChoiceStartMeasure = false;
 
     /* Recorder */
     private MyMediaRecorder mRecorder ;
@@ -36,6 +32,8 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     float volume = 10000;
     private double totalDb = 0; // tổng cộng dB
     private long numberOfDb = 0; // số lần đo độ ồn
+
+    private String imagePath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,6 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         super.onResume();
 
         startMeasure();
-
         bListener = true;
     }
 
@@ -76,15 +73,11 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         if (fragmentId != currentFragmentId) {
             switch (fragmentId) {
                 case 1: {
-                    UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestionBuildingChoosingStep());
+                    UtilsFragment.replace(this, frameId, new FragmentCameraImageCapture());
                     break;
                 }
                 case 2: {
-                    UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestionSectionChoosingStep());
-                    break;
-                }
-                case 3: {
-                    UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestionResultStep());
+                    UtilsFragment.replace(this, frameId, new FragmentCameraImagePreview());
                     break;
                 }
             }
@@ -93,8 +86,8 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     }
 
     private void initializeComponents() {
-        UtilsActivity.enterFullScreen(ActivityNoiseLevelSuggestion.this);
-        @LayoutRes int layoutId = R.layout.activity_noise_level_suggestion;
+        UtilsActivity.enterFullScreen(ActivityCamera.this);
+        @LayoutRes int layoutId = R.layout.activity_camera;
         setContentView(layoutId);
         binding = DataBindingUtil.setContentView(this, layoutId);
 
@@ -177,27 +170,11 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         }
     }
 
-    public void setBuildingIdChosen(int buildingId){
-        buildingIdChosen = buildingId;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public int getBuildingIdChosen(){
-        return buildingIdChosen;
-    }
-
-    public void setSectionIdChosen(int sectionId) {
-        sectionIdChosen = sectionId;
-    }
-
-    public int getSectionIdChosen() {
-        return sectionIdChosen;
-    }
-
-    public boolean getIsChoiceStartMeasure() {
-        return isChoiceStartMeasure;
-    }
-
-    public void setIsChoiceStartMeasure(boolean isChoiceStartMeasure) {
-        ActivityNoiseLevelSuggestion.isChoiceStartMeasure = isChoiceStartMeasure;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

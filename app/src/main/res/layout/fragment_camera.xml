@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.circularreveal.CircularRevealRelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextureView
-            android:id="@+id/view_picture"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_snap"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="@dimen/size_button_snap"
-            android:layout_height="@dimen/size_button_snap"
-            android:background="@drawable/button_snap"
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/margin_30dp"/>
+            android:layout_margin="@dimen/margin_24dp"
+            android:text="@string/noti_snap"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_20sp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_snap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_snap"
+            android:backgroundTint="@color/orange"
+            app:cornerRadius="@dimen/radius_15dp"/>
+
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 </layout>

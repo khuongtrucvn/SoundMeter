@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/nav_image_capture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.dbmeter.net.model.AutoFitTextureView
+                android:id="@+id/texture_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_snap"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/size_button_snap"
+                android:layout_height="@dimen/size_button_snap"
+                android:background="@drawable/button_snap"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/margin_30dp"/>
+        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+</layout>
