@@ -493,7 +493,7 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
     }
 
     private Bitmap addInformation(byte[] data){
-        Bitmap myBitmap = rotate(decodeAndResizeImage(data),rotationDegrees);
+        Bitmap myBitmap = convertAndRotateBitmap(data, rotationDegrees);
         Canvas canvas = new Canvas(myBitmap);
 
         Locale currentLocale = Locale.getDefault();
@@ -550,7 +550,7 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
         return size;
     }
 
-    private Bitmap decodeAndResizeImage(byte[] data){
+    private Bitmap convertAndRotateBitmap (byte[] data, int degrees){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
 
@@ -562,6 +562,7 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
             options.inSampleSize = downsampleBy++;
             try {
                 myBitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+                myBitmap = rotate(myBitmap, degrees);
                 done = true;
             } catch (OutOfMemoryError e) {
                 e.printStackTrace();
@@ -574,7 +575,7 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
     private Bitmap rotate(Bitmap src, float degrees) {
         Matrix matrix = new Matrix();
         matrix.preRotate(degrees);
-        return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
+        return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, false);
     }
 
     // Lưu ảnh
@@ -707,7 +708,6 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
                 else {
                     binding.textureView.setAspectRatio(previewSize.getHeight(), previewSize.getWidth());
                 }
-
 
                 /*// Check if the flash is supported.
                 Boolean available = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
