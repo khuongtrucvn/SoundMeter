@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.LocaleList;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,10 +91,17 @@ public class FragmentSettings extends Fragment {
                 binding.swtVibrate.setChecked(isVibrate);
                 binding.swtSound.setChecked(isSound);
 
-                //Nếu ứng dụng lần đầu sử dụng (không có lưu Ngôn ngữ trong Shared Pref) và không hỗ trợ ngôn ngữ của thiết bị đang sử dụng thì ứng dụng sẽ sử dụng ngôn ngữ mặc định là tiếng anh
-                if(language.equals("") && LocaleDescriptionDatabase.getLocaleNameFromCode(getDeviceLocale()).equals("")){
-                    language = getString(R.string.locale_en);
+                //Nếu ứng dụng lần đầu sử dụng (không có lưu Ngôn ngữ trong Shared Pref)
+                if(language.equals("")){
+                    //Nếu ứng dụng không hỗ trợ ngôn ngữ của thiết bị đang sử dụng thì ứng dụng sẽ sử dụng ngôn ngữ mặc định là tiếng anh
+                    if(LocaleDescriptionDatabase.getLocaleNameFromCode(getDeviceLocale()).equals("")){
+                        language = getString(R.string.locale_en);
+                    }
+                    else{
+                        language = getDeviceLocale();
+                    }
                 }
+
                 String localeLanguage = LocaleDescriptionDatabase.getLocaleNameFromCode(language);
                 binding.textLanguage.setText(localeLanguage);
             }

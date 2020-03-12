@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="@dimen/size_height_header"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimaryDark">
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"

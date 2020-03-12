@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -36,7 +37,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 
@@ -54,7 +54,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     private boolean isThreadRun = true;
     public boolean isRecording = true;
     private Thread measureThread, warnThread;
-    int volume;
+    private int volume;
     private double totalDb = 0; // tổng cộng dB
     private long numberOfDb = 0; // số lần đo độ ồn
 
@@ -65,6 +65,10 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     /* Duration */
     public long duration;
+
+    /* Warning */
+    private MediaPlayer ringtone;
+    private Vibrator v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
         if(isRecording){
             startMeasure();
+            initdbWarning();
         }
         bListener = true;
     }
@@ -86,18 +91,31 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     public void onPause() {
         super.onPause();
         bListener = false;
-        mRecorder.stopRecording();
+        mRecorder.stopRecorder();
+
         measureThread = null;
+        warnThread = null;
+
+        //stopWarningRingtone(ringtone);
+        //stopVibration(v);
     }
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+        mRecorder.stopRecorder();
+
         if (measureThread != null) {
             isThreadRun = false;
             measureThread = null;
         }
-        mRecorder.stopRecording();
-        super.onDestroy();
+
+        if(warnThread != null){
+            warnThread = null;
+        }
+
+        //stopWarningRingtone(ringtone);
+        //stopVibration(v);
     }
 
     @Override
@@ -109,6 +127,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     public void switchFragments(int fragmentId) {
         @IdRes int frameId = R.id.content_frame;
+        int backgroundColor = R.drawable.color_background;
 
         if (fragmentId != currentFragmentId) {
             switch (fragmentId) {
@@ -120,31 +139,31 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 case R.id.nav_history: {
                     binding.toolbar.textTitle.setText(R.string.title_history);
                     UtilsFragment.replace(this, frameId, new FragmentHistory());
-                    changeBackgroundColor(R.color.colorPrimary);
+                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_hearing_test: {
                     binding.toolbar.textTitle.setText(R.string.title_hearing_test);
                     UtilsFragment.replace(this, frameId, new FragmentHearingTest());
-                    changeBackgroundColor(R.color.colorPrimary);
+                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_noise_level_suggest: {
                     binding.toolbar.textTitle.setText(R.string.title_noise_level_suggest);
                     UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestion());
-                    changeBackgroundColor(R.color.colorPrimary);
+                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_share: {
                     binding.toolbar.textTitle.setText(R.string.title_share);
                     UtilsFragment.replace(this, frameId, new FragmentCamera());
-                    changeBackgroundColor(R.color.colorPrimary);
+                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_settings: {
                     binding.toolbar.textTitle.setText(R.string.title_setting);
                     UtilsFragment.replace(this, frameId, new FragmentSettings());
-                    changeBackgroundColor(R.color.colorPrimary);
+                    changeBackgroundColor(backgroundColor);
                     break;
                 }
             }
@@ -179,8 +198,22 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         mRecorder = new MyMediaRecorder();
     }
 
-    public void restartRecorder(){
-        mRecorder.restartRecording();
+    public void startRecorder(){
+        isRecording = true;
+        bListener = true;
+        mRecorder.startRecorder();
+    }
+
+    public void stopRecorder(){
+        isRecording = false;
+        bListener = false;
+        mRecorder.stopRecorder();
+    }
+
+    public synchronized void restartRecorder(){
+        bListener = false;
+        mRecorder.restartRecorder();
+        bListener = true;
 
         // Chỉnh lại thông số sau khi restart
         totalDb = 0;
@@ -189,16 +222,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         Global.minDb = 140;
         Global.avgDb = 0;
         Global.maxDb = 0;
-    }
-
-    public void resumeRecorder(){
-        mRecorder.resumeRecording();
-        isRecording = true;
-    }
-
-    public void pauseRecorder(){
-        mRecorder.pauseRecording();
-        isRecording = false;
     }
 
     private void setEventHandler(){
@@ -211,7 +234,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         binding.navView.setNavigationItemSelectedListener(this);
     }
 
-    public void startMeasure(){
+    private void startMeasure(){
         try{
             if (mRecorder.startRecorder()) {
                 startListenAudio();
@@ -238,6 +261,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                         Thread.sleep(WAITING_TIME);
                     }
                     catch (Exception e) {
+                        Log.e("TAG","Đã vào đây");
                         e.printStackTrace();
                         bListener = false;
                     }
@@ -259,7 +283,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     }
 
     public void changeBackgroundColor(int color){
-        binding.layoutActivity.setBackgroundColor(ContextCompat.getColor(this, color));
+        binding.layoutActivity.setBackgroundResource(color);
     }
 
     //Phương thức tải dữ liệu từ Shared Preferences
@@ -278,8 +302,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             public void run() {
                 while (isThreadRun) {
                     try {
-                        if(isRecording)
+                        if(isRecording) {
                             warn(Global.lastDb);
+                        }
 
                         Thread.sleep(DELAYING_WARNING_TIME);
                     }
@@ -292,13 +317,14 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         warnThread.start();
     }
 
-    private void warn(float curVal){
+    private synchronized void warn(float curVal){
         if(isWarn){
             if(curVal > warningVal){
+                Log.w("WARNING","Warning");
                 if(isVibrate){
-                    Vibrator v = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
+                    v = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
                     if(v != null){
-                        // Rung 0.5s
+                        // Rung 0.4s
                         if (Build.VERSION.SDK_INT >= 26) {
                             v.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
                         } else {
@@ -307,7 +333,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                     }
                 }
                 if(isSound){
-                    MediaPlayer ringtone = MediaPlayer.create(this, R.raw.warning_tone);
+                    ringtone = MediaPlayer.create(this, R.raw.warning_tone);
                     ringtone.start();
                 }
             }
@@ -329,4 +355,23 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         startActivity(new Intent(this, ActivityMain.class));
         finishAffinity();
     }
+
+    /*private void stopWarningRingtone(MediaPlayer ringtone) {
+        try {
+            if (ringtone != null) {
+                if (ringtone.isPlaying())
+                    ringtone.stop();
+                ringtone.release();
+                ringtone = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    /*private void stopVibration(Vibrator v) {
+        if (v != null) {
+            v.cancel();
+        }
+    }*/
 }

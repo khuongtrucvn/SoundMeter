@@ -47,8 +47,9 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        startMeasure();
-
+        if(isRecording){
+            startMeasure();
+        }
         bListener = true;
     }
 
@@ -56,18 +57,19 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         bListener = false;
-        mRecorder.stopRecording();
+        mRecorder.stopRecorder();
         measureThread = null;
     }
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+        mRecorder.stopRecorder();
+
         if (measureThread != null) {
             isThreadRun = false;
             measureThread = null;
         }
-        mRecorder.stopRecording();
-        super.onDestroy();
     }
 
     public void switchFragments(int fragmentId) {
@@ -106,8 +108,22 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         mRecorder = new MyMediaRecorder();
     }
 
-    public void restartRecorder(){
-        mRecorder.restartRecording();
+    public void startRecorder(){
+        isRecording = true;
+        bListener = true;
+        mRecorder.startRecorder();
+    }
+
+    public void stopRecorder(){
+        isRecording = false;
+        bListener = false;
+        mRecorder.stopRecorder();
+    }
+
+    public synchronized void restartRecorder(){
+        bListener = false;
+        mRecorder.restartRecorder();
+        bListener = true;
 
         // Chỉnh lại thông số sau khi restart
         totalDb = 0;
@@ -118,17 +134,7 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         Global.maxDb = 0;
     }
 
-    public void resumeRecorder(){
-        mRecorder.resumeRecording();
-        isRecording = true;
-    }
-
-    public void pauseRecorder(){
-        mRecorder.pauseRecording();
-        isRecording = false;
-    }
-
-    public void startMeasure(){
+    private void startMeasure(){
         try{
             if (mRecorder.startRecorder()) {
                 startListenAudio();

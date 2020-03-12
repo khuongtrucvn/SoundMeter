@@ -135,7 +135,7 @@ public class NoiseLevel {
         else if(value > 70)
             return R.color.moderate_danger;
         else
-            return R.color.colorPrimary;
+            return R.drawable.color_background;
     }
 
     public int getInfluenceLevel(float value){

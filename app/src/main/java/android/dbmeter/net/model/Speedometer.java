@@ -37,7 +37,7 @@ public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
     }
 
     private void init() {
-        Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_speedometer_needle);
+        Bitmap myBitmap = decodeAndResizeImage(R.drawable.img_speedometer_needle);
         int bitmapWidth = myBitmap.getWidth();
         int bitmapHeight = myBitmap.getHeight();
         newWidth = getWidth();
@@ -91,5 +91,26 @@ public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
 
     private float getAngle(float db){
         return(db-85)*5/3;  //Say more are tears, online to find pictures. The They will not change the map, the code calculation
+    }
+
+    private Bitmap decodeAndResizeImage(int drawable){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inMutable = true;
+
+        boolean done = false;
+        int downsampleBy = 1;
+
+        Bitmap myBitmap = null;
+        while (!done) {
+            options.inSampleSize = downsampleBy++;
+            try {
+                myBitmap = BitmapFactory.decodeResource(getResources(), drawable, options);
+                done = true;
+            } catch (OutOfMemoryError e) {
+                e.printStackTrace();
+            }
+        }
+
+        return myBitmap;
     }
 }

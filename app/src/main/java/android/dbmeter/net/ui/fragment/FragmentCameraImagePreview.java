@@ -70,7 +70,7 @@ public class FragmentCameraImagePreview extends Fragment {
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         activity.getSupportActionBar().setTitle("");
 
-        activity.pauseRecorder();
+        activity.stopRecorder();
 
         loadImage();
     }

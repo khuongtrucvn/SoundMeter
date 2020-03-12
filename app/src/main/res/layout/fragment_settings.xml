@@ -5,8 +5,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:layout_height="match_parent">
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:layout_width="match_parent"

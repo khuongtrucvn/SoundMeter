@@ -219,7 +219,7 @@ public class FragmentMeter extends Fragment {
 
     private void pauseAndResumeRecord(boolean isChecked){
         if (isChecked) {
-            activity.pauseRecorder();
+            activity.stopRecorder();
 
             //Lưu lại thời gian đếm và dừng đồng hồ đếm
             activity.duration = binding.textDuration.getBase() - SystemClock.elapsedRealtime();
@@ -228,7 +228,7 @@ public class FragmentMeter extends Fragment {
             Toast.makeText(getActivity(), R.string.noti_pause,Toast.LENGTH_SHORT).show();
         }
         else {
-            activity.startMeasure();
+            activity.startRecorder();
 
             //Gán thời gian đếm và chạy đồng hồ đếm
             binding.textDuration.setBase(SystemClock.elapsedRealtime() + activity.duration);
