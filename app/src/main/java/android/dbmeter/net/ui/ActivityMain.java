@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.dbmeter.net.R;
+import android.dbmeter.net.database.LocaleDescriptionDatabase;
 import android.dbmeter.net.databinding.ActivityMainBinding;
 import android.dbmeter.net.model.Global;
+import android.dbmeter.net.model.LocaleDescription;
 import android.dbmeter.net.model.MyMediaRecorder;
 import android.dbmeter.net.model.MyPrefs;
 import android.dbmeter.net.ui.fragment.FragmentCamera;
 import android.dbmeter.net.ui.fragment.FragmentHearingTest;
 import android.dbmeter.net.ui.fragment.FragmentHistory;
 import android.dbmeter.net.ui.fragment.FragmentMeter;
+import android.dbmeter.net.ui.fragment.FragmentMusicPlayer;
 import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestion;
 import android.dbmeter.net.ui.fragment.FragmentSettings;
 import android.dbmeter.net.utils.UtilsActivity;
@@ -20,6 +23,7 @@ import android.dbmeter.net.utils.UtilsFragment;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
@@ -30,6 +34,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import androidx.annotation.IdRes;
@@ -69,6 +74,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     /* Warning */
     private MediaPlayer ringtone;
     private Vibrator v;
+
+    private String localeCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,9 +161,15 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                     changeBackgroundColor(backgroundColor);
                     break;
                 }
-                case R.id.nav_share: {
+                case R.id.nav_camera: {
                     binding.toolbar.textTitle.setText(R.string.title_share);
                     UtilsFragment.replace(this, frameId, new FragmentCamera());
+                    changeBackgroundColor(backgroundColor);
+                    break;
+                }
+                case R.id.nav_focusing_music: {
+                    binding.toolbar.textTitle.setText(R.string.title_focusing_music);
+                    UtilsFragment.replace(this, frameId, new FragmentMusicPlayer());
                     changeBackgroundColor(backgroundColor);
                     break;
                 }
@@ -174,7 +187,10 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     private void initializeComponents() {
         loadSharedPreferences();
+
+        //Cài đặt ngôn ngữ cho ứng dụng
         setAppLocale();
+
         UtilsActivity.enterFullScreen(ActivityMain.this);
         @LayoutRes int layoutId = R.layout.activity_main;
         setContentView(layoutId);
@@ -294,6 +310,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         isVibrate = myPrefs.getIsVibrate();
         isSound = myPrefs.getIsSound();
         Global.calibrateValue = myPrefs.getCalibrateValue();
+        localeCode =  myPrefs.getLocale();
     }
 
     private void initdbWarning(){
@@ -344,11 +361,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
-
-        if(!myPrefs.getLocale().equals("")){
-            config.setLocale(new Locale(myPrefs.getLocale().toLowerCase()));
-            resources.updateConfiguration(config, dm);
-        }
+        config.setLocale(new Locale(localeCode));
+        resources.updateConfiguration(config, dm);
     }
 
     public void restartApplication(){

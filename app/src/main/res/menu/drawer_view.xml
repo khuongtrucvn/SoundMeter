@@ -24,13 +24,13 @@
             android:icon="@drawable/icon_info"
             android:title="@string/title_noise_level_suggest"/>
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/nav_camera"
             android:icon="@drawable/icon_camera"
             android:title="@string/title_share" />
-        <!-- <item
-            android:id="@+id/nav_noise_cancelling_music"
+        <item
+            android:id="@+id/nav_focusing_music"
             android:icon="@drawable/icon_music"
-            android:title="@string/title_noise_cancelling_music"/> -->
+            android:title="@string/title_focusing_music"/>
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/icon_settings"

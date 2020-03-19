@@ -23,7 +23,7 @@
     <string name="title_history">History</string>
     <string name="title_hearing_test">Hearing Test</string>
     <string name="title_noise_level_suggest">Noise standards</string>
-    <string name="title_noise_cancelling_music">Noise-cancelling Music</string>
+    <string name="title_focusing_music">Focusing Music</string>
     <string name="title_share">Snap &amp; Share</string>
     <string name="title_setting">Settings</string>
 
@@ -52,6 +52,8 @@
     <string name="title_measure">Start measure</string>
     <string name="title_measure_again">Measure again</string>
     <string name="title_check_other_place">Check other places</string>
+    <string name="title_category">Category</string>
+    <string name="title_listen">Listen</string>
 
     <!-- Sound Unit -->
     <string name="sound_unit">dB</string>
@@ -110,7 +112,7 @@
     <string name="activity_helplabel">Help</string>
     <string name="activity_can_hear">I can hear</string>
     <string name="activity_cannot_hear">I cannot hear</string>
-
+    <string name="activity_loading">Loading…</string>
 
     <!-- Message -->
     <string name="activity_recStartErr">Unable to start recording</string>
@@ -163,6 +165,8 @@
     <string name="noti_noise_suggestion_conclusion_true">The noise which is measured meets the standard</string>
     <string name="noti_noise_suggestion_conclusion_false">The noise which is measured does not meet the standard</string>
     <string name="noti_camera_location">Please connect to network or turn on Location on your device to get current location</string>
+    <string name="noti_check_network">No network connection. \n Swipe down to retry.</string>
+    <string name="noti_music_player">\t\t Improve your concentration with different types of music. \n\n\t\t Internet connection is required to play music.</string>
 
     <!-- Settings -->
     <string name="settings_warninglabel">dB Warning</string>

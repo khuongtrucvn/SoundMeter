@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/margin_40dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/song_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_image_frame_song_list"
+            android:layout_marginBottom="@dimen/margin_5dp"
+            android:scaleType="centerCrop" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/song_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_5dp"
+            android:textSize="@dimen/font_20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/song_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_15sp"
+            android:textStyle="bold"
+            android:textColor="@color/gradient_white_80"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+</layout>

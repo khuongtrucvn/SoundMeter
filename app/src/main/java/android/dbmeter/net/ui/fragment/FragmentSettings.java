@@ -36,13 +36,13 @@ public class FragmentSettings extends Fragment {
     private FragmentSettingsBinding binding;
     private DialogWarningBinding warningBinding;
     private DialogLanguageBinding languageBinding;
-    private ArrayList<LocaleDescription> mLocale = new ArrayList<>();
 
     /* Shared Preferences */
     private MyPrefs myPrefs;
     private boolean isWarn, isVibrate, isSound;
     private int warningVal;
-    private String language;
+    private String localeCode;
+    private ArrayList<LocaleDescription> mLocale = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -82,30 +82,21 @@ public class FragmentSettings extends Fragment {
 
         loadSharedPreferences();
 
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                binding.chkWarn.setChecked(isWarn);
-                turndbWarning();
-                binding.textWarnValue.setText(Integer.toString(warningVal));
-                binding.swtVibrate.setChecked(isVibrate);
-                binding.swtSound.setChecked(isSound);
+        if(activity != null){
+            activity.runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    binding.chkWarn.setChecked(isWarn);
+                    turndbWarning();
+                    binding.textWarnValue.setText(Integer.toString(warningVal));
+                    binding.swtVibrate.setChecked(isVibrate);
+                    binding.swtSound.setChecked(isSound);
 
-                //Nếu ứng dụng lần đầu sử dụng (không có lưu Ngôn ngữ trong Shared Pref)
-                if(language.equals("")){
-                    //Nếu ứng dụng không hỗ trợ ngôn ngữ của thiết bị đang sử dụng thì ứng dụng sẽ sử dụng ngôn ngữ mặc định là tiếng anh
-                    if(LocaleDescriptionDatabase.getLocaleNameFromCode(getDeviceLocale()).equals("")){
-                        language = getString(R.string.locale_en);
-                    }
-                    else{
-                        language = getDeviceLocale();
-                    }
+                    String localeLanguage = LocaleDescriptionDatabase.getLocaleNameFromCode(localeCode);
+                    binding.textLanguage.setText(localeLanguage);
                 }
-
-                String localeLanguage = LocaleDescriptionDatabase.getLocaleNameFromCode(language);
-                binding.textLanguage.setText(localeLanguage);
-            }
-        });
+            });
+        }
     }
 
     //Phương thức tải dữ liệu từ Shared Preferences
@@ -115,7 +106,7 @@ public class FragmentSettings extends Fragment {
         warningVal = myPrefs.getWarningValue();
         isVibrate = myPrefs.getIsVibrate();
         isSound = myPrefs.getIsSound();
-        language = myPrefs.getLocale();
+        localeCode = myPrefs.getLocale();
     }
 
     private void setEventHandler(){
@@ -305,11 +296,12 @@ public class FragmentSettings extends Fragment {
     }
 
     private void initializeLanguageDialog(){
+
         String[] valRange = LocaleDescriptionDatabase.getLocaleNameArrayList().toArray(new String[mLocale.size()]);
         languageBinding.pickerLanguage.setDisplayedValues(valRange);
         languageBinding.pickerLanguage.setMinValue(0);
         languageBinding.pickerLanguage.setMaxValue(valRange.length-1);
-        languageBinding.pickerLanguage.setValue(findPosLanguage(valRange, language));
+        languageBinding.pickerLanguage.setValue(findPosLanguage(valRange, localeCode));
         languageBinding.pickerLanguage.setWrapSelectorWheel(false);
     }
 
@@ -321,17 +313,5 @@ public class FragmentSettings extends Fragment {
             }
         }
         return 0;
-    }
-
-    private String getDeviceLocale(){
-        String currentLocale;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            currentLocale = LocaleList.getDefault().get(0).getLanguage();
-        } else{
-            currentLocale =  Locale.getDefault().getLanguage();
-        }
-
-        return currentLocale;
     }
 }

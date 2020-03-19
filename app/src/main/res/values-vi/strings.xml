@@ -93,7 +93,7 @@
     <string name="title_history_delete_all">Xoá tất cả lịch sử</string>
     <string name="title_history_save">Lưu kết quả đo</string>
     <string name="title_hearing_test">Đo thính lực</string>
-    <string name="title_noise_cancelling_music">Nhạc chống ồn</string>
+    <string name="title_focusing_music">Nhạc hỗ trợ tập trung</string>
     <string name="title_noise_level_suggest">Chuẩn độ ồn</string>
     <string name="activity_cameraStartErr">Không thể mở do không được cấp quyền</string>
     <string name="title_back">Trở lại</string>
@@ -203,4 +203,9 @@
     <string name="activity_language">Ngôn ngữ</string>
     <string name="lang_en">Tiếng Anh</string>
     <string name="lang_vi">Tiếng Việt</string>
+    <string name="title_category">Thể loại</string>
+    <string name="activity_loading">Đang tải…</string>
+    <string name="noti_check_network">Không có kết nối mạng. \n Vuốt xuống để thử lại.</string>
+    <string name="title_listen">Nghe nhạc</string>
+    <string name="noti_music_player">\t\t Tăng khả năng tập trung của bạn thông qua nhiều thể loại nhạc khác nhau. \n\n\t\t Yêu cầu kết nối mạng để nghe nhạc.</string>
 </resources>

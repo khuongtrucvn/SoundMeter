@@ -3,9 +3,17 @@ package android.dbmeter.net.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.dbmeter.net.R;
+import android.dbmeter.net.database.LocaleDescriptionDatabase;
+import android.dbmeter.net.model.Global;
+import android.dbmeter.net.model.MyPrefs;
 import android.dbmeter.net.utils.AppConfig;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.LocaleList;
+import android.util.Log;
+
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,12 +21,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 public class ActivityLaunch extends AppCompatActivity {
-
     private static String[] PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.RECORD_AUDIO
     };
+
+    private MyPrefs myPrefs;
+    private String localeCode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +48,13 @@ public class ActivityLaunch extends AppCompatActivity {
     }
 
     private void initializeComponents() {
+        loadSharedPreferences();
+
+        //Nếu ứng dụng lần đầu sử dụng (không có lưu Ngôn ngữ trong Shared Pref)
+        if(localeCode.equals("")){
+            saveAppLocale();
+        }
+
         try {
             Thread.sleep(AppConfig.SPLASH_TIME);
             startActivity(new Intent(this, ActivityMain.class));
@@ -82,5 +99,38 @@ public class ActivityLaunch extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    //Phương thức tải dữ liệu từ Shared Preferences
+    public void loadSharedPreferences(){
+        myPrefs = new MyPrefs(this);
+        localeCode =  myPrefs.getLocale();
+    }
+
+    private String getDeviceLocale(){
+        String currentLocale;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            currentLocale = LocaleList.getDefault().get(0).getLanguage();
+        } else{
+            currentLocale =  Locale.getDefault().getLanguage();
+        }
+
+        return currentLocale;
+    }
+
+    private void saveAppLocale(){
+        //Khởi tạo data locale
+        LocaleDescriptionDatabase.get(this);
+
+        //Nếu ứng dụng không hỗ trợ ngôn ngữ của thiết bị đang sử dụng thì ứng dụng sẽ sử dụng ngôn ngữ mặc định là tiếng anh
+        if(LocaleDescriptionDatabase.getLocaleNameFromCode(getDeviceLocale()).equals("")){
+            localeCode = getString(R.string.locale_en);
+        }
+        else{
+            localeCode = getDeviceLocale();
+        }
+
+        myPrefs.setLocale(localeCode);
     }
 }

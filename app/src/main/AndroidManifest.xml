@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="LockedOrientationActivity"
     package="android.dbmeter.net">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -55,6 +57,9 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name="android.dbmeter.net.ui.ActivityCamera"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="android.dbmeter.net.ui.ActivityMusicPlayer"
             android:screenOrientation="portrait"/>
     </application>
 </manifest>

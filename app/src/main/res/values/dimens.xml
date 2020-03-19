@@ -38,6 +38,8 @@
     <dimen name="size_button_back">48dp</dimen>
     <dimen name="size_button_testing_step">54dp</dimen>
     <dimen name="size_height_building_picker">100dp</dimen>
+    <dimen name="size_image_frame_category">140dp</dimen>
+    <dimen name="size_image_frame_song_list">200dp</dimen>
 
     //Font Size
     <dimen name="font_36sp">36sp</dimen>
@@ -49,6 +51,7 @@
     <dimen name="font_20sp">20sp</dimen>
     <dimen name="font_18sp">18sp</dimen>
     <dimen name="font_16sp">16sp</dimen>
+    <dimen name="font_15sp">15sp</dimen>
 
     //Radius
     <dimen name="radius_15dp">15dp</dimen>

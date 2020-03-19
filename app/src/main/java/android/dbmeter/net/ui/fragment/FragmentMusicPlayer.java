@@ -1,14 +1,15 @@
 package android.dbmeter.net.ui.fragment;
 
-import android.dbmeter.net.databinding.FragmentNoiseLevelSuggestResultStepBinding;
-import android.dbmeter.net.ui.ActivityMain;
 import android.content.Context;
+import android.content.Intent;
+import android.dbmeter.net.R;
+import android.dbmeter.net.databinding.FragmentMusicPlayerBinding;
+import android.dbmeter.net.ui.ActivityMain;
+import android.dbmeter.net.ui.ActivityMusicPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.dbmeter.net.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-public class FragmentNoiseCancellingMusic extends Fragment {
+public class FragmentMusicPlayer extends Fragment {
     private ActivityMain activity = (ActivityMain)getActivity();
-    private FragmentNoiseLevelSuggestResultStepBinding binding;
+    private FragmentMusicPlayerBinding binding;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -37,7 +38,7 @@ public class FragmentNoiseCancellingMusic extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_noise_cancelling_music, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_music_player, container, false);
         return binding.getRoot();
     }
 
@@ -49,5 +50,14 @@ public class FragmentNoiseCancellingMusic extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setEventHandler();
+    }
+
+    private void setEventHandler(){
+        binding.btnListen.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(activity, ActivityMusicPlayer.class));
+            }
+        });
     }
 }
