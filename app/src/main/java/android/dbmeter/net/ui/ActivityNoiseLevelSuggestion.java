@@ -1,9 +1,14 @@
 package android.dbmeter.net.ui;
 
+import android.content.DialogInterface;
+import android.dbmeter.net.model.BuildingSectionStandard;
+import android.dbmeter.net.model.BuildingStandard;
 import android.dbmeter.net.model.MyMediaRecorder;
 import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestionResultStep;
 import android.dbmeter.net.ui.fragment.FragmentNoiseLevelSuggestionSectionChoosingStep;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import android.dbmeter.net.R;
@@ -15,6 +20,7 @@ import android.dbmeter.net.utils.UtilsFragment;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -23,8 +29,8 @@ import static android.dbmeter.net.utils.AppConfig.WAITING_TIME;
 public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     private ActivityNoiseLevelSuggestionBinding binding;
     private int currentFragmentId;
-    private static int buildingIdChosen = -1;
-    private static int sectionIdChosen = -1;
+    private static BuildingStandard chosenBuilding;
+    private static BuildingSectionStandard chosenSection;
     private static boolean isChoiceStartMeasure = false;
 
     /* Recorder */
@@ -41,6 +47,7 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeComponents();
+        setEventHandler();
     }
 
     @Override
@@ -78,14 +85,17 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         if (fragmentId != currentFragmentId) {
             switch (fragmentId) {
                 case 1: {
+                    binding.toolbar.textTitle.setText(R.string.title_buildings);
                     UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestionBuildingChoosingStep());
                     break;
                 }
                 case 2: {
+                    binding.toolbar.textTitle.setText(chosenBuilding.getBuildingName());
                     UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestionSectionChoosingStep());
                     break;
                 }
                 case 3: {
+                    binding.toolbar.textTitle.setText(R.string.title_result);
                     UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestionResultStep());
                     break;
                 }
@@ -99,9 +109,62 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         @LayoutRes int layoutId = R.layout.activity_noise_level_suggestion;
         setContentView(layoutId);
         binding = DataBindingUtil.setContentView(this, layoutId);
+        setSupportActionBar(binding.toolbar.toolbar);
 
         switchFragments(1);
         initRecorder();
+    }
+
+    private void setEventHandler(){
+        binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                handleBackButton();
+            }
+        });
+    }
+
+    private void handleBackButton(){
+        if(currentFragmentId == 1){
+            exitNoiseLevelSuggestion();
+        }
+        else if(currentFragmentId == 2){
+            switchFragments(1);
+        }
+        else if(currentFragmentId == 3){
+            switchFragments(2);
+        }
+    }
+
+    public void exitNoiseLevelSuggestion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.title_exit);
+        builder.setMessage(R.string.activity_exit_noiseSuggest);
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.title_exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.activity_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            handleBackButton();
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initRecorder(){
@@ -172,31 +235,37 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
 
     private synchronized void getSoundPowerLevel(){
         volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
-        //Log.e("Thread", "Thread : " + threadId + ", volume: " + volume);
+
+        //Kiểm tra nếu số lần đo vượt quá 1 triệu lần thì reset
+        if(numberOfDb > 1000000){
+            numberOfDb = 1000;
+            totalDb = Global.avgDb*1000;
+        }
+
         if(volume > 0) {
+            //Đổi từ áp suất thành độ lớn
             float dbCurrent = 20 * (float)(Math.log10(volume));
-            Global.setDbCount(dbCurrent);  //Đổi từ áp suất thành độ lớn
+            Global.setDbCount(dbCurrent);
             numberOfDb++;
             totalDb += Global.lastDb;
             Global.avgDb = (float)(totalDb/numberOfDb);
-            //Log.e("Measureeeeee", "Thread : " + threadId + ", volume: " + volume + ", times: " + numberOfDb + ", average: " + Global.avgDb +", min: " + Global.minDb);
         }
     }
 
-    public void setBuildingIdChosen(int buildingId){
-        buildingIdChosen = buildingId;
+    public BuildingStandard getChosenBuilding() {
+        return chosenBuilding;
     }
 
-    public int getBuildingIdChosen(){
-        return buildingIdChosen;
+    public void setChosenBuilding(BuildingStandard chosenBuilding) {
+        ActivityNoiseLevelSuggestion.chosenBuilding = chosenBuilding;
     }
 
-    public void setSectionIdChosen(int sectionId) {
-        sectionIdChosen = sectionId;
+    public BuildingSectionStandard getChosenSection() {
+        return chosenSection;
     }
 
-    public int getSectionIdChosen() {
-        return sectionIdChosen;
+    public void setChosenSection(BuildingSectionStandard chosenSection) {
+        ActivityNoiseLevelSuggestion.chosenSection = chosenSection;
     }
 
     public boolean getIsChoiceStartMeasure() {

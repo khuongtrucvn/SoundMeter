@@ -2,16 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.circularreveal.CircularRevealRelativeLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/nav_noise_level_suggest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" />
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:id="@+id/layout_help"
@@ -74,7 +66,11 @@
             android:backgroundTint="@color/orange"
             android:text="@string/title_show_value"
             android:layout_marginTop="@dimen/margin_50dp"
-            app:cornerRadius="@dimen/radius_15dp"/>
+            android:paddingStart="@dimen/padding_20dp"
+            android:paddingEnd="@dimen/padding_20dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:paddingBottom="@dimen/padding_10dp"
+            app:cornerRadius="@dimen/radius_20dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_measure"
@@ -86,6 +82,10 @@
             android:text="@string/title_measure"
             android:layout_marginBottom="@dimen/margin_30dp"
             android:layout_marginTop="@dimen/margin_16dp"
-            app:cornerRadius="@dimen/radius_15dp"/>
+            android:paddingStart="@dimen/padding_20dp"
+            android:paddingEnd="@dimen/padding_20dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:paddingBottom="@dimen/padding_10dp"
+            app:cornerRadius="@dimen/radius_20dp"/>
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 </layout>

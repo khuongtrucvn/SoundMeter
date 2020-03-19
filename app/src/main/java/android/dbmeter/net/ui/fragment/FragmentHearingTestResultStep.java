@@ -63,14 +63,11 @@ public class FragmentHearingTestResultStep extends Fragment {
     }
 
     private void initializeComponents(){
-        activity.setSupportActionBar(binding.toolbar.toolbar);
-        binding.toolbar.textTitle.setText(getString(R.string.title_result));
         getResult();
 
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                binding.toolbar.btnBack.setVisibility(View.INVISIBLE);
                 binding.textLeftEarResult.setText(getHearingTestStandard(leftEarResult));
                 binding.textRightEarResult.setText(getHearingTestStandard(rightEarResult));
             }
@@ -80,7 +77,7 @@ public class FragmentHearingTestResultStep extends Fragment {
     private void setEventHandler(){
         binding.btnExitTest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                exitHearingTest();
+                activity.exitHearingTest();
             }
         });
 
@@ -91,33 +88,12 @@ public class FragmentHearingTestResultStep extends Fragment {
         });
     }
 
-    private void exitHearingTest(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.title_exit_test);
-        builder.setMessage(R.string.activity_exit_hearingTest);
-        builder.setCancelable(false);
-        builder.setPositiveButton(R.string.title_exit, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                activity.finish();
-            }
-        });
-        builder.setNegativeButton(R.string.activity_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
-
     private void testAgain(){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.title_test_again);
         builder.setMessage(R.string.activity_test_again_hearingTest);
         builder.setCancelable(false);
-        builder.setPositiveButton(R.string.title_confirm, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.activity_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 activity.switchFragments(1);

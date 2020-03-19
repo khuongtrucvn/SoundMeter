@@ -78,7 +78,7 @@
                 android:layout_margin="@dimen/margin_20dp"
                 android:text="@string/activity_can_hear"
                 android:backgroundTint="@color/orange"
-                app:cornerRadius="@dimen/radius_15dp"/>
+                app:cornerRadius="@dimen/radius_20dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_cant_hear"
@@ -88,7 +88,7 @@
                 android:layout_margin="@dimen/margin_20dp"
                 android:text="@string/activity_cannot_hear"
                 android:backgroundTint="@color/orange"
-                app:cornerRadius="@dimen/radius_15dp"/>
+                app:cornerRadius="@dimen/radius_20dp"/>
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 </layout>

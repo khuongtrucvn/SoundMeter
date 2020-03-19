@@ -116,9 +116,9 @@ public class FragmentMeter extends Fragment {
             binding.btnPausePlay.setChecked(true);
             binding.textDuration.setBase(SystemClock.elapsedRealtime() + activity.duration);
         }
-        else
+        else {
             binding.textDuration.start();
-
+        }
 
         new Thread(new Runnable() {
             @Override
@@ -425,4 +425,6 @@ public class FragmentMeter extends Fragment {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+
 }

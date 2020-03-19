@@ -68,6 +68,14 @@ public class ActivityMusicPlayer extends AppCompatActivity {
         }
     }
 
+    private void setEventHandler(){
+        binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                handleBackButton();
+            }
+        });
+    }
+
     private void handleBackButton(){
         if(currentFragmentId == 1){
             finish();
@@ -80,18 +88,9 @@ public class ActivityMusicPlayer extends AppCompatActivity {
         }
     }
 
-    private void setEventHandler(){
-        binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                handleBackButton();
-            }
-        });
-    }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-
             handleBackButton();
 
             return true;

@@ -1,19 +1,17 @@
 package android.dbmeter.net.ui.fragment;
 
+import android.content.Context;
+import android.dbmeter.net.R;
 import android.dbmeter.net.database.BuildingSectionStandardDatabase;
-import android.dbmeter.net.database.BuildingStandardDatabase;
+import android.dbmeter.net.databinding.DialogNoiseLevelSuggestHelpBinding;
+import android.dbmeter.net.databinding.FragmentNoiseLevelSuggestSectionChoosingStepBinding;
 import android.dbmeter.net.model.BuildingSectionStandard;
 import android.dbmeter.net.model.BuildingStandard;
 import android.dbmeter.net.ui.ActivityNoiseLevelSuggestion;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.dbmeter.net.R;
-import android.dbmeter.net.databinding.DialogNoiseLevelSuggestHelpBinding;
-import android.dbmeter.net.databinding.FragmentNoiseLevelSuggestSectionChoosingStepBinding;
 
 import java.util.ArrayList;
 
@@ -29,6 +27,7 @@ public class FragmentNoiseLevelSuggestionSectionChoosingStep extends Fragment {
     private FragmentNoiseLevelSuggestSectionChoosingStepBinding binding;
 
     private BuildingStandard chosenBuilding;
+    private BuildingSectionStandard chosenSection;
     private ArrayList<BuildingSectionStandard> mSection = new ArrayList<>();
 
     @Override
@@ -65,12 +64,9 @@ public class FragmentNoiseLevelSuggestionSectionChoosingStep extends Fragment {
     }
 
     private void initializeComponents() {
-        mSection = BuildingSectionStandardDatabase.get(activity);
-        mSection = BuildingSectionStandardDatabase.searchSectionFromBuilding(activity.getBuildingIdChosen());
-        chosenBuilding = BuildingStandardDatabase.searchBuilding(activity.getBuildingIdChosen());
-
-        activity.setSupportActionBar(binding.toolbar.toolbar);
-        binding.toolbar.textTitle.setText(chosenBuilding.getBuildingName());
+        chosenBuilding = activity.getChosenBuilding();
+        BuildingSectionStandardDatabase.get(activity);
+        mSection = BuildingSectionStandardDatabase.searchSectionsOfBuilding(chosenBuilding);
 
         String question = activity.getString(R.string.noti_noise_suggestion_choose_section_1) + " " + chosenBuilding.getBuildingName() + " " + activity.getString(R.string.noti_noise_suggestion_choose_section_2);
         binding.textAsk.setText(question);
@@ -79,12 +75,6 @@ public class FragmentNoiseLevelSuggestionSectionChoosingStep extends Fragment {
     }
 
     private void setEventHandler() {
-        binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                activity.switchFragments(1);
-            }
-        });
-
         binding.layoutHelp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showHelp();
@@ -93,8 +83,8 @@ public class FragmentNoiseLevelSuggestionSectionChoosingStep extends Fragment {
 
         binding.btnCheckValue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int sectionId = BuildingSectionStandardDatabase.searchSectionIdOfBuilding(chosenBuilding.getBuildingId(),binding.pickerSection.getDisplayedValues()[binding.pickerSection.getValue()]);
-                activity.setSectionIdChosen(sectionId);
+                chosenSection = BuildingSectionStandardDatabase.searchSectionOfBuilding(chosenBuilding,binding.pickerSection.getDisplayedValues()[binding.pickerSection.getValue()]);
+                activity.setChosenSection(chosenSection);
                 activity.setIsChoiceStartMeasure(false);
                 activity.switchFragments(3);
             }
@@ -102,8 +92,8 @@ public class FragmentNoiseLevelSuggestionSectionChoosingStep extends Fragment {
 
         binding.btnMeasure.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int sectionId = BuildingSectionStandardDatabase.searchSectionIdOfBuilding(chosenBuilding.getBuildingId(),binding.pickerSection.getDisplayedValues()[binding.pickerSection.getValue()]);
-                activity.setSectionIdChosen(sectionId);
+                chosenSection = BuildingSectionStandardDatabase.searchSectionOfBuilding(chosenBuilding,binding.pickerSection.getDisplayedValues()[binding.pickerSection.getValue()]);
+                activity.setChosenSection(chosenSection);
                 activity.setIsChoiceStartMeasure(true);
                 activity.switchFragments(3);
             }

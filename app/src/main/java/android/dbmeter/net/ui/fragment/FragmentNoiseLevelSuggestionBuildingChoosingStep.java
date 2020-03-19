@@ -64,9 +64,6 @@ public class FragmentNoiseLevelSuggestionBuildingChoosingStep extends Fragment {
     }
 
     private void initializeComponents() {
-        activity.setSupportActionBar(binding.toolbar.toolbar);
-        binding.toolbar.textTitle.setText(getString(R.string.title_buildings));
-
         mBuildings = BuildingStandardDatabase.get(activity);
         initializeBuildingPicker();
 
@@ -77,12 +74,6 @@ public class FragmentNoiseLevelSuggestionBuildingChoosingStep extends Fragment {
     }
 
     private void setEventHandler() {
-        binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                activity.finish();
-            }
-        });
-
         binding.layoutHelp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showHelp();
@@ -91,8 +82,8 @@ public class FragmentNoiseLevelSuggestionBuildingChoosingStep extends Fragment {
 
         binding.btnContinue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int buildingId = BuildingStandardDatabase.searchBuildingId(binding.pickerBuilding.getDisplayedValues()[binding.pickerBuilding.getValue()]);
-                activity.setBuildingIdChosen(buildingId);
+                BuildingStandard building = BuildingStandardDatabase.searchBuildingFromName(binding.pickerBuilding.getDisplayedValues()[binding.pickerBuilding.getValue()]);
+                activity.setChosenBuilding(building);
                 activity.switchFragments(2);
             }
         });

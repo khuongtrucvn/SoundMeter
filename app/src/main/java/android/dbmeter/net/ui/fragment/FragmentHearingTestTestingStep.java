@@ -65,9 +65,6 @@ public class FragmentHearingTestTestingStep extends Fragment{
     }
 
     private void initializeComponents() {
-        activity.setSupportActionBar(binding.toolbar.toolbar);
-        binding.toolbar.textTitle.setText(getString(R.string.title_testing));
-
         if(firstTime){
             showHelp();
             firstTime = false;
@@ -80,40 +77,36 @@ public class FragmentHearingTestTestingStep extends Fragment{
             @Override
             public void onPageSelected(final int position) {
                 super.onPageSelected(position);
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(position == 0){
-                            binding.btnFirstPage.setVisibility(View.INVISIBLE);
-                            binding.btnPrevPage.setVisibility(View.INVISIBLE);
-                            binding.btnLastPage.setVisibility(View.VISIBLE);
-                            binding.btnNextPage.setVisibility(View.VISIBLE);
+                if(activity != null){
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(position == 0){
+                                binding.btnFirstPage.setVisibility(View.INVISIBLE);
+                                binding.btnPrevPage.setVisibility(View.INVISIBLE);
+                                binding.btnLastPage.setVisibility(View.VISIBLE);
+                                binding.btnNextPage.setVisibility(View.VISIBLE);
+                            }
+                            else if (position == binding.layoutTest.getAdapter().getItemCount()-1){
+                                binding.btnLastPage.setVisibility(View.INVISIBLE);
+                                binding.btnNextPage.setVisibility(View.INVISIBLE);
+                                binding.btnFirstPage.setVisibility(View.VISIBLE);
+                                binding.btnPrevPage.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                binding.btnLastPage.setVisibility(View.VISIBLE);
+                                binding.btnNextPage.setVisibility(View.VISIBLE);
+                                binding.btnFirstPage.setVisibility(View.VISIBLE);
+                                binding.btnPrevPage.setVisibility(View.VISIBLE);
+                            }
                         }
-                        else if (position == binding.layoutTest.getAdapter().getItemCount()-1){
-                            binding.btnLastPage.setVisibility(View.INVISIBLE);
-                            binding.btnNextPage.setVisibility(View.INVISIBLE);
-                            binding.btnFirstPage.setVisibility(View.VISIBLE);
-                            binding.btnPrevPage.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            binding.btnLastPage.setVisibility(View.VISIBLE);
-                            binding.btnNextPage.setVisibility(View.VISIBLE);
-                            binding.btnFirstPage.setVisibility(View.VISIBLE);
-                            binding.btnPrevPage.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                    });
+                }
             }
         });
     }
 
     private void setEventHandler() {
-        binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                backToCalibrationStep();
-            }
-        });
-
         binding.layoutHelp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showHelp();
@@ -149,27 +142,6 @@ public class FragmentHearingTestTestingStep extends Fragment{
                 proceedToResultStep();
             }
         });
-    }
-
-    private void backToCalibrationStep(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.title_back_calibration);
-        builder.setMessage(R.string.activity_back_calibration_hearingTest);
-        builder.setCancelable(false);
-        builder.setPositiveButton(R.string.title_back, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                activity.switchFragments(1);
-            }
-        });
-        builder.setNegativeButton(R.string.activity_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 
     private void showHelp(){

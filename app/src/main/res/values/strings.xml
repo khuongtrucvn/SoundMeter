@@ -27,7 +27,6 @@
     <string name="title_share">Snap &amp; Share</string>
     <string name="title_setting">Settings</string>
 
-    <string name="title_confirm">Confirm</string>
     <string name="title_exit">Exit</string>
     <string name="title_history_save">Save result</string>
     <string name="title_history_delete_all">Delete all history</string>
@@ -124,6 +123,7 @@
     <string name="activity_save_confirm">Do you want to save this measure result ?</string>
     <string name="activity_calibrate">Performance of the microphone will be different for each device, so calibration is need before use.</string>
     <string name="activity_save">Save</string>
+    <string name="activity_confirm">Confirm</string>
     <string name="activity_cancel">Cancel</string>
     <string name="activity_delete">Delete</string>
     <string name="activity_cameraStartErr">Unable to open due to permission"'"s denial</string>
@@ -138,6 +138,7 @@
     <string name="activity_test_headphone_remind">Please connect your headphones or headset to continue the test</string>
     <string name="activity_test_volume_denied">Cannot adjust volume during the test</string>
     <string name="activity_exit_noiseSuggest">Do you want to exit Noise standards ?</string>
+    <string name="activity_snap_location_on">Your GPS seems to be disabled, do you want to enable it?</string>
 
     <!-- Notification -->
     <string name="noti_refresh">Refreshed</string>
@@ -152,19 +153,18 @@
     <string name="noti_history_delete_fail">Error: History has not been deleted</string>
     <string name="noti_calibrate_save">Value has been save</string>
     <string name="noti_warning_value_save">Value has been save</string>
-    <string name="noti_snap">\t\t Please allow the app to use Location otherwise function will not run \n\n\t\t Also remember to have either Location turned on and Network connected in order to get your location</string>
-    <string name="noti_hearing_test">\t\t Headphones or headset is required for this test \n\n\t\t Please connect your headphones or headset and wear it properly before starting the test </string>
-    <string name="noti_hearing_test_calibration">\t\t Calibration is a necessary step to adjust your device"'"volume appropriate for your test \n\n\t\t\ Rub your hands together, in front of your nose, quickly and firmly, and try producing the same sound as our calibration file \n\n\t\t As you play our calibration file, adjust your device"'"s volume to match the sound level you just heard from you hands \n\n\t\t Proceed back and forth until both levels match, then we are ready to begin the test </string>
-    <string name="noti_hearing_test_help">\t\t Press &quot;Play&quot; icon button to hear the sound \n\n\t\t Press button &quot;I can hear&quot; if you hear the sound, the sound then will be played again with lower sound level \n\n\t\t Press button &quot;I cannot hear&quot; if you don"'"t hear the sound, the sound then will be played again with higher sound level \n\n\t\t Stop until you are at the sound level you can hear but cannot at the lower sound level \n\n\t\t Repeating the progress until you finish the test, there are 7 sound with different frequency from 125Hz to 8000Hz for each ear \n\n\t\t Press button &quot;Finish&quot; to finish the test and get result</string>
-    <string name="noti_noise_suggestion">\t\t Noise standards provides you maximum values of noise allowed in different places \n\n\t\t Moreover, you can even measure current location"'"s noise and see if it meet the standard</string>
-    <string name="noti_noise_suggestion_help">\t\t Choose a building and its section which you want to know its noise"'"s standard value \n\n\t\t Then you can choose whether to see the value or have the app measure the noise and return result \n\n\t\t Press button &quot;Show value&quot; to check the standard value \n\n\t\t Press button &quot;Start measure&quot; to check if the current location"'"s noise meets the standard \n\n\t\t Make sure you choose the correct building and its section before start measure noise</string>
+    <string name="noti_snap">\t\t Please allow the app to use Location otherwise function will not run. \n\n\t\t Also remember to have either Location turned on and Network connected in order to get your location. </string>
+    <string name="noti_hearing_test">\t\t Headphones or headset is required for this test. \n\n\t\t Please connect your headphones or headset and wear it properly before starting the test. </string>
+    <string name="noti_hearing_test_calibration">\t\t Calibration is a necessary step to adjust your device"'"volume appropriate for your test. \n\n\t\t\ Rub your hands together, in front of your nose, quickly and firmly, and try producing the same sound as our calibration file. \n\n\t\t As you play our calibration file, adjust your device"'"s volume to match the sound level you just heard from you hands. \n\n\t\t Proceed back and forth until both levels match, then we are ready to begin the test. </string>
+    <string name="noti_hearing_test_help">\t\t Press &quot;Play&quot; icon button to hear the sound. \n\n\t\t Press button &quot;I can hear&quot; if you hear the sound, the sound then will be played again with lower sound level. \n\n\t\t Press button &quot;I cannot hear&quot; if you don"'"t hear the sound, the sound then will be played again with higher sound level. \n\n\t\t Stop until you are at the sound level you can hear but cannot at the lower sound level. \n\n\t\t Repeating the progress until you finish the test, there are 7 sound with different frequency from 125Hz to 8000Hz for each ear. \n\n\t\t Press button &quot;Finish&quot; to finish the test and get result.</string>
+    <string name="noti_noise_suggestion">\t\t Noise standards provides you maximum values of noise allowed in different places. \n\n\t\t Moreover, you can even measure current location"'"s noise and see if it meet the standard.</string>
+    <string name="noti_noise_suggestion_help">\t\t Choose a building and its section which you want to know its noise"'"s standard value. \n\n\t\t Then you can choose whether to see the value or have the app measure the noise and return result. \n\n\t\t Press button &quot;Show value&quot; to check the standard value. \n\n\t\t Press button &quot;Start measure&quot; to check if the current location"'"s noise meets the standard. \n\n\t\t Make sure you choose the correct building and its section before start measure noise.</string>
     <string name="noti_noise_suggestion_choose_building">Choose a building you would like to check standard value </string>
     <string name="noti_noise_suggestion_choose_section_1">Choose an area in</string>
     <string name="noti_noise_suggestion_choose_section_2">you would like to check standard value</string>
-    <string name="noti_noise_suggestion_testing">This action may take a few seconds \n Please wait until it finishes</string>
+    <string name="noti_noise_suggestion_testing">This action may take a few seconds. \n Please wait until it finishes.</string>
     <string name="noti_noise_suggestion_conclusion_true">The noise which is measured meets the standard</string>
     <string name="noti_noise_suggestion_conclusion_false">The noise which is measured does not meet the standard</string>
-    <string name="noti_camera_location">Please connect to network or turn on Location on your device to get current location</string>
     <string name="noti_check_network">No network connection. \n Swipe down to retry.</string>
     <string name="noti_music_player">\t\t Improve your concentration with different types of music. \n\n\t\t Internet connection is required to play music.</string>
 

@@ -66,7 +66,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.HistoryV
         holder.binding.textTime.setText(measureResult.getTime());
         holder.binding.textDuration.setText(measureResult.getDuration());
         NoiseLevel nl = new NoiseLevel();
-        int status = nl.getNoiseLevelDescription(nl.getNoiseLevel(measureResult.getCurValue()));
+        int status = nl.getNoiseLevelDescription(nl.getNoiseLevel(measureResult.getAvgValue()));
         holder.binding.textStatus.setText(status);
 
         holder.binding.btnDelete.setOnClickListener(new View.OnClickListener() {

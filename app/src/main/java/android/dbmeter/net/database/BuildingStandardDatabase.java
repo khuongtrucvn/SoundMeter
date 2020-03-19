@@ -33,24 +33,13 @@ public class BuildingStandardDatabase {
         return databases;
     }
 
-    public static int searchBuildingId(String buildingName){
+    public static BuildingStandard searchBuildingFromName(String buildingName){
         for (BuildingStandard bs: databases) {
             if(bs.getBuildingName().equals(buildingName)){
-                return bs.getBuildingId();
-            }
-        }
-        return -1;
-    }
-
-    public static BuildingStandard searchBuilding(int buildingId){
-        BuildingStandard result = new BuildingStandard();
-
-        for (BuildingStandard bs: databases) {
-            if(bs.getBuildingId() == buildingId){
-                result = bs;
+                return bs;
             }
         }
 
-        return result;
+        return null;
     }
 }

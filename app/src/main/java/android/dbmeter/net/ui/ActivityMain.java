@@ -277,7 +277,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                         Thread.sleep(WAITING_TIME);
                     }
                     catch (Exception e) {
-                        Log.e("TAG","Đã vào đây");
                         e.printStackTrace();
                         bListener = false;
                     }
@@ -289,9 +288,17 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     private synchronized void getSoundPowerLevel(){
         volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
+
+        //Kiểm tra nếu số lần đo vượt quá 1 triệu lần thì reset
+        if(numberOfDb > 1000000){
+            numberOfDb = 1000;
+            totalDb = Global.avgDb*1000;
+        }
+
         if(volume > 0) {
+            //Đổi từ áp suất thành độ lớn
             float dbCurrent = 20 * (float)(Math.log10(volume));
-            Global.setDbCount(dbCurrent);  //Đổi từ áp suất thành độ lớn
+            Global.setDbCount(dbCurrent);
             numberOfDb++;
             totalDb += Global.lastDb;
             Global.avgDb = (float)(totalDb/numberOfDb);

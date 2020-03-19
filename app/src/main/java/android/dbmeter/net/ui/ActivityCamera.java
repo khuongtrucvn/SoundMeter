@@ -165,14 +165,20 @@ public class ActivityCamera extends AppCompatActivity {
 
     private synchronized void getSoundPowerLevel(){
         volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
-        //Log.e("Thread", "Thread : " + threadId + ", volume: " + volume);
+
+        //Kiểm tra nếu số lần đo vượt quá 1 triệu lần thì reset
+        if(numberOfDb > 1000000){
+            numberOfDb = 1000;
+            totalDb = Global.avgDb*1000;
+        }
+
         if(volume > 0) {
+            //Đổi từ áp suất thành độ lớn
             float dbCurrent = 20 * (float)(Math.log10(volume));
-            Global.setDbCount(dbCurrent);  //Đổi từ áp suất thành độ lớn
+            Global.setDbCount(dbCurrent);
             numberOfDb++;
             totalDb += Global.lastDb;
             Global.avgDb = (float)(totalDb/numberOfDb);
-            //Log.e("Measureeeeee", "Thread : " + threadId + ", volume: " + volume + ", times: " + numberOfDb + ", average: " + Global.avgDb +", min: " + Global.minDb);
         }
     }
 

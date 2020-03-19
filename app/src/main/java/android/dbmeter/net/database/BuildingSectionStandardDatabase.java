@@ -4,6 +4,7 @@ import android.content.Context;
 
 import android.dbmeter.net.R;
 import android.dbmeter.net.model.BuildingSectionStandard;
+import android.dbmeter.net.model.BuildingStandard;
 
 import java.util.ArrayList;
 
@@ -72,33 +73,24 @@ public class BuildingSectionStandardDatabase {
         return databases;
     }
 
-    public static int searchSectionIdOfBuilding(int buildingId, String sectionName){
+    //Phương thức tìm trả về khu vực (section) thuộc công trình (building) dựa vào tên của khu vực
+    public static BuildingSectionStandard searchSectionOfBuilding(BuildingStandard building, String sectionName){
         for (BuildingSectionStandard bs: databases) {
-            if(bs.getBuildingId() == buildingId && bs.getSectionName().equals(sectionName)){
-                return bs.getSectionId();
+            if(bs.getBuildingId() == building.getBuildingId() && bs.getSectionName().equals(sectionName)){
+                return bs;
             }
         }
-        return -1;
+
+        return null;
     }
 
-    public static ArrayList<BuildingSectionStandard> searchSectionFromBuilding(int buildingId){
+    //Phương thức tìm trả về mảng các khu vực (section) thuộc công trình (building) đó
+    public static ArrayList<BuildingSectionStandard> searchSectionsOfBuilding(BuildingStandard building){
         ArrayList<BuildingSectionStandard> result = new ArrayList<>();
 
         for (BuildingSectionStandard bss : databases) {
-            if(bss.getBuildingId() == buildingId){
+            if(bss.getBuildingId() == building.getBuildingId()){
                 result.add(bss);
-            }
-        }
-
-        return result;
-    }
-
-    public static BuildingSectionStandard searchSection(int buildingId, int sectionId){
-        BuildingSectionStandard result = new BuildingSectionStandard();
-
-        for (BuildingSectionStandard bss : databases) {
-            if(bss.getBuildingId() == buildingId && bss.getSectionId() == sectionId){
-                result = bss;
             }
         }
 

@@ -55,5 +55,5 @@
 
     //Radius
     <dimen name="radius_15dp">15dp</dimen>
-
+    <dimen name="radius_20dp">20dp</dimen>
 </resources>

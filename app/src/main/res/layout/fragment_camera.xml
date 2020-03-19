@@ -22,7 +22,11 @@
             android:layout_centerInParent="true"
             android:text="@string/title_snap"
             android:backgroundTint="@color/orange"
-            app:cornerRadius="@dimen/radius_15dp"/>
+            android:paddingStart="@dimen/padding_20dp"
+            android:paddingEnd="@dimen/padding_20dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:paddingBottom="@dimen/padding_10dp"
+            app:cornerRadius="@dimen/radius_20dp"/>
 
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 </layout>

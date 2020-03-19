@@ -193,7 +193,11 @@
                 android:backgroundTint="@color/orange"
                 android:text="@string/title_measure_again"
                 android:layout_marginTop="@dimen/margin_24dp"
-                app:cornerRadius="@dimen/radius_15dp"/>
+                android:paddingStart="@dimen/padding_20dp"
+                android:paddingEnd="@dimen/padding_20dp"
+                android:paddingTop="@dimen/padding_10dp"
+                android:paddingBottom="@dimen/padding_10dp"
+                app:cornerRadius="@dimen/radius_20dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_check_other"
@@ -204,7 +208,11 @@
                 android:backgroundTint="@color/orange"
                 android:text="@string/title_check_other_place"
                 android:layout_marginTop="@dimen/margin_20dp"
-                app:cornerRadius="@dimen/radius_15dp"/>
+                android:paddingStart="@dimen/padding_20dp"
+                android:paddingEnd="@dimen/padding_20dp"
+                android:paddingTop="@dimen/padding_10dp"
+                android:paddingBottom="@dimen/padding_10dp"
+                app:cornerRadius="@dimen/radius_20dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_exit_test"
@@ -216,7 +224,11 @@
                 android:text="@string/title_exit"
                 android:layout_marginBottom="@dimen/margin_50dp"
                 android:layout_marginTop="@dimen/margin_20dp"
-                app:cornerRadius="@dimen/radius_15dp"/>
+                android:paddingStart="@dimen/padding_20dp"
+                android:paddingEnd="@dimen/padding_20dp"
+                android:paddingTop="@dimen/padding_10dp"
+                android:paddingBottom="@dimen/padding_10dp"
+                app:cornerRadius="@dimen/radius_20dp"/>
         </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout

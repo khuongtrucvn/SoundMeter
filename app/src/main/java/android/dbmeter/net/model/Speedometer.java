@@ -23,7 +23,7 @@ public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
     private Matrix mMatrix = new Matrix();
     private Bitmap indicatorBitmap;
     private Paint dbValuePaint = new Paint(), influencePaint = new Paint();
-    DecimalFormat df1;
+    private DecimalFormat df1;
     private NoiseLevel level = new NoiseLevel();
 
     public Speedometer(Context context) {
@@ -42,20 +42,22 @@ public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
         int bitmapHeight = myBitmap.getHeight();
         newWidth = getWidth();
         newHeight = getHeight();
-        scaleWidth = ((float) newWidth) /(float) bitmapWidth;  // Get the zoom ratio
-        scaleHeight = ((float) newHeight) /(float) bitmapHeight;  //Get the zoom ratio
-        mMatrix.postScale(scaleWidth, scaleHeight);   //Set the scale of mMatrix
-        indicatorBitmap = Bitmap.createBitmap(myBitmap, 0, 0, bitmapWidth, bitmapHeight, mMatrix,true);  //Get the same and background width and height of the pointer map bitmap
+        //Tính tỉ lệ zoom so với nền đồng hồ
+        scaleWidth = ((float) newWidth) /(float) bitmapWidth;
+        scaleHeight = ((float) newHeight) /(float) bitmapHeight;
+        mMatrix.postScale(scaleWidth, scaleHeight);
+        //Ghép hình kim vào nền đồng hồ
+        indicatorBitmap = Bitmap.createBitmap(myBitmap, 0, 0, bitmapWidth, bitmapHeight, mMatrix,true);
 
         dbValuePaint = new Paint();
         dbValuePaint.setTextSize(112);
-        dbValuePaint.setAntiAlias(true);  //Anti-aliasing
+        dbValuePaint.setAntiAlias(true);
         dbValuePaint.setTextAlign(Paint.Align.CENTER);
         dbValuePaint.setColor(Color.WHITE);
 
         influencePaint = new Paint();
         influencePaint.setTextSize(54);
-        influencePaint.setAntiAlias(true);  //Anti-aliasing
+        influencePaint.setAntiAlias(true);
         influencePaint.setTextAlign(Paint.Align.CENTER);
         influencePaint.setColor(Color.WHITE);
 
@@ -65,8 +67,9 @@ public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
         df1 = new DecimalFormat("##0.0", otherSymbols);
     }
 
+    //Hàm tải lại đồng hồ
     public void refresh() {
-        postInvalidateDelayed(AppConfig.ANIMATION_INTERVAL); //Sub-thread refresh view
+        postInvalidateDelayed(AppConfig.WAITING_TIME);
     }
 
     @Override
@@ -80,19 +83,21 @@ public class Speedometer extends androidx.appcompat.widget.AppCompatImageView {
         if (indicatorBitmap == null) {
             init();
         }
-        mMatrix.setRotate(getAngle(Global.lastDb), newWidth / 2, newHeight * 215 / 460);   //The relative position of the sheet
+        mMatrix.setRotate(getAngle(Global.lastDb), (float)newWidth / 2, (float)newHeight * 215 / 460);   //The relative position of the sheet
         canvas.drawBitmap(indicatorBitmap, mMatrix, dbValuePaint);
 
         //Mức độ ảnh hưởng
-        canvas.drawText(context.getString(level.getInfluenceLevel(Global.lastDb)), newWidth/2,newHeight*18/23, influencePaint); //Picture relative position
+        canvas.drawText(context.getString(level.getInfluenceLevel(Global.lastDb)), (float)newWidth/2,(float)newHeight*18/23, influencePaint); //Picture relative position
         //Độ ồn hiện tại
-        canvas.drawText(df1.format(Global.lastDb)+" dB", newWidth/2,newHeight*22/23, dbValuePaint); //Picture relative position
+        canvas.drawText(df1.format(Global.lastDb)+" dB", (float)newWidth/2,(float)newHeight*22/23, dbValuePaint); //Picture relative position
     }
 
+    //Hàm tính góc quay
     private float getAngle(float db){
-        return(db-85)*5/3;  //Say more are tears, online to find pictures. The They will not change the map, the code calculation
+        return(db-85)*5/3;
     }
 
+    //Hàm giảm phân giải ảnh nếu ảnh gây lỗi OutOfMemory
     private Bitmap decodeAndResizeImage(int drawable){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;

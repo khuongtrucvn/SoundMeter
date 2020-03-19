@@ -1,20 +1,16 @@
 package android.dbmeter.net.ui.fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import android.dbmeter.net.R;
-import android.dbmeter.net.database.BuildingSectionStandardDatabase;
-import android.dbmeter.net.database.BuildingStandardDatabase;
 import android.dbmeter.net.databinding.FragmentNoiseLevelSuggestResultStepBinding;
 import android.dbmeter.net.model.BuildingSectionStandard;
 import android.dbmeter.net.model.BuildingStandard;
 import android.dbmeter.net.model.Global;
 import android.dbmeter.net.ui.ActivityNoiseLevelSuggestion;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -22,7 +18,6 @@ import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -75,8 +70,8 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
 
     private void initializeComponents(){
         isChoiceStartMeasure = activity.getIsChoiceStartMeasure();
-        chosenBuilding = BuildingStandardDatabase.searchBuilding(activity.getBuildingIdChosen());
-        chosenSection = BuildingSectionStandardDatabase.searchSection(activity.getBuildingIdChosen(), activity.getSectionIdChosen());
+        chosenBuilding = activity.getChosenBuilding();
+        chosenSection = activity.getChosenSection();
 
         final String location = chosenBuilding.getBuildingName() + " " + activity.getString(R.string.minus) + " " + chosenSection.getSectionName();
 
@@ -152,30 +147,9 @@ public class FragmentNoiseLevelSuggestionResultStep extends Fragment {
 
         binding.btnExitTest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                exitNoiseLevelSuggestion();
+                activity.exitNoiseLevelSuggestion();
             }
         });
-    }
-
-    private void exitNoiseLevelSuggestion(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.title_exit);
-        builder.setMessage(R.string.activity_exit_noiseSuggest);
-        builder.setCancelable(false);
-        builder.setPositiveButton(R.string.title_exit, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                activity.finish();
-            }
-        });
-        builder.setNegativeButton(R.string.activity_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 
     private void setMeasureResultFormat(){

@@ -9,7 +9,7 @@
     <string name="title_history">Lịch sử</string>
     <string name="title_share">Chụp &amp; Chia sẻ</string>
     <string name="title_setting">Cài đặt</string>
-    <string name="title_confirm">Xác nhận</string>
+    <string name="title_focusing_music">Nhạc hỗ trợ tập trung</string>
 
     <!-- Sound Unit -->
     <string name="sound_unit">dB</string>
@@ -56,6 +56,7 @@
     <string name="activity_save_confirm">Bạn có muốn lưu kết quả đo hiện tại ?</string>
     <string name="activity_calibrate">Hiệu quả của mỗi ống thu thanh sẽ khác nhau tuỳ vào thiết bị, vì vậy hãy điều chỉnh sai số trước khi sử dụng.</string>
     <string name="activity_cancel">Huỷ</string>
+    <string name="activity_confirm">Xác nhận</string>
 
     <!-- Notification -->
     <string name="noti_refresh">Đã làm mới</string>
@@ -82,6 +83,7 @@
 
     <string name="settings_soundlabel">Chế độ chuông</string>
     <string name="settings_soundex">Nếu được kích hoạt, thiết bị sẽ bật chuông thông báo khi độ ồn hiện tại lớn hơn độ ồn được định sẵn</string>
+
     <string name="il_normal">Bình thường</string>
     <string name="il_moderate_danger">Không an toàn</string>
     <string name="il_high_danger">Nguy hiểm</string>
@@ -93,7 +95,6 @@
     <string name="title_history_delete_all">Xoá tất cả lịch sử</string>
     <string name="title_history_save">Lưu kết quả đo</string>
     <string name="title_hearing_test">Đo thính lực</string>
-    <string name="title_focusing_music">Nhạc hỗ trợ tập trung</string>
     <string name="title_noise_level_suggest">Chuẩn độ ồn</string>
     <string name="activity_cameraStartErr">Không thể mở do không được cấp quyền</string>
     <string name="title_back">Trở lại</string>
@@ -105,13 +106,13 @@
     <string name="title_snap">Chụp ảnh</string>
     <string name="activity_unidentified_location">Địa điểm không xác định</string>
     <string name="activity_resultlabel">Kết quả (dB)</string>
-    <string name="noti_snap">\t\t Vui lòng cấp quyền sử dụng Vị trí nếu không chức năng sẽ không chạy được \n\n\t\t Và nhớ mở dịch vụ Vị trí và kết nối mạng để ứng dụng có thể xác định vị trí hiện tại của bạn</string>
+    <string name="noti_snap">\t\t Vui lòng cấp quyền sử dụng Vị trí nếu không chức năng sẽ không chạy được. \n\n\t\t Và nhớ mở dịch vụ Vị trí và kết nối mạng để ứng dụng có thể xác định vị trí hiện tại của bạn.</string>
     <string name="title_start_hearing_test">Bắt đầu kiểm tra</string>
-    <string name="noti_hearing_test">\t\t Bài kiểm tra yêu cầu phải sử dụng tai nghe \n\n\t\t Hãy kết nối và đeo tai nghe vào trước khi bắt đầu kiểm tra</string>
+    <string name="noti_hearing_test">\t\t Bài kiểm tra yêu cầu phải sử dụng tai nghe. \n\n\t\t Hãy kết nối và đeo tai nghe vào trước khi bắt đầu kiểm tra.</string>
     <string name="activity_hearingTestStartErr">Hãy kết nối tai nghe trước khi kiểm tra thính lực</string>
-    <string name="noti_hearing_test_calibration">\t\t Hiệu chỉnh là bước cần thiết để điều chỉnh âm lượng thiết bị của bạn phù hợp cho bài kiểm tra \n\n\t\t\ Đặt hai bàn tay vào nhau, hướng trước mũi bạn, chà nhanh và mạnh, cố gắng tạo ra âm thanh giống như tập tin hiệu chỉnh bên dưới \n\n\t\t Khi bạn phát tập tin hiệu chỉnh, hãy điều chỉnh âm lượng thiết bị để phù hợp với âm thanh bạn vừa tạo ra từ tay bạn \n\n\t\t Tiếp tục thực hiện cho đến khi cả hai âm thanh có độ lớn giống nhau, khi đó ta đã sẵn sàng để bắt đầu bài kiểm tra</string>
+    <string name="noti_hearing_test_calibration">\t\t Hiệu chỉnh là bước cần thiết để điều chỉnh âm lượng thiết bị của bạn phù hợp cho bài kiểm tra. \n\n\t\t\ Đặt hai bàn tay vào nhau, hướng trước mũi bạn, chà nhanh và mạnh, cố gắng tạo ra âm thanh giống như tập tin hiệu chỉnh bên dưới. \n\n\t\t Khi bạn phát tập tin hiệu chỉnh, hãy điều chỉnh âm lượng thiết bị để phù hợp với âm thanh bạn vừa tạo ra từ tay bạn. \n\n\t\t Tiếp tục thực hiện cho đến khi cả hai âm thanh có độ lớn giống nhau, khi đó ta đã sẵn sàng để bắt đầu bài kiểm tra. </string>
     <string name="title_continue">Tiếp tục</string>
-    <string name="activity_exit_hearingTest">Bạn muốn thoát khỏibài kiểm tra thính lực ?</string>
+    <string name="activity_exit_hearingTest">Bạn muốn thoát khỏi bài kiểm tra thính lực ?</string>
     <string name="title_exit">Thoát</string>
     <string name="title_exit_test">Thoát bài kiểm tra</string>
     <string name="activity_test_headphone_remind">Vui lòng kết nối tai nghe vào thiết bị để tiếp tục kiểm tra</string>
@@ -125,7 +126,7 @@
     <string name="title_back_testing">Trở lại bước Kiểm tra</string>
     <string name="activity_can_hear">Nghe</string>
     <string name="activity_cannot_hear">Không nghe</string>
-    <string name="noti_hearing_test_help">\t\t Ấn nút có biểu tượng &quot;Phát âm thanh &quot; để nghe âm thanh\n\n\t\t Ấn nút &quot;Nghe được&quot; nếu bạn nghe âm thanh, khi đó âm thanh sẽ được phát lại với độ lớn thấp hơn \n\n\t\t Ấn nút &quot;Không nghe được&quot; nếu bạn không nghe được âm thanh, khi đó âm thanh sẽ được phát lại với cường độ cao hơn \n\n\t\t Dừng khi bạn có thể nghe được âm thanh ở cường độ hiện tại nhưng không thể ở cường độ thấp hơn \n\n\t\t Lặp lại quá trình cho đến lúc hoàn thành bài kiểm tra , có tổng cộng 7 âm thanh với tần số khác nhau từ 125Hz đến 8000Hz cho mỗi bên tai \n\n\t\t Ấn nút &quot;Hoàn thành&quot; để kết thúc bài kiểm tra và nhận kết quả </string>
+    <string name="noti_hearing_test_help">\t\t Ấn nút có biểu tượng &quot;Phát âm thanh&quot; để nghe âm thanh. \n\n\t\t Ấn nút &quot;Nghe được&quot; nếu bạn nghe âm thanh, khi đó âm thanh sẽ được phát lại với độ lớn thấp hơn. \n\n\t\t Ấn nút &quot;Không nghe được&quot; nếu bạn không nghe được âm thanh, khi đó âm thanh sẽ được phát lại với cường độ cao hơn. \n\n\t\t Dừng khi bạn có thể nghe được âm thanh ở cường độ hiện tại nhưng không thể ở cường độ thấp hơn. \n\n\t\t Lặp lại quá trình cho đến lúc hoàn thành bài kiểm tra , có tổng cộng 7 âm thanh với tần số khác nhau từ 125Hz đến 8000Hz cho mỗi bên tai. \n\n\t\t Ấn nút &quot;Hoàn thành&quot; để kết thúc bài kiểm tra và nhận kết quả. </string>
     <string name="hearing_test_left">Tai trái</string>
     <string name="hearing_test_right">Tai phải</string>
     <string name="title_finish">Hoàn thành</string>
@@ -154,8 +155,8 @@
     <string name="standard_sport">Công trình, cơ sở thể thao</string>
     <string name="standard_station">Nhà ga</string>
 
-    <string name="noti_noise_suggestion">\t\t Chuẩn độ ồn cung cấp cho bạn giá trị độ ồn tối đa cho phép của nhiều công trình khác nhau \n\n\t\t Ngoài ra, bạn có thể đo và kiểm tra độ ồn nơi bạn đứng có đạt chuẩn độ ồn hay không </string>
-    <string name="noti_noise_suggestion_help">\t\t Chọn 1 công trình bạn muốn biết chuẩn độ ồn của nó \n\n\t\t Sau đó bạn có thể chọn xem chuẩn độ ồn hoặc kiểm tra độ ồn nơi bạn đứng có đạt chuẩn độ ồn \n\n\t\t Ấn nút &quot;Xem giá trị&quot; để xem giá trị chuẩn độ ồn của nơi đã chọn \n\n\t\t Ấn nút &quot;Bắt đầu đo&quot; để tiến hành kiểm tra độ ồn tại nơi bạn đứng có thoả chuẩn độ ồn \n\n\t\t Đảm bảo bạn chọn đúng loại công trình và khu vực của công trình đó trước khi tiến hành kiểm tra</string>
+    <string name="noti_noise_suggestion">\t\t Chuẩn độ ồn cung cấp cho bạn giá trị độ ồn tối đa cho phép của nhiều công trình khác nhau. \n\n\t\t Ngoài ra, bạn có thể đo và kiểm tra độ ồn nơi bạn đứng có đạt chuẩn độ ồn hay không.</string>
+    <string name="noti_noise_suggestion_help">\t\t Chọn 1 công trình bạn muốn biết chuẩn độ ồn của nó. \n\n\t\t Sau đó bạn có thể chọn xem chuẩn độ ồn hoặc kiểm tra độ ồn nơi bạn đứng có đạt chuẩn độ ồn. \n\n\t\t Ấn nút &quot;Xem giá trị&quot; để xem giá trị chuẩn độ ồn của nơi đã chọn. \n\n\t\t Ấn nút &quot;Bắt đầu đo&quot; để tiến hành kiểm tra độ ồn tại nơi bạn đứng có thoả chuẩn độ ồn. \n\n\t\t Đảm bảo bạn chọn đúng loại công trình và khu vực của công trình đó trước khi tiến hành kiểm tra.</string>
     <string name="title_measure">Bắt đầu đo</string>
     <string name="title_show_value">Xem giá trị</string>
     <string name="title_buildings">Công trình</string>
@@ -196,10 +197,9 @@
     <string name="activity_exit_noiseSuggest">Bạn có muốn thoát khỏi Chuẩn độ ồn</string>
     <string name="sound_standardlabel">TIÊU CHUẨN (dB)</string>
     <string name="sound_actuallabel">THỰC TẾ (dB)</string>
-    <string name="noti_noise_suggestion_testing">Quá trình đo có thể mất vài giây \n Vui lòng chờ đến khi hoàn thành</string>
+    <string name="noti_noise_suggestion_testing">Quá trình đo có thể mất vài giây. \n Vui lòng chờ đến khi hoàn thành.</string>
     <string name="noti_noise_suggestion_conclusion_false">Độ ồn đo được vượt quá chuẩn độ ồn cho phép</string>
     <string name="noti_noise_suggestion_conclusion_true">Độ ồn đo được đạt chuẩn độ ồn cho phép</string>
-    <string name="noti_camera_location">Hãy kết nối với mạng hoặc bật dịch vụ Vị trí trên thiết bị để lấy vị trí hiện tại</string>
     <string name="activity_language">Ngôn ngữ</string>
     <string name="lang_en">Tiếng Anh</string>
     <string name="lang_vi">Tiếng Việt</string>
@@ -208,4 +208,5 @@
     <string name="noti_check_network">Không có kết nối mạng. \n Vuốt xuống để thử lại.</string>
     <string name="title_listen">Nghe nhạc</string>
     <string name="noti_music_player">\t\t Tăng khả năng tập trung của bạn thông qua nhiều thể loại nhạc khác nhau. \n\n\t\t Yêu cầu kết nối mạng để nghe nhạc.</string>
+    <string name="activity_snap_location_on">Dịch vụ vị trí hiện đang tắt, bạn có muốn bật?</string>
 </resources>

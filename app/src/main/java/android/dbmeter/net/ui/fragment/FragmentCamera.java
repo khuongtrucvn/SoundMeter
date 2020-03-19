@@ -2,6 +2,7 @@ package android.dbmeter.net.ui.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.dbmeter.net.R;
@@ -9,6 +10,7 @@ import android.dbmeter.net.databinding.FragmentCameraBinding;
 import android.dbmeter.net.ui.ActivityCamera;
 import android.dbmeter.net.ui.ActivityMain;
 import android.dbmeter.net.utils.AppConfig;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,12 +20,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 public class FragmentCamera extends Fragment {
+    private static boolean isFirstTime = true;
+
     private ActivityMain activity = (ActivityMain)getActivity();
     private FragmentCameraBinding binding;
     private static String[] PERMISSIONS = {
@@ -83,11 +88,11 @@ public class FragmentCamera extends Fragment {
                 requestPermissions(PERMISSIONS, AppConfig.REQUEST_CODE);
             }
             else {
-                startActivity(new Intent(activity, ActivityCamera.class));
+                locationStatusCheck();
             }
         }
         else {
-            startActivity(new Intent(activity, ActivityCamera.class));
+            locationStatusCheck();
         }
     }
 
@@ -96,7 +101,7 @@ public class FragmentCamera extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == AppConfig.REQUEST_CODE) {
             if(checkPermissionsGranted(permissions, grantResults)) {
-                startActivity(new Intent(activity, ActivityCamera.class));
+                locationStatusCheck();
             }
             else{
                 Toast.makeText(activity, R.string.activity_cameraStartErr, Toast.LENGTH_LONG).show();
@@ -119,5 +124,41 @@ public class FragmentCamera extends Fragment {
         }
 
         return true;
+    }
+
+    private void locationStatusCheck() {
+        if (isFirstTime){
+            isFirstTime = false;
+
+            LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                enableLocationService();
+            }
+            else{
+                startActivity(new Intent(activity, ActivityCamera.class));
+            }
+        }
+        else{
+            startActivity(new Intent(activity, ActivityCamera.class));
+        }
+    }
+
+    private void enableLocationService() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage(R.string.activity_snap_location_on);
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.activity_confirm, new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialogInterface, int id) {
+                startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        });
+        builder.setNegativeButton(R.string.activity_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int id) {
+                dialogInterface.dismiss();
+                startActivity(new Intent(activity, ActivityCamera.class));
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
