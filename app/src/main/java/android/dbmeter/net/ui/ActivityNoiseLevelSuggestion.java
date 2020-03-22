@@ -67,8 +67,8 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mRecorder.stopRecorder();
         isThreadRun = false;
+        mRecorder.stopRecorder();
         if (measureThread != null) {
             measureThread = null;
         }
@@ -176,11 +176,7 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
         mRecorder.stopRecorder();
     }
 
-    public synchronized void restartRecorder(){
-        isPlaying = false;
-        mRecorder.restartRecorder();
-        isPlaying = true;
-
+    public void restartRecorder(){
         // Chỉnh lại thông số sau khi restart
         totalDb = 0;
         numberOfDb = 0;

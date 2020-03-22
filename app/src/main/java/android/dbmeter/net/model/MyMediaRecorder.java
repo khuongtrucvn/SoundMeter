@@ -60,9 +60,4 @@ public class MyMediaRecorder {
             isRecording = false;
         }
     }
-
-    public void restartRecorder(){
-        stopRecorder();
-        startRecorder();
-    }
 }

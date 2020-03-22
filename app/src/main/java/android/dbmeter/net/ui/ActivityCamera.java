@@ -9,6 +9,7 @@ import android.dbmeter.net.ui.fragment.FragmentCameraImagePreview;
 import android.dbmeter.net.utils.UtilsActivity;
 import android.dbmeter.net.utils.UtilsFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.IdRes;
@@ -57,8 +58,8 @@ public class ActivityCamera extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mRecorder.stopRecorder();
         isThreadRun = false;
+        mRecorder.stopRecorder();
         if (measureThread != null) {
             measureThread = null;
         }
@@ -106,11 +107,7 @@ public class ActivityCamera extends AppCompatActivity {
         mRecorder.stopRecorder();
     }
 
-    public synchronized void restartRecorder(){
-        isPlaying = false;
-        mRecorder.restartRecorder();
-        isPlaying = true;
-
+    public void restartRecorder(){
         // Chỉnh lại thông số sau khi restart
         totalDb = 0;
         numberOfDb = 0;
