@@ -7,6 +7,7 @@ import android.dbmeter.net.databinding.FragmentMusicPlayerCategoriesBinding;
 import android.dbmeter.net.model.Category;
 import android.dbmeter.net.model.MyPrefs;
 import android.dbmeter.net.ui.ActivityMusicPlayer;
+import android.dbmeter.net.utils.UtilsWebsite;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +17,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -44,6 +38,8 @@ public class FragmentMusicPlayerCategories extends Fragment{
     /* Shared Preferences */
     private MyPrefs myPrefs;
     private String language;
+
+    private UtilsWebsite website = new UtilsWebsite();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -142,7 +138,7 @@ public class FragmentMusicPlayerCategories extends Fragment{
 
     private void loadData(){
         while (!done) {
-            String categoryString = getWebPage("https://soundmeterapi.herokuapp.com/api/categories");
+            String categoryString = website.readWebpage("https://soundmeterapi.herokuapp.com/api/categories");
 
             try{
                 if(categoryString != null){
@@ -166,49 +162,6 @@ public class FragmentMusicPlayerCategories extends Fragment{
 
             done = true;
         }
-    }
-
-    private String getWebPage(String address) {
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
-        String result = null;
-
-        try {
-            URL url = new URL(address);
-
-            connection = (HttpURLConnection) url.openConnection();
-            connection.connect();
-
-            InputStream stream = connection.getInputStream();
-
-            reader = new BufferedReader(new InputStreamReader(stream));
-
-            StringBuilder buffer = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line).append("\n");
-            }
-
-            result = buffer.toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return result;
     }
 
     private void controlLayout(final ArrayList<Category> categories){
