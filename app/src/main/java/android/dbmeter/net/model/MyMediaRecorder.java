@@ -17,30 +17,31 @@ public class MyMediaRecorder {
         }
     }
 
-    private void setUpRecorder(){
+    private boolean setUpRecorder() {
         mMediaRecorder = new MediaRecorder();
 
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         mMediaRecorder.setOutputFile("/dev/null");
-    }
 
-    public boolean startRecorder(){
         try {
-            setUpRecorder();
-
             mMediaRecorder.prepare();
-            mMediaRecorder.start();
             isRecording = true;
-
             return true;
         }
         catch(IOException e) {
             isRecording = false;
             e.printStackTrace();
         }
+        return false;
+    }
 
+    public boolean startRecorder(){
+        if(setUpRecorder()){
+            mMediaRecorder.start();
+            return true;
+        }
         return false;
     }
 

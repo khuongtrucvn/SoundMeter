@@ -45,7 +45,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 import android.util.Size;
-import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
@@ -97,17 +96,10 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
     private CameraCaptureSession cameraCaptureSession;
     private CaptureRequest captureRequest;
     private CaptureRequest.Builder captureRequestBuilder;
-
     private boolean flashSupported;
 
-    /**
-     * A {@link Semaphore} to prevent the app from exiting before closing the camera.
-     */
     private Semaphore cameraOpenCloseLock = new Semaphore(1);
 
-    /**
-     * The current state of camera state for taking pictures.
-     */
     private int mState = STATE_PREVIEW;
 
     private Size previewSize;
@@ -621,9 +613,7 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
                 cameraId = camera;
                 return;
             }
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
+        } catch (CameraAccessException | NullPointerException e) {
             e.printStackTrace();
         }
     }
@@ -665,11 +655,12 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
             assert texture != null;
 
             texture.setDefaultBufferSize(previewSize.getWidth(), previewSize.getHeight());
-            Surface surface = new Surface(texture);
-            captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-            captureRequestBuilder.addTarget(surface);
 
-            cameraDevice.createCaptureSession(Arrays.asList(surface, reader.getSurface()),
+            Surface cameraSurface = new Surface(texture);
+            captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+            captureRequestBuilder.addTarget(cameraSurface);
+
+            cameraDevice.createCaptureSession(Arrays.asList(cameraSurface, reader.getSurface()),
                     new CameraCaptureSession.StateCallback() {
                         @Override
                         public void onConfigured(@NonNull CameraCaptureSession session) {
@@ -705,10 +696,6 @@ public class FragmentCameraImageCapture extends Fragment implements OrientationM
         super.onResume();
         startBackgroundThread();
 
-        // When the screen is turned off and turned back on, the SurfaceTexture is already
-        // available, and "onSurfaceTextureAvailable" will not be called. In that case, we can open
-        // a camera and start preview from here (otherwise, we wait until the surface is ready in
-        // the SurfaceTextureListener).
         if (binding.textureView.isAvailable()) {
             openCamera(binding.textureView.getWidth(),binding.textureView.getHeight());
         }

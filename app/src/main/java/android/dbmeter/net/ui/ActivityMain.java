@@ -23,6 +23,7 @@ import android.dbmeter.net.utils.UtilsFragment;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.LocaleList;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -46,6 +47,7 @@ import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 
 import static android.dbmeter.net.utils.AppConfig.DELAYING_WARNING_TIME;
+import static android.dbmeter.net.utils.AppConfig.VIBRATION_TIME;
 import static android.dbmeter.net.utils.AppConfig.WAITING_TIME;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -55,9 +57,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     /* Recorder */
     private MyMediaRecorder mRecorder ;
-    private boolean bListener = true;
     private boolean isThreadRun = true;
-    public boolean isRecording = true;
+    private boolean isPlaying = true;                      //Trạng thái của nút pause/play
     private Thread measureThread, warnThread;
     private int volume;
     private double totalDb = 0; // tổng cộng dB
@@ -74,6 +75,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     /* Warning */
     private MediaPlayer ringtone;
     private Vibrator v;
+    private boolean isRingtoneFree = true;
+    private CountDownTimer vibratorCountDownCounter;
+    private boolean isVibratorFree = true;
 
     private String localeCode;
 
@@ -86,34 +90,27 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     @Override
     public void onResume() {
         super.onResume();
-
-        if(isRecording){
-            startMeasure();
-            initdbWarning();
-        }
-        bListener = true;
+        isThreadRun = true;
+        startMeasure();
+        initdbWarning();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        bListener = false;
+        isThreadRun = false;
         mRecorder.stopRecorder();
-
         measureThread = null;
         warnThread = null;
-
-        //stopWarningRingtone(ringtone);
-        //stopVibration(v);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mRecorder.stopRecorder();
+        isThreadRun = false;
 
         if (measureThread != null) {
-            isThreadRun = false;
             measureThread = null;
         }
 
@@ -121,8 +118,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             warnThread = null;
         }
 
-        //stopWarningRingtone(ringtone);
-        //stopVibration(v);
+        releaseWarningRingtone(ringtone);
     }
 
     @Override
@@ -215,21 +211,19 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     }
 
     public void startRecorder(){
-        isRecording = true;
-        bListener = true;
+        isPlaying = true;
         mRecorder.startRecorder();
     }
 
     public void stopRecorder(){
-        isRecording = false;
-        bListener = false;
+        isPlaying = false;
         mRecorder.stopRecorder();
     }
 
     public synchronized void restartRecorder(){
-        bListener = false;
+        isPlaying = false;
         mRecorder.restartRecorder();
-        bListener = true;
+        isPlaying = true;
 
         // Chỉnh lại thông số sau khi restart
         totalDb = 0;
@@ -271,14 +265,13 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             public void run() {
                 while (isThreadRun) {
                     try {
-                        if(bListener) {
-                            getSoundPowerLevel();
-                        }
+                        Log.e("TTT","is Running");
+                        getSoundPowerLevel();
                         Thread.sleep(WAITING_TIME);
                     }
                     catch (Exception e) {
                         e.printStackTrace();
-                        bListener = false;
+                        isPlaying = false;
                     }
                 }
             }
@@ -287,21 +280,23 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     }
 
     private synchronized void getSoundPowerLevel(){
-        volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
+        if(isPlaying) {
+            volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
 
-        //Kiểm tra nếu số lần đo vượt quá 1 triệu lần thì reset
-        if(numberOfDb > 1000000){
-            numberOfDb = 1000;
-            totalDb = Global.avgDb*1000;
-        }
+            //Kiểm tra nếu số lần đo vượt quá 1 triệu lần thì reset
+            if(numberOfDb > 1000000){
+                numberOfDb = 1000;
+                totalDb = Global.avgDb*1000;
+            }
 
-        if(volume > 0) {
-            //Đổi từ áp suất thành độ lớn
-            float dbCurrent = 20 * (float)(Math.log10(volume));
-            Global.setDbCount(dbCurrent);
-            numberOfDb++;
-            totalDb += Global.lastDb;
-            Global.avgDb = (float)(totalDb/numberOfDb);
+            if(volume > 0) {
+                //Đổi từ áp suất thành độ lớn
+                float dbCurrent = 20 * (float)(Math.log10(volume));
+                Global.setDbCount(dbCurrent);
+                numberOfDb++;
+                totalDb += Global.lastDb;
+                Global.avgDb = (float)(totalDb/numberOfDb);
+            }
         }
     }
 
@@ -321,15 +316,32 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     }
 
     private void initdbWarning(){
+        v = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
+        vibratorCountDownCounter = new CountDownTimer(1000,400) {
+            @Override
+            public void onTick(long l) { }
+
+            @Override
+            public void onFinish() {
+                isVibratorFree = true;
+            }
+        };
+
+        //Khi ringtone chạy hết mới mở tiếp
+        ringtone = MediaPlayer.create(this, R.raw.warning_tone);
+        ringtone.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                isRingtoneFree = true;
+            }
+        });
+
         warnThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (isThreadRun) {
                     try {
-                        if(isRecording) {
-                            warn(Global.lastDb);
-                        }
-
+                        warn(Global.lastDb);
                         Thread.sleep(DELAYING_WARNING_TIME);
                     }
                     catch (Exception e) {
@@ -342,23 +354,30 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     }
 
     private synchronized void warn(float curVal){
-        if(isWarn){
-            if(curVal > warningVal){
-                Log.w("WARNING","Warning");
-                if(isVibrate){
-                    v = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-                    if(v != null){
-                        // Rung 0.4s
-                        if (Build.VERSION.SDK_INT >= 26) {
-                            v.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            v.vibrate(400);
+        //Nếu recorder đang chạy
+        if(isPlaying){
+            if(isWarn){
+                if(curVal > warningVal){
+                    if(isVibrate){
+                        if(v.hasVibrator()){
+                            if(isVibratorFree){
+                                if (Build.VERSION.SDK_INT >= 26) {
+                                    v.vibrate(VibrationEffect.createOneShot(VIBRATION_TIME, VibrationEffect.DEFAULT_AMPLITUDE));
+                                } else {
+                                    v.vibrate(VIBRATION_TIME);
+                                }
+                                isVibratorFree = false;
+                                vibratorCountDownCounter.start();
+                            }
                         }
                     }
-                }
-                if(isSound){
-                    ringtone = MediaPlayer.create(this, R.raw.warning_tone);
-                    ringtone.start();
+
+                    if(isSound){
+                        if(isRingtoneFree){
+                            ringtone.start();
+                            isRingtoneFree = false;
+                        }
+                    }
                 }
             }
         }
@@ -377,22 +396,20 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         finishAffinity();
     }
 
-    /*private void stopWarningRingtone(MediaPlayer ringtone) {
+    private void releaseWarningRingtone(MediaPlayer ringtone) {
         try {
             if (ringtone != null) {
-                if (ringtone.isPlaying())
+                if (ringtone.isPlaying()){
                     ringtone.stop();
+                }
                 ringtone.release();
-                ringtone = null;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
-    /*private void stopVibration(Vibrator v) {
-        if (v != null) {
-            v.cancel();
-        }
-    }*/
+    public boolean getIsPlayingStatus(){
+        return isPlaying;
+    }
 }

@@ -35,9 +35,8 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
 
     /* Recorder */
     private MyMediaRecorder mRecorder ;
-    private boolean bListener = true;
     private boolean isThreadRun = true;
-    public boolean isRecording = true;
+    public boolean isPlaying = true;
     private Thread measureThread;
     float volume = 10000;
     private double totalDb = 0; // tổng cộng dB
@@ -53,17 +52,14 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-
-        if(isRecording){
-            startMeasure();
-        }
-        bListener = true;
+        isThreadRun = true;
+        startMeasure();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        bListener = false;
+        isThreadRun = false;
         mRecorder.stopRecorder();
         measureThread = null;
     }
@@ -72,9 +68,8 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         mRecorder.stopRecorder();
-
+        isThreadRun = false;
         if (measureThread != null) {
-            isThreadRun = false;
             measureThread = null;
         }
     }
@@ -172,21 +167,19 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     }
 
     public void startRecorder(){
-        isRecording = true;
-        bListener = true;
+        isPlaying = true;
         mRecorder.startRecorder();
     }
 
     public void stopRecorder(){
-        isRecording = false;
-        bListener = false;
+        isPlaying = false;
         mRecorder.stopRecorder();
     }
 
     public synchronized void restartRecorder(){
-        bListener = false;
+        isPlaying = false;
         mRecorder.restartRecorder();
-        bListener = true;
+        isPlaying = true;
 
         // Chỉnh lại thông số sau khi restart
         totalDb = 0;
@@ -218,14 +211,12 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
             public void run() {
                 while (isThreadRun) {
                     try {
-                        if(bListener) {
-                            getSoundPowerLevel();
-                        }
+                        getSoundPowerLevel();
                         Thread.sleep(WAITING_TIME);
                     }
                     catch (Exception e) {
                         e.printStackTrace();
-                        bListener = false;
+                        isPlaying = false;
                     }
                 }
             }
@@ -234,21 +225,23 @@ public class ActivityNoiseLevelSuggestion extends AppCompatActivity {
     }
 
     private synchronized void getSoundPowerLevel(){
-        volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
+        if(isPlaying) {
+            volume = mRecorder.getMaxAmplitude();  //Lấy áp suất âm thanh
 
-        //Kiểm tra nếu số lần đo vượt quá 1 triệu lần thì reset
-        if(numberOfDb > 1000000){
-            numberOfDb = 1000;
-            totalDb = Global.avgDb*1000;
-        }
+            //Kiểm tra nếu số lần đo vượt quá 1 triệu lần thì reset
+            if(numberOfDb > 1000000){
+                numberOfDb = 1000;
+                totalDb = Global.avgDb*1000;
+            }
 
-        if(volume > 0) {
-            //Đổi từ áp suất thành độ lớn
-            float dbCurrent = 20 * (float)(Math.log10(volume));
-            Global.setDbCount(dbCurrent);
-            numberOfDb++;
-            totalDb += Global.lastDb;
-            Global.avgDb = (float)(totalDb/numberOfDb);
+            if(volume > 0) {
+                //Đổi từ áp suất thành độ lớn
+                float dbCurrent = 20 * (float)(Math.log10(volume));
+                Global.setDbCount(dbCurrent);
+                numberOfDb++;
+                totalDb += Global.lastDb;
+                Global.avgDb = (float)(totalDb/numberOfDb);
+            }
         }
     }
 

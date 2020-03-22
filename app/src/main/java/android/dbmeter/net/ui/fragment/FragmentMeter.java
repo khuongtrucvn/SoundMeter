@@ -106,13 +106,19 @@ public class FragmentMeter extends Fragment {
         setEventHandler();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setEventHandler();
+    }
+
     private void initializeComponents() {
         myPrefs = new MyPrefs(activity);
         calibrateValue = myPrefs.getCalibrateValue();
 
         setMeasureResultFormat();
 
-        if(!activity.isRecording){                  // Đang tạm dừng
+        if(!activity.getIsPlayingStatus()){                  // Đang tạm dừng
             binding.btnPausePlay.setChecked(true);
             binding.textDuration.setBase(SystemClock.elapsedRealtime() + activity.duration);
         }
@@ -425,6 +431,4 @@ public class FragmentMeter extends Fragment {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
-
 }
