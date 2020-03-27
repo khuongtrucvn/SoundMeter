@@ -78,6 +78,10 @@ public class FragmentSettings extends Fragment {
     }
 
     private void initializeComponents(){
+        if (activity != null){
+            activity.changeBackgroundColor(R.drawable.color_background);
+        }
+
         mLocale = LocaleDescriptionDatabase.get(activity);
 
         loadSharedPreferences();

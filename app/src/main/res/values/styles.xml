@@ -1,12 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <!-- splash screen la item windowBackground -->
+        <!--
+        windowBackground là background của 1 windows (window là lớp chứa view của 1 activity)
+        nên là cái background này sẽ tồn tại mãi, nó ở phía sau activity
+        h mình cần làm 1 theme cho splash, sau khi app lên thì set apptheme
+
+        => màu nên mặc định (k cần set màu cho activity, nó sẽ có màu tím
+        -->
+        <item name="android:windowBackground">@color/splash_background_color</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
+    </style>
+    <style name="AppTheme" parent="BaseTheme"/>
+    <style name="SplashTheme" parent="BaseTheme">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
     <style name="ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">

@@ -130,7 +130,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     public void switchFragments(int fragmentId) {
         @IdRes int frameId = R.id.content_frame;
-        int backgroundColor = R.drawable.color_background;
 
         if (fragmentId != currentFragmentId) {
             switch (fragmentId) {
@@ -142,37 +141,31 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 case R.id.nav_history: {
                     binding.toolbar.textTitle.setText(R.string.title_history);
                     UtilsFragment.replace(this, frameId, new FragmentHistory());
-                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_hearing_test: {
                     binding.toolbar.textTitle.setText(R.string.title_hearing_test);
                     UtilsFragment.replace(this, frameId, new FragmentHearingTest());
-                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_noise_level_suggest: {
                     binding.toolbar.textTitle.setText(R.string.title_noise_level_suggest);
                     UtilsFragment.replace(this, frameId, new FragmentNoiseLevelSuggestion());
-                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_camera: {
                     binding.toolbar.textTitle.setText(R.string.title_share);
                     UtilsFragment.replace(this, frameId, new FragmentCamera());
-                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_focusing_music: {
                     binding.toolbar.textTitle.setText(R.string.title_focusing_music);
                     UtilsFragment.replace(this, frameId, new FragmentMusicPlayer());
-                    changeBackgroundColor(backgroundColor);
                     break;
                 }
                 case R.id.nav_settings: {
                     binding.toolbar.textTitle.setText(R.string.title_setting);
                     UtilsFragment.replace(this, frameId, new FragmentSettings());
-                    changeBackgroundColor(backgroundColor);
                     break;
                 }
             }

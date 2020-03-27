@@ -49,6 +49,7 @@ public class FragmentHearingTest extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initializeComponents();
     }
 
     @Override
@@ -68,6 +69,12 @@ public class FragmentHearingTest extends Fragment {
                 }
             }
         });
+    }
+
+    private void initializeComponents(){
+        if (activity != null){
+            activity.changeBackgroundColor(R.drawable.color_background);
+        }
     }
 
     private boolean isHeadphonesPlugged(){

@@ -113,6 +113,10 @@ public class FragmentMeter extends Fragment {
     }
 
     private void initializeComponents() {
+        if(activity != null){
+            activity.changeBackgroundColor(R.drawable.color_background);
+        }
+
         myPrefs = new MyPrefs(activity);
         calibrateValue = myPrefs.getCalibrateValue();
 

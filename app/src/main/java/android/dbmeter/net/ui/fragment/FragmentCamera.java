@@ -61,6 +61,13 @@ public class FragmentCamera extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initializeComponents();
+    }
+
+    private void initializeComponents() {
+        if (activity != null){
+            activity.changeBackgroundColor(R.drawable.color_background);
+        }
     }
 
     @Override

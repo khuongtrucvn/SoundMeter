@@ -45,6 +45,7 @@ public class FragmentMusicPlayer extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initializeComponents();
     }
 
     @Override
@@ -59,5 +60,11 @@ public class FragmentMusicPlayer extends Fragment {
                 startActivity(new Intent(activity, ActivityMusicPlayer.class));
             }
         });
+    }
+
+    private void initializeComponents(){
+        if (activity != null){
+            activity.changeBackgroundColor(R.drawable.color_background);
+        }
     }
 }

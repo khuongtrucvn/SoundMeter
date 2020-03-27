@@ -215,21 +215,31 @@
                     android:focusable="false"
                     android:focusableInTouchMode="false"/>
 
+                <!-- Lớp ImageButton = ImageView + set sẵn clickable/focusable,
+                 nó k thêm tính năng nào cả
+                  ImageButton còn vớ vẩn cái là nó thêm 1 background dạng button
+                  rất khó chịu -->
+
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btn_calibrate"
                     android:layout_width="@dimen/size_button_calibrate"
                     android:layout_height="@dimen/size_button_calibrate"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/button_calibrate"
-                    android:layout_toStartOf="@id/btn_pause_play"/>
+                    android:src="@drawable/button_calibrate"
+                    android:layout_toStartOf="@id/btn_pause_play"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btn_save"
                     android:layout_width="@dimen/size_button_save"
                     android:layout_height="@dimen/size_button_save"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/button_save"
-                    android:layout_toEndOf="@id/btn_pause_play"/>
+                    android:src="@drawable/button_save"
+                    android:layout_toEndOf="@id/btn_pause_play"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"/>
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 </layout>

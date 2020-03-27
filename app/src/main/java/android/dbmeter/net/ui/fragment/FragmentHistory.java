@@ -71,6 +71,10 @@ public class FragmentHistory extends Fragment {
     }
 
     private void initializeComponents(){
+        if (activity != null){
+            activity.changeBackgroundColor(R.drawable.color_background);
+        }
+
         //Đọc file xml để lấy lịch sử đo nếu có
         resultList = xml.readXmlFile(activity);
         loadHistory(resultList);
