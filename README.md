@@ -11,6 +11,9 @@
 - ##### Snap and Share
 - ##### Focusing Music
 - ##### And more...
+## Supported Languages
+- ##### Vietnamese
+- ##### English
 ## Screenshots
 </br>
 <div align="center">
@@ -55,10 +58,7 @@ src="https://user-images.githubusercontent.com/32270580/86750250-06b6da80-c068-1
 </br>
 
 ## Installing for android
-##### Download Apk from [here]("URL") or go to the link below, support from Android 4.0.1 (API 16), up to Android Pie (API 29).
-```
-"URL"
-```
+##### Download Apk from [here](https://github.com/khuongtrucvn/SoundMeter/blob/master/apk/SoundMeter-v1.0.apk?raw=true), support from Android 4.0.1 (API 16) up to Android Pie (API 29).
 ## LICENSE
 
     License belongs to Ho Chi Minh University of Science.
